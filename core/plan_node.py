@@ -89,7 +89,7 @@ class PlanNode:
         # 只有在onnx_manager不为None时才进行推理
         if self.onnx_manager is not None:
             self.infer_exec_with_onnx()
-            self.infer_mem_with_onnx()
+            # self.infer_mem_with_onnx()
 
     def add_child(self, child_node):
         self.child_plans.append(child_node)

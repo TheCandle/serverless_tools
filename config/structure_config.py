@@ -110,7 +110,8 @@ table_structure = {
 # 假设已知的 jointype 和 table_names 类型
 jointypes = ['none', 'Inner', 'Right', 'Left', 'Full', 'Semi', 'Anti', 'Right Semi', 'Right Anti', 'Left Anti Full', 'Right Anti Full']
 table_names = ['none', 'region', 'nation', 'supplier', 'customer', 'part', 'partsupp', 'orders', 'lineitem']
-operator_type =['CStore Index Scan',
+operator_type =[
+    'CStore Index Scan',
         'Vector Nest Loop',
         'Vector Merge Join',
         'Aggregate',
@@ -138,7 +139,27 @@ operator_type =['CStore Index Scan',
         'Streaming(type: LOCAL REDISTRIBUTE dop: 64/64)', 
         'Streaming(type: LOCAL GATHER dop: 1/64)',
         'Vector Subquery Scan',
-        'CTE Scan'
+        'CTE Scan',
+
+
+        # presto算子
+         'ScanFilterProject',
+        'Aggregate',
+        'AssignUniqueId',
+        'CrossJoin',
+        'EnforceSingleRow',
+        'FilterProject',
+        'InnerJoin',
+        'LeftJoin',
+        'LocalExchange',
+        'LocalMerge',
+        'PartialSort',
+        'Project',
+        'RemoteSource',
+        'ScanFilter',
+        'ScanProject',
+        'SemiJoin',
+        'TableScan',
         ]
 # 创建编码字典
 jointype_encoding = {jointype: idx for idx, jointype in enumerate(jointypes)}
@@ -171,8 +192,29 @@ parallel_op = [
         'Hash',
         'Hash Join',
         'Row Adapter',
+
+
+        # presto
+        'ScanFilterProject',
+        'Aggregate',
+        'AssignUniqueId',
+        'CrossJoin',
+        'EnforceSingleRow',
+        'FilterProject',
+        'InnerJoin',
+        'LeftJoin',
+        'LocalExchange',
+        'LocalMerge',
+        'PartialSort',
+        'Project',
+        'RemoteSource',
+        'ScanFilter',
+        'ScanProject',
+        'SemiJoin',
+        'TableScan',
 ]
 
+# 训练时一个个那该列表中算子的特征进行训练
 operator_lists = [
         'CStore Index Scan',
         'Vector Nest Loop',
@@ -196,6 +238,25 @@ operator_lists = [
         'Vector Streaming BROADCAST',
         'Vector SetOp',
         'Vector Append',
+
+        # presto算子
+        'ScanFilterProject',
+        'Aggregate',
+        'AssignUniqueId',
+        'CrossJoin',
+        'EnforceSingleRow',
+        'FilterProject',
+        'InnerJoin',
+        'LeftJoin',
+        'LocalExchange',
+        'LocalMerge',
+        'PartialSort',
+        'Project',
+        'RemoteSource',
+        'ScanFilter',
+        'ScanProject',
+        'SemiJoin',
+        'TableScan',
 ]
 no_dop_operators_exec = [
         'CStore Index Scan',
@@ -206,23 +267,44 @@ no_dop_operators_exec = [
 ]
 
 dop_operators_exec = [
-        'CStore Scan',
-        'Vector Materialize',
-        'Vector Aggregate',
-        'Vector Sort',
-        'Vector Hash Aggregate',
-        'Vector Sonic Hash Aggregate',
-        'Vector Hash Join',
-        'Vector Sonic Hash Join',
-        'Vector Streaming LOCAL GATHER',
-        'Vector Streaming LOCAL REDISTRIBUTE', 
-        'Vector Streaming BROADCAST',
-        'Vector SetOp',
-        'Vector Append',
+        # 'CStore Scan',
+        # 'Vector Materialize',
+        # 'Vector Aggregate',
+        # 'Vector Sort',
+        # 'Vector Hash Aggregate',
+        # 'Vector Sonic Hash Aggregate',
+        # 'Vector Hash Join',
+        # 'Vector Sonic Hash Join',
+        # 'Vector Streaming LOCAL GATHER',
+        # 'Vector Streaming LOCAL REDISTRIBUTE', 
+        # 'Vector Streaming BROADCAST',
+        # 'Vector SetOp',
+        # 'Vector Append',
+        # 'Aggregate',
+        # 'Hash',
+        # 'Append',
+        # 'Hash Join',
+
+
+        # Presto
+        'ScanFilterProject',
         'Aggregate',
-        'Hash',
-        'Append',
-        'Hash Join',
+        'AssignUniqueId',
+        'CrossJoin',
+        'EnforceSingleRow',
+        'FilterProject',
+        'InnerJoin',
+        'LeftJoin',
+        'LocalExchange',
+        'LocalMerge',
+        'PartialSort',
+        'Project',
+        'RemoteSource',
+        'ScanFilter',
+        'ScanProject',
+        'SemiJoin',
+        'TableScan',
+        
 ]
 
 no_dop_operators_mem = [
@@ -351,101 +433,171 @@ no_dop_operator_features = {
     # Add more operators and their corresponding feature sets here as needed
 }
 
+# 这里定义每个算子训练时用到的特征
 dop_operator_features = {
-    'CStore Scan': {
-        'exec': ['l_input_rows', 'actual_rows', 'width', 'predicate_cost'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Vector Aggregate': {
-        'exec': ['l_input_rows', 'actual_rows', 'width', 'agg_width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width', 'agg_width']
-    },
-    'Vector Sort': {
-        'exec': ['l_input_rows', 'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Vector Materialize': {
-        'exec': ['l_input_rows', 'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Vector Hash Aggregate': {
-        'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width', 'disk_ratio'],
-        'mem': ['actual_rows', 'width', 'agg_col', 'agg_width', 'hash_table_size', 'disk_ratio']
-    },
+    # 'CStore Scan': {
+    #     'exec': ['l_input_rows', 'actual_rows', 'width', 'predicate_cost'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
+    # 'Vector Aggregate': {
+    #     'exec': ['l_input_rows', 'actual_rows', 'width', 'agg_width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width', 'agg_width']
+    # },
+    # 'Vector Sort': {
+    #     'exec': ['l_input_rows', 'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
+    # 'Vector Materialize': {
+    #     'exec': ['l_input_rows', 'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
     # 'Vector Hash Aggregate': {
     #     'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width', 'disk_ratio'],
-    #     'mem': ['actual_rows', 'width', 'agg_col', 'agg_width', 'disk_ratio'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    #     'mem': ['actual_rows', 'width', 'agg_col', 'agg_width', 'hash_table_size', 'disk_ratio']
     # },
-    'Vector Sonic Hash Aggregate': {
-        'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width', 'disk_ratio'],
-        'mem': ['actual_rows', 'width', 'agg_col', 'agg_width', 'hash_table_size', 'disk_ratio']
-    },
+    # # 'Vector Hash Aggregate': {
+    # #     'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width', 'disk_ratio'],
+    # #     'mem': ['actual_rows', 'width', 'agg_col', 'agg_width', 'disk_ratio'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    # # },
     # 'Vector Sonic Hash Aggregate': {
     #     'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width', 'disk_ratio'],
-    #     'mem': ['actual_rows', 'width', 'agg_col', 'agg_width',  'disk_ratio'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    #     'mem': ['actual_rows', 'width', 'agg_col', 'agg_width', 'hash_table_size', 'disk_ratio']
     # },
-    'Vector Hash Join': {
-        'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost', 'hash_table_size'],
-        'mem': ['r_input_rows', 'width', 'hash_table_size']
-    },
+    # # 'Vector Sonic Hash Aggregate': {
+    # #     'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width', 'disk_ratio'],
+    # #     'mem': ['actual_rows', 'width', 'agg_col', 'agg_width',  'disk_ratio'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    # # },
     # 'Vector Hash Join': {
-    #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else []),
-    #     'mem': ['r_input_rows', 'width'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost', 'hash_table_size'],
+    #     'mem': ['r_input_rows', 'width', 'hash_table_size']
     # },
-    'Vector Sonic Hash Join': {
-        'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost','hash_table_size'],
-        'mem': ['r_input_rows', 'width', 'hash_table_size']
-    },
+    # # 'Vector Hash Join': {
+    # #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else []),
+    # #     'mem': ['r_input_rows', 'width'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    # # },
     # 'Vector Sonic Hash Join': {
-    #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else []),
-    #     'mem': ['r_input_rows', 'width'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost','hash_table_size'],
+    #     'mem': ['r_input_rows', 'width', 'hash_table_size']
     # },
-    'Vector Streaming LOCAL GATHER': {
-        'exec': ['l_input_rows',  'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Vector Streaming LOCAL REDISTRIBUTE': {
-        'exec': ['l_input_rows',  'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Vector Streaming BROADCAST': {
-        'exec': ['l_input_rows',  'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Vector SetOp': {
-        'exec': ['l_input_rows',  'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Vector Append': {
-        'exec': ['l_input_rows',  'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Aggregate': {
-        'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width'],
-        'mem': ['l_input_rows', 'width', 'agg_col', 'agg_width']
-    },
-    'Vector Sort Aggregate': {
-        'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width'],
-        'mem': ['l_input_rows', 'width', 'agg_col', 'agg_width']
-    },
-    'Hash Join': {
-        'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost', 'hash_table_size'],
-        'mem': ['r_input_rows', 'width', 'jointype', 'hash_table_size']
-    },
+    # # 'Vector Sonic Hash Join': {
+    # #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else []),
+    # #     'mem': ['r_input_rows', 'width'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    # # },
+    # 'Vector Streaming LOCAL GATHER': {
+    #     'exec': ['l_input_rows',  'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
+    # 'Vector Streaming LOCAL REDISTRIBUTE': {
+    #     'exec': ['l_input_rows',  'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
+    # 'Vector Streaming BROADCAST': {
+    #     'exec': ['l_input_rows',  'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
+    # 'Vector SetOp': {
+    #     'exec': ['l_input_rows',  'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
+    # 'Vector Append': {
+    #     'exec': ['l_input_rows',  'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
+    # 'Aggregate': {
+    #     'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width'],
+    #     'mem': ['l_input_rows', 'width', 'agg_col', 'agg_width']
+    # },
+    # 'Vector Sort Aggregate': {
+    #     'exec': ['l_input_rows', 'width', 'agg_col', 'agg_width'],
+    #     'mem': ['l_input_rows', 'width', 'agg_col', 'agg_width']
+    # },
     # 'Hash Join': {
-    #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else []),
-    #     'mem': ['r_input_rows', 'jointype', 'width'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost', 'hash_table_size'],
+    #     'mem': ['r_input_rows', 'width', 'jointype', 'hash_table_size']
     # },
-    'Hash': {
-        'exec': ['l_input_rows', 'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
-    'Append': {
-        'exec': ['l_input_rows', 'actual_rows', 'width'],
-        'mem': ['l_input_rows', 'actual_rows', 'width']
-    },
+    # # 'Hash Join': {
+    # #     'exec': ['l_input_rows', 'r_input_rows', 'actual_rows', 'width', 'jointype', 'predicate_cost'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else []),
+    # #     'mem': ['r_input_rows', 'jointype', 'width'] + (['hash_table_size'] if USE_HASH_TABLE_SIZE_FEATURE else [])
+    # # },
+    # 'Hash': {
+    #     'exec': ['l_input_rows', 'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
+    # 'Append': {
+    #     'exec': ['l_input_rows', 'actual_rows', 'width'],
+    #     'mem': ['l_input_rows', 'actual_rows', 'width']
+    # },
 
     # Add more operators and their corresponding feature sets here as needed
+    'ScanFilterProject': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'Aggregate': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'AssignUniqueId': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'CrossJoin': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'EnforceSingleRow': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'FilterProject': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'InnerJoin': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'LeftJoin': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'LocalExchange': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'LocalMerge': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'PartialSort': {
+        'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'Project': {
+         'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ] 
+    },
+        'RemoteSource': {
+         'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ] 
+    },
+        'ScanFilter': {
+       'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ] 
+    },
+        'ScanProject': {
+         'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ]  
+    },
+        'SemiJoin': {
+         'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ] 
+    },
+        'TableScan': {
+         'exec': ['l_input_rows', 'r_input_rows' ],
+        'mem': ['l_input_rows', 'r_input_rows' ] 
+    },
+
 }
 
 # 全局特征列表 - 分别收集exec和mem特征
@@ -466,6 +618,7 @@ for op_type, features in no_dop_operator_features.items():
 global_exec_feature_list = sorted(list(all_exec_features))
 global_mem_feature_list = sorted(list(all_mem_features))
 
+# 这里定义每个算子训练是的轮数。
 dop_train_epochs = {
     'CStore Scan': {
         'exec': 150,
@@ -545,4 +698,72 @@ dop_train_epochs = {
     },
 
     # Add more operators and their corresponding feature sets here as needed
+    'ScanFilterProject': {
+        'exec': 100,
+        'mem': 50
+     },
+    'Aggregate': {
+        'exec': 100,
+        'mem': 50
+     },
+    'AssignUniqueId': {
+        'exec': 100,
+        'mem': 50
+    },
+    'CrossJoin': {
+        'exec': 100,
+        'mem': 50
+    },
+    'EnforceSingleRow': {
+        'exec': 100,
+        'mem': 50
+    },
+    'FilterProject': {
+        'exec': 100,
+        'mem': 50
+    },
+    'InnerJoin': {
+        'exec': 100,
+        'mem': 50
+    },
+    'LeftJoin': {
+        'exec': 100,
+        'mem': 50
+    },
+    'LocalExchange': {
+        'exec': 100,
+        'mem': 50
+    },
+    'LocalMerge': {
+        'exec': 100,
+        'mem': 50
+    },
+    'PartialSort': {
+        'exec': 100,
+        'mem': 50
+    },
+    'Project': {
+        'exec': 100,
+        'mem': 50
+    },
+    'RemoteSource': {
+        'exec': 100,
+        'mem': 50
+    },
+    'ScanFilter': {
+        'exec': 100,
+        'mem': 50
+    },
+    'ScanProject': {
+        'exec': 100,
+        'mem': 50
+    },
+    'SemiJoin': {
+        'exec': 100,
+        'mem': 50
+    },
+    'TableScan': {
+        'exec': 100,
+        'mem': 50
+    }
 }
