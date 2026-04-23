@@ -7,7 +7,7 @@ Using NSGA-II to optimize thread block DOP configurations considering:
 """
 
 import numpy as np
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional, Tuple, Set
 from dataclasses import dataclass
 from functools import lru_cache
 import math
@@ -504,7 +504,14 @@ class DependentRepair(Repair):
 class ThreadBlockDOPProblem(Problem):
     """Thread Block DOP optimization problem for NSGA-II"""
     
-    def __init__(self, thread_blocks: List[ThreadBlockInfo], use_continuous_dop: bool = True, enable_cache: bool = True, mismatch_penalty: float = 0.0):
+    def __init__(
+        self,
+        thread_blocks: List[ThreadBlockInfo],
+        use_continuous_dop: bool = True,
+        enable_cache: bool = True,
+        mismatch_penalty: float = 0.0,
+        pdg_top_segment: Optional[Any] = None
+    ):
         """
         Initialize the optimization problem.
         
@@ -521,6 +528,7 @@ class ThreadBlockDOPProblem(Problem):
         self.enable_cache = enable_cache
         self.mismatch_penalty = mismatch_penalty
         self._cache = {}  # Cache for objective function evaluations
+        self.pdg_top_segment = pdg_top_segment
         
         # Define variable boundaries
         n_vars = len(thread_blocks)
@@ -564,6 +572,7 @@ class ThreadBlockDOPProblem(Problem):
         # Pre-compute data structures for performance (after super().__init__)
         self._precompute_mappings()
         self._precompute_exec_times()  # Pre-compute exec times for common DOPs
+        self._precompute_pdg_mappings()
         
         # Pre-compute min/max DOPs for continuous mode optimization
         if use_continuous_dop:
@@ -579,6 +588,54 @@ class ThreadBlockDOPProblem(Problem):
         else:
             self.min_dops = {}
             self.max_dops = {}
+
+    def _precompute_pdg_mappings(self):
+        """Pre-compute PDG segment mappings for fast PDG-based latency evaluation."""
+        self.pdg_available = False
+        self.pdg_segments = []
+        self.segment_stage_ratios = {}   # {id(seg): {stage_id: ratio}}
+        self.segment_children = {}       # {id(seg): [upstream_seg]}
+        self.segment_is_inner = {}       # {id(seg): bool}
+
+        if self.pdg_top_segment is None:
+            return
+
+        try:
+            seen: Set[int] = set()
+
+            def dfs(seg):
+                if seg is None or id(seg) in seen:
+                    return
+                sid = id(seg)
+                seen.add(sid)
+                self.pdg_segments.append(seg)
+
+                # Cache segment shape and topology
+                self.segment_is_inner[sid] = bool(getattr(seg, "is_inner_stage", True))
+                upstream = list(getattr(seg, "upstream_segments", []) or [])
+                self.segment_children[sid] = upstream
+
+                # Compute stage contribution ratio for this segment
+                ratios = {}
+                dop_info = getattr(seg, "dop_info", {}) or {}
+                for stage_id, stage_meta in dop_info.items():
+                    stage_nodes_in_seg = stage_meta.get('nodes', []) if isinstance(stage_meta, dict) else []
+                    tb = self.tb_map.get(stage_id)
+                    total_stage_nodes = len(getattr(tb, "nodes", []) or []) if tb is not None else 0
+                    if total_stage_nodes <= 0:
+                        ratios[stage_id] = 1.0 if stage_nodes_in_seg else 0.0
+                    else:
+                        ratios[stage_id] = len(stage_nodes_in_seg) / total_stage_nodes
+                self.segment_stage_ratios[sid] = ratios
+
+                for up in upstream:
+                    dfs(up)
+
+            dfs(self.pdg_top_segment)
+            self.pdg_available = len(self.pdg_segments) > 0
+        except Exception:
+            # Any failure should keep old stage-DAG latency path available
+            self.pdg_available = False
     
     def _precompute_mappings(self):
         """Pre-compute parent-child mappings for faster evaluation"""
@@ -705,6 +762,13 @@ class ThreadBlockDOPProblem(Problem):
     
     def _compute_latency_optimized(self, dop_config: Dict[int, int]) -> float:
         """Optimized version of latency calculation with precomputed mappings"""
+        if self.pdg_available:
+            try:
+                return self._compute_latency_pdg_optimized(dop_config)
+            except Exception:
+                # Fallback to stage-DAG latency path when PDG eval fails
+                pass
+
         # Use precomputed mappings for faster lookup
         memo = {}
         
@@ -743,6 +807,60 @@ class ThreadBlockDOPProblem(Problem):
             return max(calc_time(rid) for rid in self.root_ids)
         else:
             return 0.0
+
+    def _compute_latency_pdg_optimized(self, dop_config: Dict[int, int]) -> float:
+        """PDG-based latency evaluation with precomputed segment-stage ratios."""
+        # 1) stage exec time cache for current dop_config
+        stage_exec_times = {}
+        for stage_id, dop in dop_config.items():
+            tb = self.tb_map[stage_id]
+            if stage_id in self.exec_time_cache and dop in self.exec_time_cache[stage_id]:
+                exec_time = self.exec_time_cache[stage_id][dop]
+            else:
+                exec_time = compute_exec_time_from_params(
+                    pred_params=tb.pred_params,
+                    dop=dop,
+                    is_parallel=tb.is_parallel,
+                    base_time=tb.base_exec_time
+                )
+            stage_exec_times[stage_id] = exec_time
+
+        # 2) project stage times to segments -> t_seg
+        seg_t = {}
+        for seg in self.pdg_segments:
+            sid = id(seg)
+            ratios = self.segment_stage_ratios.get(sid, {})
+            contrib = []
+            for stage_id, ratio in ratios.items():
+                if stage_id in stage_exec_times:
+                    contrib.append(stage_exec_times[stage_id] * ratio)
+
+            if not contrib:
+                seg_t[sid] = 0.0
+            elif self.segment_is_inner.get(sid, True):
+                # Inner-stage segment has a single effective pipeline latency
+                seg_t[sid] = contrib[0]
+            else:
+                # Cross-stage segment takes max latency among included pipelines
+                seg_t[sid] = max(contrib)
+
+        # 3) eval segment recursively: no upstream -> t_seg; else max(upstream)+t_seg
+        memo = {}
+
+        def eval_seg(seg):
+            sid = id(seg)
+            if sid in memo:
+                return memo[sid]
+            upstream = self.segment_children.get(sid, [])
+            base_t = seg_t.get(sid, 0.0)
+            if not upstream:
+                total = base_t
+            else:
+                total = max(eval_seg(u) for u in upstream) + base_t
+            memo[sid] = total
+            return total
+
+        return eval_seg(self.pdg_top_segment)
     
     def _compute_cost_optimized(self, dop_config: Dict[int, int]) -> float:
         """Optimized version of cost calculation using precomputed exec times"""
@@ -768,6 +886,7 @@ class ThreadBlockDOPProblem(Problem):
 
 def optimize_thread_block_dops_with_moo(
     thread_blocks: Dict[int, Any],  # thread_id -> ThreadBlock object
+    all_nodes: Optional[List[Any]] = None,
     population_size: int = 30,
     generations: int = 20,
     weight_latency: float = 0.9,
@@ -868,12 +987,24 @@ def optimize_thread_block_dops_with_moo(
     else:
         print(f"  Mode: Discrete DOP search from candidate list")
     
+    # Build PDG once per query for latency evaluation reuse
+    pdg_top_segment = None
+    if all_nodes:
+        try:
+            from core.pdg_builder import convert_stage_dag_to_pdg
+            pdg_top_segment = convert_stage_dag_to_pdg(thread_blocks, all_nodes)
+            print("  PDG context built for MOO latency evaluation")
+        except Exception as e:
+            print(f"  Warning: PDG build failed, fallback to stage latency: {e}")
+            pdg_top_segment = None
+
     # Create optimization problem with caching enabled
     problem = ThreadBlockDOPProblem(
         thread_block_infos,
         use_continuous_dop=use_continuous_dop,
         enable_cache=True,
-        mismatch_penalty=mismatch_penalty
+        mismatch_penalty=mismatch_penalty,
+        pdg_top_segment=pdg_top_segment
     )
     
     # Configure NSGA-II algorithm with optimized parameters for speed

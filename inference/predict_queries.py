@@ -19,6 +19,7 @@ from core.pipeline_pair import Segment
 from core.thread_block import ThreadBlock
 from core.pdg_builder import convert_stage_dag_to_pdg, Pipeline
 from config.structure_config import thread_cost, thread_mem
+from scripts.main import RUN_PRESTO
 # -------------------------
 
 # ==============================================================================
@@ -178,7 +179,7 @@ def eval_segment(seg):
     """
     # #region agent log
     import json
-    log_path = '/home/zhy/opengauss/tools/new_serverless_predictor/.cursor/debug.log'
+    log_path = './debug4.log'
     seg_id = id(seg)
     seg_nodes_count = len(seg.nodes) if seg.nodes else 0
     seg_latencies = seg.pipeline_latencies if seg.pipeline_latencies else []
@@ -372,7 +373,7 @@ def calculate_query_execution_time(all_nodes):
     
     # #region agent log
     import json
-    log_path = '/home/zhy/opengauss/tools/new_serverless_predictor/.cursor/debug.log'
+    log_path = './debug.log'
     with open(log_path, 'a') as f:
         top_seg_id = id(top_segment)
         upstream_ids = [id(us) for us in top_segment.upstream_segments] if top_segment.upstream_segments else []
@@ -470,7 +471,6 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
     """
 
     # === 开始: 严格复制粘贴原始顶层逻辑 ===
-
     # 读取执行计划数据
     df_plans = pd.read_csv(plan_csv_path, delimiter=';', encoding='utf-8') # 使用参数
     # df_plans = df_plans[df_plans['query_dop'] == 8].copy() # 原始代码注释掉了这行
@@ -478,7 +478,6 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
     # df_query_info = df_query_info[df_query_info['dop'] == 8].copy() # 原始代码注释掉了这行
     # 按 query_id 和 query_dop 分组
     query_groups = df_plans.groupby(['query_id', 'query_dop'])
-
     # 创建 PlanNode 对象并处理每个查询的树结构
     query_trees = {}
 
@@ -491,15 +490,21 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
     # 仅处理测试数据的查询 (原始逻辑包含 if query_id > 0)
     # Import build_query_plan function
     from utils.data_utils import build_query_plan
-    
     for (query_id, query_dop), group in query_groups:
-        if query_id >0 : # Only process query_id == 1 for debugging
-            # 使用 (query_id, query_dop) 作为键
-            key = (query_id, query_dop) # 保持原始键
+        # if query_id >0 : # Only process query_id == 1 for debugging
+        #     # 使用 (query_id, query_dop) 作为键
+        #     key = (query_id, query_dop) # 保持原始键
             
-            # Use build_query_plan to create nodes with build/probe splitting
-            nodes_dict, root_nodes_list = build_query_plan(group, use_estimates=use_estimates, onnx_manager=onnx_manager)
-            query_trees[key] = list(nodes_dict.values())
+        #     # Use build_query_plan to create nodes with build/probe splitting
+        #     nodes_dict, root_nodes_list = build_query_plan(group, use_estimates=use_estimates, onnx_manager=onnx_manager)
+        #     query_trees[key] = list(nodes_dict.values())
+
+        # 使用 (query_id, query_dop) 作为键
+        key = (query_id, query_dop) # 保持原始键
+        
+        # Use build_query_plan to create nodes with build/probe splitting
+        nodes_dict, root_nodes_list = build_query_plan(group, use_estimates=use_estimates, onnx_manager=onnx_manager)
+        query_trees[key] = list(nodes_dict.values())
 
     # 打开日志文件进行写入 (原始逻辑，但路径处理可能需要调整或移除)
     # log_file_path = 'query_comparison_log.txt' # 硬编码文件名
@@ -523,12 +528,58 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
     # 遍历 query_trees 的键 (原始逻辑)
     for (query_id, query_dop), plan_tree in query_trees.items(): # 原始变量名 plan_tree
         # 获取实际的执行时间和内存使用量 (原始逻辑)
-        actual_time_row = df_query_info[(df_query_info['query_id'] == query_id) & (df_query_info['dop'] == query_dop)]
+        # actual_time_row = df_query_info[(df_query_info['query_id'] == query_id) & (df_query_info['dop'] == query_dop)]
+        actual_time_row = 1
 
-        if not actual_time_row.empty: # 原始检查
-            actual_time = actual_time_row['execution_time'].values[0]
-            actual_memory = actual_time_row['query_used_mem'].values[0]
+        if not RUN_PRESTO:
+            if not actual_time_row.empty: # 原始检查
+                actual_time = actual_time_row['execution_time'].values[0]
+                actual_memory = actual_time_row['query_used_mem'].values[0]
 
+                # 计算预测执行时间 (原始逻辑)
+                start_time = time.time()
+                # 假设调用前需要重置 visit 状态
+                for node in plan_tree: node.visit = False
+                predicted_time = calculate_query_execution_time(plan_tree)
+                end_time = time.time()
+                pred_exec_time = 0
+                for plan_node in plan_tree: # 原始变量名 plan_node
+                    pred_exec_time += plan_node.pred_exec_time
+                time_calculation_duration = end_time - start_time + pred_exec_time
+
+                # 计算预测内存 (原始逻辑)
+                start_time = time.time()
+                predicted_memory, _ = calculate_query_memory(plan_tree)
+                end_time = time.time()
+                pred_mem_time = 0
+                for plan_node in plan_tree:
+                    pred_mem_time += plan_node.pred_mem_time
+                memory_calculation_duration = end_time - start_time + pred_mem_time
+
+                # 确保预测值是标量 (原始逻辑)
+                if isinstance(predicted_time, (np.ndarray, torch.Tensor)):
+                    predicted_time = predicted_time.item()
+                if isinstance(predicted_memory, (np.ndarray, torch.Tensor)):
+                    predicted_memory = predicted_memory.item()
+
+                # 转换单位 (原始逻辑，假设是 / 1000)
+                actual_times_in_s.append(actual_time / 1000.0)
+                predicted_times_in_s.append(predicted_time / 1000.0)
+                actual_memories_in_mb.append(actual_memory / 1000.0) # 保持 / 1000
+                predicted_memories_in_mb.append(predicted_memory / 1000.0) # 保持 / 1000
+
+                # 计算 Q-error (原始逻辑，可能不处理除零)
+                time_q_error_value = max(predicted_time/actual_time, actual_time/predicted_time) - 1
+                memory_q_error_value = max(predicted_memory/actual_memory, actual_memory/predicted_memory) - 1
+
+                # 存储结果 (原始逻辑)
+                time_q_error.append(time_q_error_value)
+                memory_q_error.append(memory_q_error_value)
+                time_calculation_durations.append(time_calculation_duration)
+                memory_calculation_durations.append(memory_calculation_duration)
+                query_ids.append(query_id)
+                query_dops.append(query_dop)
+        else:
             # 计算预测执行时间 (原始逻辑)
             start_time = time.time()
             # 假设调用前需要重置 visit 状态
@@ -538,40 +589,16 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
             pred_exec_time = 0
             for plan_node in plan_tree: # 原始变量名 plan_node
                 pred_exec_time += plan_node.pred_exec_time
-            time_calculation_duration = end_time - start_time + pred_exec_time
-
-            # 计算预测内存 (原始逻辑)
-            start_time = time.time()
-            predicted_memory, _ = calculate_query_memory(plan_tree)
-            end_time = time.time()
-            pred_mem_time = 0
-            for plan_node in plan_tree:
-                pred_mem_time += plan_node.pred_mem_time
-            memory_calculation_duration = end_time - start_time + pred_mem_time
+            time_calculation_duration = end_time - start_time + pred_exec_time        
 
             # 确保预测值是标量 (原始逻辑)
             if isinstance(predicted_time, (np.ndarray, torch.Tensor)):
                 predicted_time = predicted_time.item()
-            if isinstance(predicted_memory, (np.ndarray, torch.Tensor)):
-                predicted_memory = predicted_memory.item()
 
-            # 转换单位 (原始逻辑，假设是 / 1000)
-            actual_times_in_s.append(actual_time / 1000.0)
             predicted_times_in_s.append(predicted_time / 1000.0)
-            actual_memories_in_mb.append(actual_memory / 1000.0) # 保持 / 1000
-            predicted_memories_in_mb.append(predicted_memory / 1000.0) # 保持 / 1000
-
-            # 计算 Q-error (原始逻辑，可能不处理除零)
-            time_q_error_value = max(predicted_time/actual_time, actual_time/predicted_time) - 1
-            memory_q_error_value = max(predicted_memory/actual_memory, actual_memory/predicted_memory) - 1
-
-            # 存储结果 (原始逻辑)
-            time_q_error.append(time_q_error_value)
-            memory_q_error.append(memory_q_error_value)
-            time_calculation_durations.append(time_calculation_duration)
-            memory_calculation_durations.append(memory_calculation_duration)
             query_ids.append(query_id)
-            query_dops.append(query_dop)
+            time_q_error.append(predicted_time)
+
 
     # 映射查询 ID (原始逻辑)
     mapped_query_ids = range(1, len(query_ids) + 1) # 假设原始列表是 actual_times_in_s

@@ -241,6 +241,7 @@ def prepare_data(train_data, test_data, operator, feature_columns, target_column
     # 选取特征和目标
     # 移除分类类型的列，不参与归一化
     categorical_columns = ['jointype', 'table_names']  # 你可以根据需要调整
+    # categorical_columns = []  # 你可以根据需要调整
     numerical_columns = [col for col in feature_columns if col not in categorical_columns]
 
     # 对数值列进行归一化

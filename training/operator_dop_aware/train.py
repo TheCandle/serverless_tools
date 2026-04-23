@@ -51,11 +51,13 @@ def process_and_train_curve(
         train_data=train_data,
         test_data = test_data,
         operator=operator,
-        feature_columns=['l_input_rows', 'r_input_rows', 'actual_rows', 'instance_mem', 'estimate_costs','estimate_rows',
-                         'width', 'predicate_cost', 'index_cost', 'dop', 'nloops', 'query_dop', 
-                         'agg_col', 'agg_width','jointype','hash_table_size', 'disk_ratio',
-                         'stream_poll_time','stream_data_copy_time', 'table_names', 'up_dop', 'down_dop'],
-        target_columns=['query_id', 'execution_time', 'peak_mem', 'dop'],
+        # feature_columns=['l_input_rows', 'r_input_rows', 'actual_rows', 'instance_mem', 'estimate_costs','estimate_rows',
+        #                  'width', 'predicate_cost', 'index_cost', 'dop', 'nloops', 'query_dop', 
+        #                  'agg_col', 'agg_width','jointype','hash_table_size', 'disk_ratio',
+        #                  'stream_poll_time','stream_data_copy_time', 'table_names', 'up_dop', 'down_dop'],
+        # target_columns=['query_id', 'execution_time', 'peak_mem', 'dop'],
+        feature_columns=['l_input_rows', 'r_input_rows'],
+        target_columns=['execution_time', 'peak_mem', 'dop'],
         use_estimates=use_estimates # <-- 传递开关
     )
     # ==================== 新增的健壮性检查 ====================
@@ -157,9 +159,10 @@ def process_and_train_curve(
         data_to_save_mem = {
             'Operator': [operator],
             'Training Time (s)': [training_time_mem],
-            'Execution Time MAE': [performance_exec['MAE_error']],
-            'Execution Time Q-error': [performance_exec['Q_error']],
-            'Average Execution Time': [performance_exec['average_actual_value']],
+            # TO ASK: 这里的 'Execution Time MAE' 和 'Execution Time Q-error' 是不是应该改成 'Memory MAE' 和 'Memory Q-error'？因为这是内存模型的结果。
+            'Execution Time MAE': [performance_mem['MAE_error']],
+            'Execution Time Q-error': [performance_mem['Q_error']],
+            'Average Execution Time': [performance_mem['average_actual_value']],
             'Memory MAE': [performance_mem['MAE_error']],
             'Memory Q-error': [performance_mem['Q_error']],
             'Average Memory': [performance_mem['average_actual_value']],
@@ -297,7 +300,13 @@ def train_all_operators(
             )
     
     # After processing all operators, combine all results into one DataFrame
-    final_results_df_exec = pd.concat(all_operator_results_exec, ignore_index=True)
+    # final_results_df_exec = pd.concat(all_operator_results_exec, ignore_index=True)
+    if all_operator_results_exec:
+        final_results_df_exec = pd.concat(all_operator_results_exec, ignore_index=True)
+    else:
+        print("没有数据可以拼接！")
+        # 处理列表为空的情况
+        final_results_df_exec = pd.DataFrame()  # 或者返回 None，根据业务需求决定
 
     # Save the final combined DataFrame to a single CSV file
     # final_csv_file_path_exec = "tmp_result/all_operators_performance_results_exec.csv"

@@ -46,7 +46,7 @@ class Exec_CurveFitModel(nn.Module):
     
 # 定义网络模型
 class Mem_CurveFitModel(nn.Module):
-    def __init__(self, input_dim, min_a=-1, max_a=1):
+    def __init__(self, input_dim, min_a=0, max_a=1):
         super(Mem_CurveFitModel, self).__init__()
         self.bn_input = nn.BatchNorm1d(input_dim)
         self.fc = nn.Sequential(
@@ -69,7 +69,10 @@ class Mem_CurveFitModel(nn.Module):
         a, b, c, d = pred_params[:, 0], pred_params[:, 1], pred_params[:, 2], pred_params[:, 3]
         
         # 对 a 应用 Sigmoid 激活函数并映射到 [min_a, max_a]
-        # a = torch.sigmoid(a) * (self.max_a - self.min_a) + self.min_a
+        a = torch.sigmoid(pred_params[:, 0]) * (self.max_a - self.min_a) + self.min_a
+        b = pred_params[:, 1]
+        c = pred_params[:, 2]
+        d = pred_params[:, 3]
 
         # 返回映射后的参数
         return torch.stack([a, b, c, d], dim=1)
@@ -109,14 +112,19 @@ def curve_exec_loss(pred_params, dop, true_time, epsilon=1e-2, alpha=0.5, log_fi
     
     return loss
 
-def curve_mem_loss(pred_params, dop, true_mem, epsilon=1e-2, alpha=0.5, log_file="loss_debug.log"):
+def curve_mem_loss(pred_params, dop, true_mem, epsilon=1e-2, alpha=0.5, log_file="./loss_debug.log"):
     # 打开日志文件（以追加模式），并写入错误信息
     # def log_to_file(message):
     #     with open(log_file, "a") as f:
     #         f.write(message + "\n")
     # 修改 log_to_file 函数内部打开文件的路径
+    if not log_file:  # 如果 log_file 是空字符串
+        raise ValueError("log_file cannot be an empty string. Please provide a valid file path.")
+    # print("log_file path:", log_file)  # 打印 log_file 的路径，帮助调试
     def log_to_file(message):
         # 确保目录存在
+        print(log_file)
+        print(os.path.dirname(log_file))
         os.makedirs(os.path.dirname(log_file), exist_ok=True)
         with open(log_file, "a") as f:
             f.write(message + "\n")
@@ -126,6 +134,7 @@ def curve_mem_loss(pred_params, dop, true_mem, epsilon=1e-2, alpha=0.5, log_file
     # 计算预测时间
     pred_mem = torch.max(b * (dop ** a) + c, d)
 
+    # TO ASK  这里有好多 NaN 的 pred_time是啥原因
     # 如果 pred_time 为 NaN 或者小于等于零，打印 a, b, c 和 pred_time
     if torch.any(torch.isnan(pred_mem)):
         log_to_file(f"NaN or invalid pred_time detected!")
@@ -136,15 +145,13 @@ def curve_mem_loss(pred_params, dop, true_mem, epsilon=1e-2, alpha=0.5, log_file
 
 
     # 如果 pred_time 小于 true_time，将 abs_error 乘以 2
-    abs_error = torch.abs(pred_mem - true_mem)
-    log_error = torch.log(abs_error + 1)
-    log_error = torch.where(pred_mem < true_mem, log_error, log_error)
-    pred_mem = torch.clamp(pred_mem, min=1e-2)
+    abs_error = torch.abs(pred_mem - true_mem) / ((a + 0.1))
+    pred_mem = torch.clamp(pred_mem, min=0.1)
     # 计算相对误差
-    relative_error = torch.log(torch.max(pred_mem/true_mem, true_mem/pred_mem))
+    # relative_error = torch.log(torch.max(pred_mem/true_mem, true_mem/pred_mem))
     
     # 返回最终损失
-    loss = torch.mean(log_error + relative_error)  # 加上负值惩罚项
+    loss = torch.mean(abs_error)  # 加上负值惩罚项
     
     return loss
 
@@ -171,7 +178,7 @@ def train_exec_curve_model(X_train, y_train, dop_train, batch_size=32, epochs=10
     # 创建 DataLoader 进行批量训练
     train_dataset = TensorDataset(X_train, y_train, dop_train)
     # Avoid drop_last=True: if samples < batch_size, it would create 0 batches and crash training.
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=False)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
 
     # 设置学习率调度器，StepLR 每 10 轮降低一次学习率，gamma=0.8
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.8)
@@ -184,6 +191,17 @@ def train_exec_curve_model(X_train, y_train, dop_train, batch_size=32, epochs=10
         
         for batch_idx, (X_batch, y_batch, dop_batch) in enumerate(train_loader):
             optimizer.zero_grad()
+
+            # # 打印当前批次的索引、X_batch的形状、dop_batch的形状、y_batch的形状
+            # print(f"Batch {batch_idx}")
+            # print(f"X_batch shape: {X_batch.shape}")
+            # print(f"dop_batch shape: {dop_batch.shape}")
+            # print(f"y_batch shape: {y_batch.shape}")
+            
+            # # 打印出当前批次的具体数据
+            # print("X_batch data:\n", X_batch)   # 打印 X_batch 的具体数据
+            # print("dop_batch data:\n", dop_batch)  # 打印 dop_batch 的具体数据
+            # print("y_batch data:\n", y_batch)    # 打印 y_batch 的具体数据
 
             # Forward pass
             pred_params = model(X_batch)
@@ -239,7 +257,7 @@ def train_mem_curve_model(X_train, y_train, dop_train, batch_size=16, epochs=100
     # 创建 DataLoader 进行批量训练
     train_dataset = TensorDataset(X_train, y_train, dop_train)
     # Avoid drop_last=True: if samples < batch_size, it would create 0 batches and crash training.
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=False)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
     # 设置学习率调度器，StepLR 每 10 轮降低一次学习率，gamma=0.8
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.6)
 

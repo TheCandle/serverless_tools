@@ -295,6 +295,7 @@ def run_dop_optimization(df_plans_all_dops, onnx_manager: ONNXModelManager,
 
                 optimal_dop_config, moo_execution_time = optimize_thread_block_dops_with_moo(
                     thread_blocks=thread_blocks_for_query,
+                    all_nodes=base_nodes,
                     population_size=moo_population,
                     generations=moo_generations,
                     weight_latency=moo_weight_latency,

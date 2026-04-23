@@ -136,18 +136,6 @@ def train_all_operators(
     # # 保存查询分割结果
     # utils.save_query_split(train_queries, test_queries, "tmp_result/query_split.csv")
     
-    # 读取包含 query_id 和 split 信息的文件
-    split_info_df = pd.read_csv('/home/zhy/opengauss/tools/serverless_tools_cht/train/python/dop/tmp_result/query_split.csv')
-
-    # 只保留前 200 行的数据
-    split_info = split_info_df[['query_id', 'split']]
-
-    # 获取原始的 split 信息的 query_id 和 split 列
-    test_queries = split_info[split_info['split'] == 'test']['query_id']
-
-    # 将扩展后的测试查询的 query_id 转换为 DataFrame
-    train_queries = split_info[split_info['split'] == 'train']['query_id']
-    
     # --- 新增的基数传播步骤 ---
     if use_estimates:
         print("!!! 训练模拟模式：正在对训练和测试数据进行基数传播预处理... !!!")

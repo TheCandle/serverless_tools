@@ -16,6 +16,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config.main_config import DATASETS, METHODS, TRAIN_MODES, OPTIMIZATION_ALGORITHMS, DEFAULT_CONFIG
 from utils import setup_environment, validate_experiment_config
 
+RUN_PRESTO = True
+
 def main():
     """Main function - control runtime parameters by modifying variables below"""
     
@@ -52,7 +54,7 @@ def main():
     MOO_WEIGHT_COST = 0.3  # Cost weight
     INTERVAL_TOLERANCE = 0.3  # Throughput matching interval tolerance (±30%) - used for choose_optimal_dop
     # PDG-MOO: competitive Top-K expansion + bounded elite pool (takes precedence over USE_MOO when True)
-    USE_PDG_MOO = True  # Whether to use PDG-MOO (segment-aware iterative DOP optimization)
+    USE_PDG_MOO = False  # Whether to use PDG-MOO (segment-aware iterative DOP optimization)
     PDG_MOO_WL = 0.7  # PDG-MOO latency weight (WL + WC = 1)
     PDG_MOO_WC = 0.3  # PDG-MOO cost weight
     PDG_MOO_B = 20  # Elite pool capacity
@@ -63,6 +65,7 @@ def main():
     PDG_MOO_LAMBDA_I = 0.1  # Interference penalty weight I/L
     
     # Runtime control - set which functions to run (True/False)
+    # TO ASK
     RUN_TRAIN =  False  # Whether to run training
     RUN_INFERENCE = False  # Whether to run inference
     RUN_OPTIMIZE = True  # Whether to run optimization
