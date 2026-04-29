@@ -18,6 +18,7 @@ from utils import get_model_paths
 from config.structure_config import dop_operators_exec, dop_operators_mem, dop_operator_features, dop_train_epochs, operator_lists
 all_operator_results_exec = []
 all_operator_results_mem = []
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 # --- 1. 修改 process_and_train_curve 函数定义，增加 use_estimates 参数 ---
 def process_and_train_curve(
@@ -132,9 +133,9 @@ def process_and_train_curve(
         compare_exec = results_exec["comparisons_exec"]
         compare_exec['Comparison Type'] = 'Execution Time'
 
-        eval_dir = f"../output/evaluations/dop_aware/operator_comparisons/"
+        eval_dir = os.path.join(PROJECT_ROOT, "output", "evaluations", "dop_aware", "operator_comparisons")
         os.makedirs(eval_dir, exist_ok=True) # 确保目录存在
-        compare_exec.to_csv(f"{eval_dir}{operator}_combined_comparison_exec.csv", index=False)
+        compare_exec.to_csv(os.path.join(eval_dir, f"{operator}_combined_comparison_exec.csv"), index=False)
         # compare_exec.to_csv(f"tmp_result/{operator}_combined_comparison_exec.csv", index=False)
         data_to_save_exec = {
             'Operator': [operator],
@@ -152,9 +153,9 @@ def process_and_train_curve(
         onnx_time_mem = results_mem["onnx_time_mem"]
         compare_mem = results_mem["comparisons_mem"]
         compare_mem['Comparison Type'] = 'Memory'
-        eval_dir = f"../output/evaluations/operator_non_dop_aware/operator_comparisons/"
+        eval_dir = os.path.join(PROJECT_ROOT, "output", "evaluations", "dop_aware", "operator_comparisons")
         os.makedirs(eval_dir, exist_ok=True) # 确保目录存在
-        compare_mem.to_csv(f"{eval_dir}{operator}_combined_comparison_mem.csv", index=False)
+        compare_mem.to_csv(os.path.join(eval_dir, f"{operator}_combined_comparison_mem.csv"), index=False)
         # compare_mem.to_csv(f"tmp_result/{operator}_combined_comparison_mem.csv", index=False)
         data_to_save_mem = {
             'Operator': [operator],
@@ -310,10 +311,12 @@ def train_all_operators(
 
     # Save the final combined DataFrame to a single CSV file
     # final_csv_file_path_exec = "tmp_result/all_operators_performance_results_exec.csv"
-    final_csv_file_path_exec = "../output/evaluations/dop_aware/all_operators_performance_exec.csv"
+    eval_base_dir = os.path.join(PROJECT_ROOT, "output", "evaluations", "dop_aware")
+    os.makedirs(eval_base_dir, exist_ok=True)
+    final_csv_file_path_exec = os.path.join(eval_base_dir, "all_operators_performance_exec.csv")
     final_results_df_exec.to_csv(final_csv_file_path_exec, index=False)
     # final_results_df_mem = pd.concat(all_operator_results_mem, ignore_index=True)
-    final_csv_file_path_mem = "../output/evaluations/dop_aware/all_operators_performance_mem.csv"
+    final_csv_file_path_mem = os.path.join(eval_base_dir, "all_operators_performance_mem.csv")
     # final_csv_file_path_mem = "tmp_result/all_operators_performance_results_mem.csv"
     # final_results_df_mem.to_csv(final_csv_file_path_mem, index=False)
 

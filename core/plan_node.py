@@ -9,60 +9,91 @@ import torch
 from utils.feature_engineering import prepare_inference_data
 # from structure import no_dop_operator_features, no_dop_operators_exec, no_dop_operators_mem, dop_operators_exec, dop_operators_mem, parallel_op
 # --- 修改导入：确保导入了 no_dop_operators_mem ---
-from config.structure_config import parallel_op, dop_operators_exec, dop_operators_mem, no_dop_operators_exec, no_dop_operators_mem
+from config.structure_config import (
+    parallel_op,
+    dop_operators_exec,
+    dop_operators_mem,
+    no_dop_operators_exec,
+    no_dop_operators_mem,
+    materialized_operator_types,
+    materialized_operator_keywords,
+)
 from config.main_config import DOP_SETS as dop_sets
 # --- 结束修改 ---
 from core.onnx_manager import ONNXModelManager
 
 class PlanNode:
     def __init__(self, plan_data, onnx_manager, use_estimates=False):
+        def _safe_num(value, default=0.0):
+            if value is None:
+                return default
+            try:
+                if pd.isna(value):
+                    return default
+            except Exception:
+                pass
+            try:
+                return float(value)
+            except (TypeError, ValueError):
+                return default
+
         self.use_estimates = use_estimates  # 模式开关
         self.visit = False
         self.plan_id = plan_data['plan_id']
         self.query_id = plan_data['query_id']
-        self.dop = plan_data['dop']
+        self.dop = _safe_num(plan_data.get('dop', plan_data.get('query_dop', 1)), 1)
         self.operator_type = plan_data['operator_type']
         
         # 保存原始plan_data用于特征生成
-        self.plan_data = plan_data
+        self.plan_data = dict(plan_data)
         
         # --- 存储真实值 ---
-        self.actual_rows = plan_data['actual_rows']
-        self.l_input_rows_actual = plan_data.get('l_input_rows') # 使用 .get 避免 Key Error
-        self.r_input_rows_actual = plan_data.get('r_input_rows')
+        # 兼容 Presto 数据：常见为 output_rows，无 actual_rows 字段
+        self.actual_rows = _safe_num(
+            plan_data.get('actual_rows', plan_data.get('output_rows', plan_data.get('l_input_rows', 0))),
+            0.0
+        )
+        self.l_input_rows_actual = _safe_num(plan_data.get('l_input_rows', 0), 0.0)
+        self.r_input_rows_actual = _safe_num(plan_data.get('r_input_rows', 0), 0.0)
         
         # --- 存储估计值 ---
-        self.estimate_rows = plan_data['estimate_rows']
+        # 若无 estimate_rows，回退到 actual_rows，保证估计模式可运行
+        self.estimate_rows = _safe_num(plan_data.get('estimate_rows', self.actual_rows), self.actual_rows)
         # l_input_rows 和 r_input_rows 的估计值需要后续计算，先初始化
         self.l_input_rows_estimate = None
         self.r_input_rows_estimate = None
 
-        self.updop =  plan_data['up_dop']
-        self.downdop =  plan_data['down_dop']
-        self.send_time = plan_data['stream_data_send_time'] - plan_data['stream_quota_time']
-        self.execution_time = plan_data['execution_time'] + self.send_time
-        self.estimate_costs = plan_data['estimate_costs']
-        self.build_time = plan_data['build_time']
+        self.updop = _safe_num(plan_data.get('up_dop', self.dop), self.dop)
+        self.downdop = _safe_num(plan_data.get('down_dop', self.dop), self.dop)
+        stream_send_time = _safe_num(plan_data.get('stream_data_send_time', 0), 0.0)
+        stream_quota_time = _safe_num(plan_data.get('stream_quota_time', 0), 0.0)
+        self.send_time = stream_send_time - stream_quota_time
+        self.execution_time = _safe_num(plan_data.get('execution_time', 0), 0.0) + self.send_time
+        self.estimate_costs = _safe_num(plan_data.get('estimate_costs', 0), 0.0)
+        self.build_time = _safe_num(plan_data.get('build_time', 0), 0.0)
         self.hash_time = plan_data.get('hash_time', 0.0)  # Hash/probe time for hash join and aggregate
         self.pred_execution_time = 0
         self.pred_mem = 0
         self.best_dop = 0
         self.thread_id = 0
-        self.peak_mem = plan_data['peak_mem']
-        self.width = plan_data['width']
+        self.peak_mem = _safe_num(plan_data.get('peak_mem', 0), 0.0)
+        self.width = _safe_num(plan_data.get('width', 0), 0.0)
         self.exec_feature_data = None 
         self.mem_feature_data = None
         self.GNN_feature = None  # 用于存储GNN特征向量，包括序列化的算子类型
         self.child_plans = []  # 用于存储子计划节点
-        # Check if operator is materialized (breaker)
-        # Build nodes are materialized, Probe nodes are not
+        # Check if operator is materialized (pipeline breaker).
+        # Build nodes are materialized, Probe nodes are not.
         op_lower = self.operator_type.lower()
+        op_compact = op_lower.replace(" ", "")
         if 'probe' in op_lower:
-            # Probe nodes are not materialized
             self.materialized = False
+        elif 'build' in op_lower:
+            self.materialized = True
+        elif self.operator_type in materialized_operator_types:
+            self.materialized = True
         else:
-            # Build nodes and other blocking operators are materialized
-            self.materialized = 'hash' in op_lower or 'aggregate' in op_lower or 'sort' in op_lower or 'materialize' in op_lower
+            self.materialized = any(keyword in op_compact for keyword in materialized_operator_keywords)
         self.parent_node = None  # 父节点
         self.is_parallel = (self.operator_type in parallel_op)
         self.thread_execution_time = 0
@@ -84,12 +115,24 @@ class PlanNode:
         self.build_dop_exec_map = {}
         self.true_dop_exec_map = {self.dop: self.execution_time}
 
-        self.get_feature_data(plan_data)
+        # 将回填后的关键字段写回，供后续特征工程统一读取
+        self.plan_data['dop'] = self.dop
+        self.plan_data['actual_rows'] = self.actual_rows
+        self.plan_data['estimate_rows'] = self.estimate_rows
+        self.plan_data['l_input_rows'] = self.l_input_rows_actual
+        self.plan_data['r_input_rows'] = self.r_input_rows_actual
+        self.plan_data['peak_mem'] = self.peak_mem
+        self.plan_data['width'] = self.width
+        self.plan_data['up_dop'] = self.updop
+        self.plan_data['down_dop'] = self.downdop
+        self.plan_data['execution_time'] = self.execution_time
+
+        self.get_feature_data(self.plan_data)
         
         # 只有在onnx_manager不为None时才进行推理
         if self.onnx_manager is not None:
             self.infer_exec_with_onnx()
-            # self.infer_mem_with_onnx()
+            self.infer_mem_with_onnx()
 
     def add_child(self, child_node):
         self.child_plans.append(child_node)
@@ -293,11 +336,25 @@ class PlanNode:
 
         return 0  # 这个分支理论上不会走到
 
-    def compute_parallel_dop_predictions(self):
+    def compute_parallel_dop_predictions(self, visited=None, in_stack=None):
         """ 计算所有 dop 的预测执行时间(累加子节点的执行时间) """
+        if visited is None:
+            visited = set()
+        if in_stack is None:
+            in_stack = set()
+
+        node_key = id(self)
+        # Already computed for this traversal.
+        if node_key in visited:
+            return
+        # Cycle detected: stop descending to avoid recursion overflow.
+        if node_key in in_stack:
+            return
+
+        in_stack.add(node_key)
         # 先递归计算所有子节点的预测执行时间
         for child in self.child_plans:
-            child.compute_parallel_dop_predictions()
+            child.compute_parallel_dop_predictions(visited=visited, in_stack=in_stack)
 
         # 如果当前节点支持并行且已经得到预测参数,则计算当前节点自身的预测执行时间
         if self.is_parallel and self.pred_params is not None:
@@ -343,6 +400,8 @@ class PlanNode:
                         else:
                             self.pred_dop_exec_map[dop] = self.pred_execution_time
                     self.pred_dop_exec_map[dop] = self.pred_dop_exec_map[dop] + child_pred
+        in_stack.remove(node_key)
+        visited.add(node_key)
 
     def generate_gnn_feature(self, feature_type='exec', operator_encoding=None, jointype_encoding=None):
         """

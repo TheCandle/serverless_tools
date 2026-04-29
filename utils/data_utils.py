@@ -11,6 +11,98 @@ import numpy as np
 from collections import deque
 from typing import Optional
 
+
+# Normalize various engine-specific operator names to a canonical set
+# already used by config/structure_config.py.
+PRESTO_OPERATOR_ALIASES = {
+    # Keep aliases minimal and conservative.
+    # We avoid semantic remapping between different operators.
+    "TableScanOperator": "TableScan",
+}
+
+
+def _normalize_operator_type(name) -> str:
+    """Map raw operator type into canonical operator names."""
+    if pd.isna(name):
+        return "Project"
+    raw = str(name).strip()
+    if not raw:
+        return "Project"
+
+    if raw in PRESTO_OPERATOR_ALIASES:
+        return PRESTO_OPERATOR_ALIASES[raw]
+
+    # Keep existing names untouched by default.
+    return raw
+
+
+def normalize_plan_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Normalize plan_info dataframe so both openGauss and Presto-like
+    datasets can be consumed by the same training/inference pipeline.
+    """
+    if df is None or df.empty:
+        return df
+
+    normalized = df.copy()
+
+    # Unify operator naming across engines.
+    if "operator_type" in normalized.columns:
+        normalized["operator_type"] = normalized["operator_type"].apply(_normalize_operator_type)
+
+    # Ensure key numeric columns exist for feature extraction and model input.
+    if "actual_rows" not in normalized.columns:
+        if "output_rows" in normalized.columns:
+            normalized["actual_rows"] = normalized["output_rows"]
+        elif "estimate_rows" in normalized.columns:
+            normalized["actual_rows"] = normalized["estimate_rows"]
+        else:
+            normalized["actual_rows"] = 0
+
+    if "estimate_rows" not in normalized.columns:
+        normalized["estimate_rows"] = normalized["actual_rows"]
+
+    default_zero_columns = [
+        "width",
+        "instance_mem",
+        "estimate_costs",
+        "nloops",
+        "agg_col",
+        "agg_width",
+        "hash_table_size",
+        "disk_ratio",
+        "stream_poll_time",
+        "stream_data_copy_time",
+        "stream_data_send_time",
+        "stream_quota_time",
+        "build_time",
+        "hash_time",
+        "up_dop",
+        "down_dop",
+        "r_input_rows",
+        "peak_mem",
+    ]
+    for col in default_zero_columns:
+        if col not in normalized.columns:
+            normalized[col] = 0
+
+    default_none_columns = [
+        "jointype",
+        "table_names",
+        "index_names",
+        "filter",
+        "child_plan",
+    ]
+    for col in default_none_columns:
+        if col not in normalized.columns:
+            normalized[col] = "none"
+
+    # Ensure bool column used by some filters exists.
+    if "is_executed" not in normalized.columns:
+        normalized["is_executed"] = True
+
+    return normalized
+
 def load_csv_safe(file_path: str, delimiter: str = ';', description: str = "CSV文件") -> Optional[pd.DataFrame]:
     """安全加载CSV文件"""
     try:

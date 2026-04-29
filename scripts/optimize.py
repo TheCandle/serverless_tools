@@ -66,7 +66,15 @@ def export_optimization_to_csv(json_path: str, csv_path: str) -> bool:
                     rows.append(row)
         
         # Sort by query_id and plan_id
-        rows.sort(key=lambda x: (int(x['query_id']), x['plan_id']))
+        # 兼容 query_id 形如 "1" 和 "query_1" 两种格式
+        def _query_sort_key(query_id):
+            query_id_str = str(query_id)
+            if query_id_str.isdigit():
+                return int(query_id_str)
+            suffix = query_id_str.split('_')[-1]
+            return int(suffix) if suffix.isdigit() else query_id_str
+
+        rows.sort(key=lambda x: (_query_sort_key(x['query_id']), int(x['plan_id'])))
         
         # Write to CSV
         if rows:
@@ -148,7 +156,7 @@ def run_baseline_optimization(dataset: str, train_mode: str,
             queries_data = []
             for query_id, base_nodes in query_trees.items():
                 query_info = {
-                    'query_id': int(query_id),
+                    'query_id': query_id,
                     'thread_blocks': []
                 }
                 
@@ -160,7 +168,7 @@ def run_baseline_optimization(dataset: str, train_mode: str,
                 root_nodes = get_root_nodes(base_nodes)
                 current_offset = 0
                 for root in root_nodes:
-                    assign_thread_ids_by_plan_id(root, thread_id=current_offset)
+                    assign_thread_ids_by_plan_id(root, thread_id=current_offset, visited=set())
                     nodes_in_tree = collect_all_nodes_by_plan_id([root])
                     max_tid = max(getattr(node, 'thread_id', 0) for node in nodes_in_tree)
                     current_offset = max_tid + 1

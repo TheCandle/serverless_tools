@@ -19,6 +19,22 @@ from core.thread_block import ThreadBlock
 from config.structure_config import thread_cost, default_dop # 假设原始文件用了 default_dop
 # --- 结束导入 ---
 
+
+def _is_stage_boundary_operator(op_type: str) -> bool:
+    """Unified stage-boundary rule for openGauss + Presto operators."""
+    if not op_type:
+        return False
+    op = op_type.lower()
+    return (
+        'streaming' in op or
+        op in {
+            'exchangeoperator',
+            # 'localexchangesinkoperator',
+            'mergeoperator',
+            # 'localmerge',
+        }
+    )
+
 # ==============================================================================
 # 从原始 dop_utils.py 直接搬运的函数
 # ==============================================================================
@@ -214,18 +230,29 @@ def calculate_query_execution_time(thread_blocks):
 # 线程块划分和更新相关函数 (直接搬运)
 # ==============================================================================
 
-def assign_thread_ids_by_plan_id(node, thread_id=0, max_thread_id=0):
+def assign_thread_ids_by_plan_id(node, thread_id=0, max_thread_id=0, visited=None):
     """递归为计划树分配线程 ID (直接搬运)"""
+    if visited is None:
+        visited = set()
+    node_key = id(node)
+    if node_key in visited:
+        return max_thread_id
+    visited.add(node_key)
+
     node.thread_id = thread_id
     max_thread_id = max(max_thread_id, thread_id)
 
-    if 'streaming' in node.operator_type.lower():
-        new_thread_id = max_thread_id + 1
-    else:
-        new_thread_id = thread_id
-
     for child in node.child_plans:
-        max_thread_id = assign_thread_ids_by_plan_id(child, new_thread_id, max_thread_id)
+        child_thread_id = thread_id
+        # Split after classic stage-boundary operators.
+        if _is_stage_boundary_operator(getattr(node, 'operator_type', '')):
+            child_thread_id = max_thread_id + 1
+        # LocalExchangeSink -> LocalExchangeSource should only split once:
+        # source starts new block, but source itself won't force another split.
+        # if getattr(child, 'operator_type', '') == 'LocalExchangeSourceOperator':
+        #     child_thread_id = max_thread_id + 1
+
+        max_thread_id = assign_thread_ids_by_plan_id(child, child_thread_id, max_thread_id, visited)
 
     return max_thread_id
 
@@ -249,7 +276,7 @@ def update_thread_blocks(base_nodes):
     root_nodes = get_root_nodes(base_nodes)
     current_offset = 0
     for root in root_nodes:
-        assign_thread_ids_by_plan_id(root, thread_id=current_offset)
+        assign_thread_ids_by_plan_id(root, thread_id=current_offset, visited=set())
         nodes_in_tree = collect_all_nodes_by_plan_id([root])
         max_tid = max(getattr(node, 'thread_id', 0) for node in nodes_in_tree)
         current_offset = max_tid + 1
@@ -394,17 +421,36 @@ def generate_aligned_dop_configurations(thread_blocks, max_configs=10):
     root_blocks = [tb for tb in thread_blocks.values() if tb.thread_id not in parent_map]
 
     # 4. 递归生成配置（带去重和剪枝）
-    def enumerate_configs(thread_id, limit=1000):
+    memo = {}
+
+    def enumerate_configs(thread_id, limit=1000, in_stack=None):
+        if in_stack is None:
+            in_stack = set()
+        # Reuse computed sub-results.
+        memo_key = (thread_id, limit)
+        if memo_key in memo:
+            return memo[memo_key]
+        # Cycle detected in thread-block DAG: stop descending this branch.
+        if thread_id in in_stack:
+            tb_cycle = thread_blocks[thread_id]
+            fallback = [{thread_id: dop} for dop in tb_cycle.candidate_optimal_dops]
+            memo[memo_key] = fallback
+            return fallback
+
+        in_stack.add(thread_id)
         tb = thread_blocks[thread_id]
         cand_dops = tb.candidate_optimal_dops
         left_bounds = cand_dops[:-1]
         d_right = cand_dops[-1]
 
         if thread_id not in children_map:
-            return [{thread_id: dop} for dop in cand_dops]
+            result = [{thread_id: dop} for dop in cand_dops]
+            in_stack.remove(thread_id)
+            memo[memo_key] = result
+            return result
 
-        child_ids = children_map[thread_id]
-        child_config_lists = [enumerate_configs(cid, limit) for cid in child_ids]
+        child_ids = [cid for cid in children_map[thread_id] if cid != thread_id]
+        child_config_lists = [enumerate_configs(cid, limit, in_stack) for cid in child_ids]
 
         aligned_configs_set = set()
         aligned_configs = []
@@ -423,6 +469,8 @@ def generate_aligned_dop_configurations(thread_blocks, max_configs=10):
                     aligned_configs_set.add(frozen)
                     aligned_configs.append(new_config)
                     if len(aligned_configs) >= limit:
+                        in_stack.remove(thread_id)
+                        memo[memo_key] = aligned_configs
                         return aligned_configs
 
         # 添加不对齐（使用 d_right）的配置
@@ -437,8 +485,12 @@ def generate_aligned_dop_configurations(thread_blocks, max_configs=10):
                 aligned_configs_set.add(frozen)
                 aligned_configs.append(new_config)
                 if len(aligned_configs) >= limit:
+                    in_stack.remove(thread_id)
+                    memo[memo_key] = aligned_configs
                     return aligned_configs
 
+        in_stack.remove(thread_id)
+        memo[memo_key] = aligned_configs
         return aligned_configs
 
     # 5. 获取每个 root 的所有配置列表
@@ -452,6 +504,8 @@ def generate_aligned_dop_configurations(thread_blocks, max_configs=10):
         merged_config = {}
         for config in config_combo:
             merged_config.update(config)
+        if not merged_config:
+            continue
         frozen = frozenset(merged_config.items())
         if frozen not in all_configs_set:
             all_configs_set.add(frozen)
@@ -468,7 +522,7 @@ def generate_aligned_dop_configurations(thread_blocks, max_configs=10):
             force_parallel_config[thread_id] = 8
     frozen_force = frozenset(force_parallel_config.items())
 
-    if frozen_force not in all_configs_set:
+    if force_parallel_config and frozen_force not in all_configs_set:
         all_configs.append(force_parallel_config)
 
     return all_configs[:max_configs]

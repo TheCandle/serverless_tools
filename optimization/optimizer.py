@@ -289,8 +289,10 @@ def run_dop_optimization(df_plans_all_dops, onnx_manager: ONNXModelManager,
 
                 moo_population = kwargs.get('moo_population_size', 10)
                 moo_generations = kwargs.get('moo_generations', 20)
-                moo_weight_latency = kwargs.get('moo_weight_latency', 0.8)
-                moo_weight_cost = kwargs.get('moo_weight_cost', 0.2)
+                # moo_weight_latency = kwargs.get('moo_weight_latency', 0.8)
+                # moo_weight_cost = kwargs.get('moo_weight_cost', 0.2)
+                moo_weight_latency = 1
+                moo_weight_cost = 0
                 use_continuous_dop = kwargs.get('use_continuous_dop', False)
 
                 optimal_dop_config, moo_execution_time = optimize_thread_block_dops_with_moo(

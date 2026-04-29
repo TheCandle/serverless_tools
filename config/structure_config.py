@@ -166,6 +166,46 @@ jointype_encoding = {jointype: idx for idx, jointype in enumerate(jointypes)}
 table_names_encoding = {table_name: idx for idx, table_name in enumerate(table_names)}
 operator_encoding = {operator_type: idx for idx, operator_type in enumerate(operator_type)}
 
+# Materialized (pipeline breaker) operator rules.
+# Keep this centralized so switching engine/operator names only needs config changes.
+materialized_operator_types = {
+    # openGauss / legacy
+    'Vector Materialize',
+    'Vector Aggregate',
+    'Vector Hash Aggregate',
+    'Vector Sonic Hash Aggregate',
+    'Vector Sort',
+    'Vector Sort Aggregate',
+    'Vector Streaming LOCAL GATHER',
+    'Vector Streaming LOCAL REDISTRIBUTE',
+    'Vector Streaming BROADCAST',
+    'Streaming(type: BROADCAST dop: 64/1)',
+    'Streaming(type: LOCAL REDISTRIBUTE dop: 64/64)',
+    'Streaming(type: LOCAL GATHER dop: 1/64)',
+    'Hash',
+    'Hash Join',
+    'Aggregate',
+    # Presto
+    'LocalExchange',
+    'LocalMerge',
+    'PartialSort',
+    'RemoteSource',
+    'EnforceSingleRow',
+}
+
+# Keyword fallback for engines/operators not explicitly listed above.
+materialized_operator_keywords = (
+    'materialize',
+    'aggregate',
+    'sort',
+    # 'hash',
+    # 'exchange',
+    'join',
+    # 'remote',
+    'merge',
+    'enforcesinglerow',
+)
+
 parallel_op = [
         'CStore Scan',
         'Vector Materialize',
@@ -329,6 +369,24 @@ dop_operators_mem = [
         # 'Vector Hash Join',
         # 'Vector Sonic Hash Join',
         # 'Vector SetOp',
+
+        'ScanFilterProject',
+        'Aggregate',
+        'AssignUniqueId',
+        'CrossJoin',
+        'EnforceSingleRow',
+        'FilterProject',
+        'InnerJoin',
+        'LeftJoin',
+        'LocalExchange',
+        'LocalMerge',
+        'PartialSort',
+        'Project',
+        'RemoteSource',
+        'ScanFilter',
+        'ScanProject',
+        'SemiJoin',
+        'TableScan',
 ]
 
 
@@ -600,6 +658,62 @@ dop_operator_features = {
 
 }
 
+# Presto native operators that may not exist in openGauss datasets.
+# Keep them as independent operators instead of forcing semantic remapping.
+PRESTO_NATIVE_OPERATORS = [
+    'MergeOperator',
+    'ExplainAnalyzeOperator',
+    'TaskOutputOperator',
+    'ExchangeOperator',
+    'OrderBy',
+    'LocalMerge',
+    'CallbackSink',
+    'PartitionedOutput',
+    'LocalExchangeSourceOperator',
+    'HashBuilderOperator',
+    'LookupJoinOperator',
+    'LocalExchangeSinkOperator',
+    'Aggregation',
+    'PartialAggregation',
+    'NestedLoopJoinBuild',
+    'NestedLoopJoinProbe',
+]
+
+def _extend_unique(target_list, values):
+    for value in values:
+        if value not in target_list:
+            target_list.append(value)
+
+# Ensure these operators can enter train/infer loops.
+_extend_unique(operator_lists, PRESTO_NATIVE_OPERATORS)
+_extend_unique(operator_type, PRESTO_NATIVE_OPERATORS)
+_extend_unique(parallel_op, PRESTO_NATIVE_OPERATORS)
+_extend_unique(dop_operators_exec, PRESTO_NATIVE_OPERATORS)
+_extend_unique(dop_operators_mem, PRESTO_NATIVE_OPERATORS)
+operator_encoding = {op_name: idx for idx, op_name in enumerate(operator_type)}
+
+# Conservative materialization tags for common pipeline breakers.
+for _op in [
+    'ExchangeOperator',
+    'LocalExchangeSourceOperator',
+    'LocalExchangeSinkOperator',
+    'PartitionedOutput',
+    'OrderBy',
+    'Aggregation',
+    'PartialAggregation',
+    'HashBuilderOperator',
+    'LocalMerge',
+]:
+    materialized_operator_types.add(_op)
+
+# Default lightweight feature template for unseen Presto-native operators.
+for _op in PRESTO_NATIVE_OPERATORS:
+    if _op not in dop_operator_features:
+        dop_operator_features[_op] = {
+            'exec': ['l_input_rows', 'r_input_rows'],
+            'mem': ['l_input_rows', 'r_input_rows'],
+        }
+
 # 全局特征列表 - 分别收集exec和mem特征
 all_exec_features = set()
 all_mem_features = set()
@@ -767,3 +881,11 @@ dop_train_epochs = {
         'mem': 50
     }
 }
+
+# Ensure newly introduced operators always have training epoch config.
+for _op in PRESTO_NATIVE_OPERATORS:
+    if _op not in dop_train_epochs:
+        dop_train_epochs[_op] = {
+            'exec': 100,
+            'mem': 50,
+        }

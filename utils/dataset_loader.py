@@ -8,7 +8,7 @@ import os
 import random
 import pandas as pd
 from typing import Dict, Optional, Union, Tuple, Set, List
-from .data_utils import load_csv_safe, save_csv_safe
+from .data_utils import load_csv_safe, save_csv_safe, normalize_plan_dataframe
 
 
 class DatasetLoader:
@@ -199,6 +199,8 @@ class DatasetLoader:
             paths = self._ensure_job_split_files(float(train_ratio), int(seed))
             plan_info_path = paths["train_plan"]
             train_df = load_csv_safe(plan_info_path, description=f"{self.dataset_name.upper()} train plan (split)")
+            if train_df is not None:
+                train_df = normalize_plan_dataframe(train_df)
             if train_df is not None and use_estimates:
                 from .data_utils import propagate_estimates_in_dataframe
                 train_df = propagate_estimates_in_dataframe(train_df)
@@ -217,6 +219,8 @@ class DatasetLoader:
             description=f"{self.dataset_name.upper()}训练集计划数据"
         )
         
+        if train_df is not None:
+            train_df = normalize_plan_dataframe(train_df)
         if train_df is not None and use_estimates:
             from .data_utils import propagate_estimates_in_dataframe
             train_df = propagate_estimates_in_dataframe(train_df)
@@ -250,6 +254,8 @@ class DatasetLoader:
             paths = self._ensure_job_split_files(float(train_ratio), int(seed))
             plan_info_path = paths["test_plan"]
             test_df = load_csv_safe(plan_info_path, description=f"{self.dataset_name.upper()} test plan (split)")
+            if test_df is not None:
+                test_df = normalize_plan_dataframe(test_df)
             if test_df is not None and use_estimates:
                 from .data_utils import propagate_estimates_in_dataframe
                 test_df = propagate_estimates_in_dataframe(test_df)
@@ -267,6 +273,8 @@ class DatasetLoader:
             description=f"{self.dataset_name.upper()}测试集计划数据"
         )
         
+        if test_df is not None:
+            test_df = normalize_plan_dataframe(test_df)
         if test_df is not None and use_estimates:
             from .data_utils import propagate_estimates_in_dataframe
             test_df = propagate_estimates_in_dataframe(test_df)

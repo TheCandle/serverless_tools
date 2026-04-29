@@ -22,6 +22,22 @@ from config.structure_config import thread_cost, thread_mem
 from scripts.main import RUN_PRESTO
 # -------------------------
 
+
+def _is_stage_boundary_operator(op_type: str) -> bool:
+    """Unified stage-boundary rule for openGauss + Presto operators."""
+    if not op_type:
+        return False
+    op = op_type.lower()
+    return (
+        'streaming' in op or
+        op in {
+            'exchangeoperator',
+            # 'localexchangesinkoperator',
+            'mergeoperator',
+            # 'localmerge',
+        }
+    )
+
 # ==============================================================================
 # 辅助函数 (计算执行时间和内存) - 从原始文件直接搬运
 # (这些函数逻辑保持不变)
@@ -89,7 +105,7 @@ def calculate_thread_execution_time(node, thread_id):
     same_results = []
     new_results = []
 
-    is_streaming = 'streaming' in node.operator_type.lower()
+    is_streaming = _is_stage_boundary_operator(getattr(node, 'operator_type', ''))
     for child in node.child_plans:
         new_thread_id = thread_id + 1 if is_streaming else thread_id
         if new_thread_id == thread_id:
@@ -294,13 +310,14 @@ def assign_thread_ids(node, thread_id=0, max_thread_id=0):
     node.thread_id = thread_id
     max_thread_id = max(max_thread_id, thread_id)
     
-    if 'streaming' in node.operator_type.lower():
-        new_thread_id = max_thread_id + 1
-    else:
-        new_thread_id = thread_id
-    
     for child in node.child_plans:
-        max_thread_id = assign_thread_ids(child, new_thread_id, max_thread_id)
+        child_thread_id = thread_id
+        if _is_stage_boundary_operator(getattr(node, 'operator_type', '')):
+            child_thread_id = max_thread_id + 1
+        # LocalExchangeSink -> LocalExchangeSource only splits once.
+        # if getattr(child, 'operator_type', '') == 'LocalExchangeSourceOperator':
+        #     child_thread_id = max_thread_id + 1
+        max_thread_id = assign_thread_ids(child, child_thread_id, max_thread_id)
     
     return max_thread_id
 
@@ -473,6 +490,8 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
     # === 开始: 严格复制粘贴原始顶层逻辑 ===
     # 读取执行计划数据
     df_plans = pd.read_csv(plan_csv_path, delimiter=';', encoding='utf-8') # 使用参数
+    from utils.data_utils import normalize_plan_dataframe
+    df_plans = normalize_plan_dataframe(df_plans)
     # df_plans = df_plans[df_plans['query_dop'] == 8].copy() # 原始代码注释掉了这行
     df_query_info = pd.read_csv(query_csv_path, delimiter=';', encoding='utf-8') # 使用参数
     # df_query_info = df_query_info[df_query_info['dop'] == 8].copy() # 原始代码注释掉了这行

@@ -202,14 +202,21 @@ def prepare_data(train_data, test_data, operator, feature_columns, target_column
     # Filter out rows where query_dop == 1
     # operator_data = operator_data[operator_data['query_dop'] != 1]
     
-    # 添加 index_cost 列
-    operator_data['index_cost'] = operator_data['index_names'].apply(
-        lambda x: calculate_index_cost(x, table_structure, column_type_cost_dict)
-    )
-    # 对 filter 列进行谓词开销计算
-    operator_data['predicate_cost'] = operator_data['filter'].apply(
-        lambda x: extract_predicate_cost(x) if pd.notnull(x) and x != '' else 0
-    )
+    # 添加 index_cost 列（兼容不同数据源：可能不存在 index_names）
+    if 'index_names' in operator_data.columns:
+        operator_data['index_cost'] = operator_data['index_names'].apply(
+            lambda x: calculate_index_cost(x, table_structure, column_type_cost_dict)
+        )
+    else:
+        operator_data['index_cost'] = 0
+
+    # 对 filter 列进行谓词开销计算（兼容不同数据源：可能不存在 filter）
+    if 'filter' in operator_data.columns:
+        operator_data['predicate_cost'] = operator_data['filter'].apply(
+            lambda x: extract_predicate_cost(x) if pd.notnull(x) and x != '' else 0
+        )
+    else:
+        operator_data['predicate_cost'] = 0
 
 
     # # Assign train/test split based on query_id
@@ -217,22 +224,35 @@ def prepare_data(train_data, test_data, operator, feature_columns, target_column
     #     lambda qid: 'train' if qid  in train_queries else 'test' if qid  in test_queries else 'exclude'
     # )
 
-    # 使用提前编码的字典将 jointype 和 table_names 转换为标签
-    operator_data['jointype'] = operator_data['jointype'].map(jointype_encoding)
+    # 使用提前编码的字典将 jointype 转换为标签（兼容无该列场景）
+    if 'jointype' in operator_data.columns:
+        operator_data['jointype'] = operator_data['jointype'].map(jointype_encoding)
+    else:
+        operator_data['jointype'] = jointype_encoding.get('none', 0)
     
     if 'is_executed' in test_data.columns:
         operator_test = test_data[(test_data['operator_type'] == operator) & (test_data['is_executed'] == True) & (test_data['execution_time'] > 0)].copy()
     else:
         operator_test = test_data[(test_data['operator_type'] == operator) & (test_data['execution_time'] > 0)].copy()
-    operator_test['index_cost'] = operator_test['index_names'].apply(
-        lambda x: calculate_index_cost(x, table_structure, column_type_cost_dict)
-    )
-    # 对 filter 列进行谓词开销计算
-    operator_test['predicate_cost'] = operator_test['filter'].apply(
-        lambda x: extract_predicate_cost(x) if pd.notnull(x) and x != '' else 0
-    )
+    if 'index_names' in operator_test.columns:
+        operator_test['index_cost'] = operator_test['index_names'].apply(
+            lambda x: calculate_index_cost(x, table_structure, column_type_cost_dict)
+        )
+    else:
+        operator_test['index_cost'] = 0
+
+    # 对 filter 列进行谓词开销计算（兼容不同数据源：可能不存在 filter）
+    if 'filter' in operator_test.columns:
+        operator_test['predicate_cost'] = operator_test['filter'].apply(
+            lambda x: extract_predicate_cost(x) if pd.notnull(x) and x != '' else 0
+        )
+    else:
+        operator_test['predicate_cost'] = 0
     
-    operator_test['jointype'] = operator_test['jointype'].map(jointype_encoding)
+    if 'jointype' in operator_test.columns:
+        operator_test['jointype'] = operator_test['jointype'].map(jointype_encoding)
+    else:
+        operator_test['jointype'] = jointype_encoding.get('none', 0)
 
     # Split into train and test data
     train_data = operator_data
@@ -250,10 +270,17 @@ def prepare_data(train_data, test_data, operator, feature_columns, target_column
     
     X_train = train_data[numerical_columns].copy()
     X_test = test_data[numerical_columns].copy()
-    
+
+    # 仅保留实际存在的分类列，避免不同引擎数据字段不一致导致 KeyError
+    existing_categorical_columns = [
+        col for col in categorical_columns
+        if col in train_data.columns and col in test_data.columns
+    ]
+
     # 将分类列保留并添加到归一化后的数据中
-    X_train[categorical_columns] = train_data[categorical_columns]
-    X_test[categorical_columns] = test_data[categorical_columns]
+    if existing_categorical_columns:
+        X_train[existing_categorical_columns] = train_data[existing_categorical_columns]
+        X_test[existing_categorical_columns] = test_data[existing_categorical_columns]
 
     # 目标列
     y_train = train_data[target_columns]
