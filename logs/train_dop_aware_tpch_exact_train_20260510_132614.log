@@ -1,0 +1,511 @@
+[日志] 已启用文件日志: logs/train_dop_aware_tpch_exact_train_20260510_132614.log
+============================================================
+开始实验: DOP_AWARE 方法
+数据集: tpch
+训练模式: exact_train
+============================================================
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+Epoch [10/100], Average Loss: 1698.1094, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 1412.8345, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 1231.3455, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 1157.4513, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 1126.5916, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 1106.7024, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 1087.5823, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 1066.8337, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 1045.5931, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 1025.8739, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/AssignUniqueId/exec_AssignUniqueId.onnx
+Native model prediction time: 0.000217 seconds
+ONNX model prediction time: 0.000178 seconds
+Epoch [10/50], Average Loss: 140442.2969, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 119297.4531, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 110213.5469, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 89376.1562, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 99193.9219, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/AssignUniqueId/mem_AssignUniqueId.onnx
+Native model prediction time: 0.000226 seconds
+ONNX model prediction time: 0.000139 seconds
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+Epoch [10/100], Average Loss: 0.0464, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 0.0245, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 0.0189, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 0.0147, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 0.0133, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 0.0128, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 0.0122, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 0.0120, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 0.0117, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 0.0116, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/EnforceSingleRow/exec_EnforceSingleRow.onnx
+Native model prediction time: 0.000212 seconds
+ONNX model prediction time: 0.000157 seconds
+Epoch [10/50], Average Loss: 0.0269, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 0.0186, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 0.0057, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 0.0031, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 0.0026, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/EnforceSingleRow/mem_EnforceSingleRow.onnx
+Native model prediction time: 0.000285 seconds
+ONNX model prediction time: 0.000125 seconds
+
+Training operator: FilterProject
+Epoch [10/100], Average Loss: 406.0159, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 452.0186, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 391.9153, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 423.9577, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 376.8742, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 380.0752, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 382.4559, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 373.4044, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 365.9379, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 368.8971, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/FilterProject/exec_FilterProject.onnx
+Native model prediction time: 0.000280 seconds
+ONNX model prediction time: 0.014531 seconds
+Epoch [10/50], Average Loss: 318403.6439, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 319483.5890, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 318504.4864, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 319554.2495, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 319553.1030, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/FilterProject/mem_FilterProject.onnx
+Native model prediction time: 0.000454 seconds
+ONNX model prediction time: 0.000200 seconds
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+Epoch [10/100], Average Loss: 51.7035, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 40.6944, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 24.6020, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 24.5158, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 31.9757, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 22.5489, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 26.8343, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 27.0725, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 22.3753, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 41.3182, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalMerge/exec_LocalMerge.onnx
+Native model prediction time: 0.000277 seconds
+ONNX model prediction time: 0.004281 seconds
+Epoch [10/50], Average Loss: 118705.2715, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 116648.4323, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 118517.3385, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 115925.1406, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 119033.0671, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalMerge/mem_LocalMerge.onnx
+Native model prediction time: 0.000257 seconds
+ONNX model prediction time: 0.000120 seconds
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+Epoch [10/100], Average Loss: 5282.0028, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 4855.4563, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 4620.9341, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 4422.8729, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 4352.2347, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 4541.7976, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 4251.8923, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 4396.5636, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 4527.6618, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 4425.3455, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TableScan/exec_TableScan.onnx
+Native model prediction time: 0.000261 seconds
+ONNX model prediction time: 0.000415 seconds
+Epoch [10/50], Average Loss: 45946751.4237, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 45851450.1695, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 46013792.7458, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 45779017.1186, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 46028688.1356, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TableScan/mem_TableScan.onnx
+Native model prediction time: 0.000278 seconds
+ONNX model prediction time: 0.000175 seconds
+
+Training operator: MergeOperator
+Epoch [10/100], Average Loss: 170.0865, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 124.3367, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 103.3134, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 94.2667, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 75.6149, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 65.2407, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 74.9071, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 81.5200, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 68.5817, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 90.3738, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/MergeOperator/exec_MergeOperator.onnx
+Native model prediction time: 0.000319 seconds
+ONNX model prediction time: 0.000133 seconds
+Epoch [10/50], Average Loss: 4225986.2292, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 4211052.8229, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 4251861.1875, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 4145726.2500, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 3867622.6146, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/MergeOperator/mem_MergeOperator.onnx
+Native model prediction time: 0.000203 seconds
+ONNX model prediction time: 0.000124 seconds
+
+Training operator: ExplainAnalyzeOperator
+Epoch [10/100], Average Loss: 25.6940, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 6.8804, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 7.2818, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 5.1928, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 4.6764, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 3.6027, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 5.5267, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 3.2195, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 4.7465, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 4.1691, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExplainAnalyzeOperator/exec_ExplainAnalyzeOperator.onnx
+Native model prediction time: 0.000841 seconds
+ONNX model prediction time: 0.000128 seconds
+Epoch [10/50], Average Loss: 0.0048, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 0.0019, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 0.0013, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 0.0014, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 0.0010, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExplainAnalyzeOperator/mem_ExplainAnalyzeOperator.onnx
+Native model prediction time: 0.000236 seconds
+ONNX model prediction time: 0.000333 seconds
+
+Training operator: TaskOutputOperator
+Epoch [10/100], Average Loss: 0.0486, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 0.0444, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 0.0352, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 0.0321, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 0.0326, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 0.0317, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 0.0299, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 0.0290, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 0.0289, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 0.0293, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TaskOutputOperator/exec_TaskOutputOperator.onnx
+Native model prediction time: 0.000223 seconds
+ONNX model prediction time: 0.000205 seconds
+Epoch [10/50], Average Loss: 0.0022, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 0.0028, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 0.0019, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 0.0015, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 0.0014, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TaskOutputOperator/mem_TaskOutputOperator.onnx
+Native model prediction time: 0.000245 seconds
+ONNX model prediction time: 0.000109 seconds
+
+Training operator: ExchangeOperator
+Epoch [10/100], Average Loss: 6101.5990, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 5542.2435, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 5844.4055, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 5086.8457, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 4833.7627, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 5098.3832, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 4759.4831, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 4904.4027, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 5375.6655, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 4848.4170, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExchangeOperator/exec_ExchangeOperator.onnx
+Native model prediction time: 0.000252 seconds
+ONNX model prediction time: 0.000167 seconds
+Epoch [10/50], Average Loss: 8883060.0549, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 8869853.9588, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 7671516.2637, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 7100707.1429, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 7014060.0275, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExchangeOperator/mem_ExchangeOperator.onnx
+Native model prediction time: 0.000337 seconds
+ONNX model prediction time: 0.000149 seconds
+
+Training operator: OrderBy
+Epoch [10/100], Average Loss: 391.0996, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 302.8725, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 276.3362, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 253.5209, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 322.2779, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 556.7038, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 336.9613, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 257.5499, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 268.5160, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 223.0667, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/OrderBy/exec_OrderBy.onnx
+Native model prediction time: 0.000241 seconds
+ONNX model prediction time: 0.004148 seconds
+Epoch [10/50], Average Loss: 6795060.8438, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 6784688.7917, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 6990963.7396, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 7028060.9167, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 6996243.0833, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/OrderBy/mem_OrderBy.onnx
+Native model prediction time: 0.000249 seconds
+ONNX model prediction time: 0.000118 seconds
+
+Training operator: CallbackSink
+Epoch [10/100], Average Loss: 1.2666, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 0.8852, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 0.8660, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 0.9598, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 0.8956, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 0.8977, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 0.7590, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 0.8112, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 1.0284, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 0.8420, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/CallbackSink/exec_CallbackSink.onnx
+Native model prediction time: 0.000199 seconds
+ONNX model prediction time: 0.000167 seconds
+Epoch [10/50], Average Loss: 0.0031, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 0.0020, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 0.0023, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 0.0011, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 0.0014, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/CallbackSink/mem_CallbackSink.onnx
+Native model prediction time: 0.000205 seconds
+ONNX model prediction time: 0.000287 seconds
+
+Training operator: PartitionedOutput
+Epoch [10/100], Average Loss: 2031.8826, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 1658.1855, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 1780.9979, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 1833.1022, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 1727.1725, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 1786.1762, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 1547.5397, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 1648.6533, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 1446.5161, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 1692.1896, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/PartitionedOutput/exec_PartitionedOutput.onnx
+Native model prediction time: 0.000268 seconds
+ONNX model prediction time: 0.000196 seconds
+Epoch [10/50], Average Loss: 3118791.4114, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 2401853.9860, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 2329198.5103, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 2232291.9994, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 2155579.8040, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/PartitionedOutput/mem_PartitionedOutput.onnx
+Native model prediction time: 0.000302 seconds
+ONNX model prediction time: 0.000156 seconds
+
+Training operator: LocalExchangeSourceOperator
+Epoch [10/100], Average Loss: 1341.7442, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 1344.0011, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 1208.2718, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 1274.5523, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 1189.7089, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 1198.3013, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 1193.6429, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 1122.9986, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 1205.4536, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 1360.0384, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalExchangeSourceOperator/exec_LocalExchangeSourceOperator.onnx
+Native model prediction time: 0.000514 seconds
+ONNX model prediction time: 0.000171 seconds
+Epoch [10/50], Average Loss: 2525071.3038, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 2487635.9412, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 1935608.5028, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 1855959.3051, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 1870148.6581, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalExchangeSourceOperator/mem_LocalExchangeSourceOperator.onnx
+Native model prediction time: 0.000432 seconds
+ONNX model prediction time: 0.000280 seconds
+
+Training operator: HashBuilderOperator
+Epoch [10/100], Average Loss: 28584.1706, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 24240.4257, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 26118.6725, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 24390.0616, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 26776.9061, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 20232.6528, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 19916.6052, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 19103.0875, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 26239.6782, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 18024.9866, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/HashBuilderOperator/exec_HashBuilderOperator.onnx
+Native model prediction time: 0.000291 seconds
+ONNX model prediction time: 0.000230 seconds
+Epoch [10/50], Average Loss: 140050802.4884, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 141234274.2791, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 140689071.3488, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 141409510.2326, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 140713872.5349, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/HashBuilderOperator/mem_HashBuilderOperator.onnx
+Native model prediction time: 0.000221 seconds
+ONNX model prediction time: 0.000167 seconds
+
+Training operator: LookupJoinOperator
+Epoch [10/100], Average Loss: 5364.0346, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 4885.9622, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 4540.7128, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 4532.3086, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 4378.0609, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 4381.3436, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 4258.5959, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 4133.2384, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 4249.1149, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 4023.6371, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LookupJoinOperator/exec_LookupJoinOperator.onnx
+Native model prediction time: 0.000288 seconds
+ONNX model prediction time: 0.000105 seconds
+Epoch [10/50], Average Loss: 4405454.6250, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 4420722.8198, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 4390063.5959, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 4334268.0378, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 4269714.4913, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LookupJoinOperator/mem_LookupJoinOperator.onnx
+Native model prediction time: 0.000253 seconds
+ONNX model prediction time: 0.000111 seconds
+
+Training operator: LocalExchangeSinkOperator
+Epoch [10/100], Average Loss: 385.8875, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 382.5874, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 377.5823, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 375.8800, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 365.2378, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 432.9560, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 341.9276, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 410.3576, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 344.7983, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 712.0672, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalExchangeSinkOperator/exec_LocalExchangeSinkOperator.onnx
+Native model prediction time: 0.000456 seconds
+ONNX model prediction time: 0.002197 seconds
+Epoch [10/50], Average Loss: 0.0014, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 0.0006, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 0.0004, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 0.0003, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 0.0003, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalExchangeSinkOperator/mem_LocalExchangeSinkOperator.onnx
+Native model prediction time: 0.000336 seconds
+ONNX model prediction time: 0.000112 seconds
+
+Training operator: Aggregation
+Epoch [10/100], Average Loss: 36399.1802, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 24835.3335, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 17204.6626, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 16544.5759, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 14516.2966, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 15148.4079, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 14843.3061, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 15781.6712, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 16798.4244, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 13446.1843, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/Aggregation/exec_Aggregation.onnx
+Native model prediction time: 0.000238 seconds
+ONNX model prediction time: 0.000129 seconds
+Epoch [10/50], Average Loss: 23119549.6429, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 23933181.4048, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 23847667.7143, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 24008068.6190, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 23841104.4762, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/Aggregation/mem_Aggregation.onnx
+Native model prediction time: 0.000258 seconds
+ONNX model prediction time: 0.000125 seconds
+
+Training operator: PartialAggregation
+Epoch [10/100], Average Loss: 27653.0454, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 22699.0702, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 21447.0917, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 21666.8365, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 21796.0581, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 21240.1260, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 21180.5752, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 20986.7452, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 21074.3882, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 21472.7312, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/PartialAggregation/exec_PartialAggregation.onnx
+Native model prediction time: 0.000308 seconds
+ONNX model prediction time: 0.000114 seconds
+Epoch [10/50], Average Loss: 11194390.1905, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 11129230.4048, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 11177992.1905, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 11211974.6905, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 11063879.1905, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/PartialAggregation/mem_PartialAggregation.onnx
+Native model prediction time: 0.000297 seconds
+ONNX model prediction time: 0.000115 seconds
+
+Training operator: NestedLoopJoinBuild
+Epoch [10/100], Average Loss: 4.8019, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 4.0767, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 3.3093, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 2.5175, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 1.7006, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 1.0824, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 0.8012, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 0.7296, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 0.7184, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 0.7041, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/NestedLoopJoinBuild/exec_NestedLoopJoinBuild.onnx
+Native model prediction time: 0.000225 seconds
+ONNX model prediction time: 0.000105 seconds
+Epoch [10/50], Average Loss: 0.0056, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 0.0055, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 0.0009, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 0.0009, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 0.0009, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/NestedLoopJoinBuild/mem_NestedLoopJoinBuild.onnx
+Native model prediction time: 0.000273 seconds
+ONNX model prediction time: 0.000096 seconds
+
+Training operator: NestedLoopJoinProbe
+Epoch [10/100], Average Loss: 51.8962, Learning Rate: 0.000800
+Epoch [20/100], Average Loss: 38.4768, Learning Rate: 0.000640
+Epoch [30/100], Average Loss: 25.2158, Learning Rate: 0.000512
+Epoch [40/100], Average Loss: 16.3808, Learning Rate: 0.000410
+Epoch [50/100], Average Loss: 12.0418, Learning Rate: 0.000328
+Epoch [60/100], Average Loss: 9.0260, Learning Rate: 0.000262
+Epoch [70/100], Average Loss: 7.0174, Learning Rate: 0.000210
+Epoch [80/100], Average Loss: 5.9165, Learning Rate: 0.000168
+Epoch [90/100], Average Loss: 5.4153, Learning Rate: 0.000134
+Epoch [100/100], Average Loss: 5.1303, Learning Rate: 0.000107
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/NestedLoopJoinProbe/exec_NestedLoopJoinProbe.onnx
+Native model prediction time: 0.000217 seconds
+ONNX model prediction time: 0.000129 seconds
+Epoch [10/50], Average Loss: 0.0071, Learning Rate: 0.000800
+Epoch [20/50], Average Loss: 0.0060, Learning Rate: 0.000640
+Epoch [30/50], Average Loss: 0.0072, Learning Rate: 0.000512
+Epoch [40/50], Average Loss: 0.0042, Learning Rate: 0.000410
+Epoch [50/50], Average Loss: 0.0030, Learning Rate: 0.000328
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/NestedLoopJoinProbe/mem_NestedLoopJoinProbe.onnx
+Native model prediction time: 0.000277 seconds
+ONNX model prediction time: 0.000141 seconds
+All operator results have been saved to /home/candle/Project/serverless_tools/output/evaluations/dop_aware/all_operators_performance_exec.csv
+DOP-aware model training 完成，耗时: 154.4506 秒
+============================================================
+实验完成: DOP_AWARE 方法
+数据集: tpch
+============================================================
+Training completed!

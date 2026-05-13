@@ -1,0 +1,79 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260513_155034.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (176 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+
+Training operator: FilterProject
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+[Exec Hyperparams] operator=TableScan, lr=0.001, batch_size=16, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1918, 14) y_train shape=(1918,) dop_train shape=(1918,)
+y_train min=0.017525 max=2972.502197 mean=228.230499
+dop_train min=2.000000 max=160.000000 mean=60.741398
+Epoch [10/100], Average Loss: 890771.0790, Best Loss: 1616.2033, Learning Rate: 0.001000
+Epoch [20/100], Average Loss: 13765.4834, Best Loss: 1616.2033, Learning Rate: 0.000900
+Epoch [30/100], Average Loss: 504846.1668, Best Loss: 1616.2033, Learning Rate: 0.000900
+Epoch [40/100], Average Loss: 60755.6889, Best Loss: 1616.2033, Learning Rate: 0.000810
+Epoch [50/100], Average Loss: 93295.7775, Best Loss: 273.7843, Learning Rate: 0.000810
+Epoch [60/100], Average Loss: 624980.8469, Best Loss: 273.7843, Learning Rate: 0.000729
+Epoch [70/100], Average Loss: 695835.0102, Best Loss: 273.7843, Learning Rate: 0.000729
+Epoch [80/100], Average Loss: 1883488.8554, Best Loss: 273.7843, Learning Rate: 0.000656
+Epoch [90/100], Average Loss: 515557.7012, Best Loss: 273.7843, Learning Rate: 0.000656
+Epoch [100/100], Average Loss: 913232.6262, Best Loss: 273.7843, Learning Rate: 0.000590
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(16, 14) y_test shape=(16,) dop_test shape=(16,)
+y_test min=0.220188 max=1042.502197 mean=211.981155
+dop_test min=2.000000 max=128.000000 mean=60.125000
+Backend TkAgg is interactive backend. Turning interactive mode on.

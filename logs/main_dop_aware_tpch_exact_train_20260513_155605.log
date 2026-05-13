@@ -1,0 +1,106 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260513_155605.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (176 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+
+Training operator: FilterProject
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+[Exec Hyperparams] operator=TableScan, lr=1e-05, batch_size=16, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1918, 14) y_train shape=(1918,) dop_train shape=(1918,)
+y_train min=0.017525 max=2972.502197 mean=228.230499
+dop_train min=2.000000 max=160.000000 mean=60.741398
+Epoch [10/100], Average Loss: 1827.8831, Best Loss: 1827.8831, Learning Rate: 0.000010
+Epoch [20/100], Average Loss: 1063.9251, Best Loss: 1063.9251, Learning Rate: 0.000009
+Epoch [30/100], Average Loss: 441.2355, Best Loss: 441.2355, Learning Rate: 0.000009
+Epoch [40/100], Average Loss: 156.3959, Best Loss: 156.3959, Learning Rate: 0.000008
+Epoch [50/100], Average Loss: 54.6400, Best Loss: 54.6400, Learning Rate: 0.000008
+Epoch [60/100], Average Loss: 13.1595, Best Loss: 13.1595, Learning Rate: 0.000007
+Epoch [70/100], Average Loss: 3.3073, Best Loss: 3.3073, Learning Rate: 0.000007
+Epoch [80/100], Average Loss: 3.2567, Best Loss: 2.9030, Learning Rate: 0.000007
+Epoch [90/100], Average Loss: 3.0272, Best Loss: 2.6215, Learning Rate: 0.000007
+Epoch [100/100], Average Loss: 2.8650, Best Loss: 2.2918, Learning Rate: 0.000006
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(16, 14) y_test shape=(16,) dop_test shape=(16,)
+y_test min=0.220188 max=1042.502197 mean=211.981155
+dop_test min=2.000000 max=128.000000 mean=60.125000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=73.7553 pred=1369374720.0000 a=2.000000 b=0.001000 c=417511424.000000 d=0.000000 e=951863360.000000
+idx=1 dop=64.0000 true=375.0023 pred=7577097216.0000 a=2.000000 b=0.001000 c=-1648157696.000000 d=0.000000 e=9225254912.000000
+idx=2 dop=64.0000 true=134.5338 pred=110919008.0000 a=2.000000 b=0.001000 c=-24127024.000000 d=0.000000 e=135046032.000000
+idx=3 dop=16.0000 true=0.2247 pred=1529456128.0000 a=2.000000 b=0.001000 c=466319104.000000 d=0.000000 e=1063136960.000000
+idx=4 dop=96.0000 true=68.5470 pred=1369374720.0000 a=2.000000 b=0.001000 c=417511424.000000 d=0.000000 e=951863360.000000
+idx=5 dop=96.0000 true=398.4398 pred=7577097216.0000 a=2.000000 b=0.001000 c=-1648157696.000000 d=0.000000 e=9225254912.000000
+idx=6 dop=96.0000 true=127.6066 pred=110919008.0000 a=2.000000 b=0.001000 c=-24127024.000000 d=0.000000 e=135046032.000000
+idx=7 dop=24.0000 true=0.2298 pred=1529456128.0000 a=2.000000 b=0.001000 c=466319104.000000 d=0.000000 e=1063136960.000000
+idx=8 dop=8.0000 true=386.2527 pred=1369374720.0000 a=2.000000 b=0.001000 c=417511424.000000 d=0.000000 e=951863360.000000
+idx=9 dop=8.0000 true=1042.5022 pred=7577097216.0000 a=2.000000 b=0.001000 c=-1648157696.000000 d=0.000000 e=9225254912.000000
+idx=10 dop=8.0000 true=268.7523 pred=110919008.0000 a=2.000000 b=0.001000 c=-24127024.000000 d=0.000000 e=135046032.000000
+idx=11 dop=2.0000 true=0.3105 pred=1529456128.0000 a=2.000000 b=0.001000 c=466319104.000000 d=0.000000 e=1063136960.000000
+idx=12 dop=128.0000 true=56.0197 pred=1369374720.0000 a=2.000000 b=0.001000 c=417511424.000000 d=0.000000 e=951863360.000000
+idx=13 dop=128.0000 true=347.4244 pred=7577097216.0000 a=2.000000 b=0.001000 c=-1648157696.000000 d=0.000000 e=9225254912.000000
+idx=14 dop=128.0000 true=111.8774 pred=110919008.0000 a=2.000000 b=0.001000 c=-24127024.000000 d=0.000000 e=135046032.000000
+idx=15 dop=32.0000 true=0.2202 pred=1529456128.0000 a=2.000000 b=0.001000 c=466319104.000000 d=0.000000 e=1063136960.000000
+[DEBUG][exec] ranges: a[2.000000, 2.000000] b[0.001000, 0.001000] c[-1648157696.000000, 466319104.000000] d[0.000000, 0.000000] e[135046032.000000, 9225254912.000000] true[0.220188, 1042.502197] pred[110919008.000000, 7577097216.000000]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TableScan/exec_TableScan.onnx
+Native model prediction time: 0.000556 seconds
+ONNX model prediction time: 0.000400 seconds
+All operator exec results have been saved to /home/candle/Project/serverless_tools/output/evaluations/dop_aware/all_operators_performance_exec.csv
+DOP-aware model training 完成，耗时: 67.1364 秒
+✅ Training completed
+
+============================================================
+🎉 All tasks completed!
+============================================================

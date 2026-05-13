@@ -1,0 +1,71 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260512_153229.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+Backend TkAgg is interactive backend. Turning interactive mode on.
+[Exec Hyperparams] operator=AssignUniqueId, lr=0.0005, batch_size=32, epochs=220
+Epoch [10/220], Average Loss: 31.7487, Best Loss: 31.7487, Learning Rate: 0.000500
+Epoch [20/220], Average Loss: 31.5062, Best Loss: 31.5062, Learning Rate: 0.000450
+Epoch [30/220], Average Loss: 31.4131, Best Loss: 31.3526, Learning Rate: 0.000450
+Epoch [40/220], Average Loss: 30.4417, Best Loss: 30.4417, Learning Rate: 0.000405
+Epoch [50/220], Average Loss: 29.8301, Best Loss: 29.8301, Learning Rate: 0.000405
+Epoch [60/220], Average Loss: 29.2635, Best Loss: 28.9244, Learning Rate: 0.000365
+Epoch [70/220], Average Loss: 27.2955, Best Loss: 26.9674, Learning Rate: 0.000365
+Epoch [80/220], Average Loss: 25.1110, Best Loss: 25.1110, Learning Rate: 0.000328
+Epoch [90/220], Average Loss: 27.1305, Best Loss: 23.0562, Learning Rate: 0.000328
+Epoch [100/220], Average Loss: 23.0335, Best Loss: 22.3210, Learning Rate: 0.000295
+Epoch [110/220], Average Loss: 19.4682, Best Loss: 19.4682, Learning Rate: 0.000295
+Epoch [120/220], Average Loss: 19.5151, Best Loss: 18.3532, Learning Rate: 0.000266
+Epoch [130/220], Average Loss: 22.5113, Best Loss: 18.3532, Learning Rate: 0.000266
+Epoch [140/220], Average Loss: 16.2306, Best Loss: 16.0253, Learning Rate: 0.000239
+Epoch [150/220], Average Loss: 17.8467, Best Loss: 15.5132, Learning Rate: 0.000239
+Epoch [160/220], Average Loss: 16.2510, Best Loss: 14.4832, Learning Rate: 0.000215
+Epoch [170/220], Average Loss: 16.3665, Best Loss: 14.4624, Learning Rate: 0.000215
+Epoch [180/220], Average Loss: 18.6776, Best Loss: 14.2424, Learning Rate: 0.000194
+Epoch [190/220], Average Loss: 18.5018, Best Loss: 14.2424, Learning Rate: 0.000194
+Epoch [200/220], Average Loss: 16.9889, Best Loss: 14.1450, Learning Rate: 0.000174
+Epoch [210/220], Average Loss: 15.4155, Best Loss: 14.1450, Learning Rate: 0.000174
+Epoch [220/220], Average Loss: 15.3307, Best Loss: 13.9978, Learning Rate: 0.000157
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/AssignUniqueId/exec_AssignUniqueId.onnx
+Native model prediction time: 0.000307 seconds
+ONNX model prediction time: 0.000194 seconds
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow

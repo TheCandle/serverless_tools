@@ -1,0 +1,569 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260512_120123.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+[Exec Hyperparams] operator=AssignUniqueId, lr=0.0005, batch_size=32, epochs=220
+Epoch [10/220], Average Loss: 31.7487, Best Loss: 31.7487, Learning Rate: 0.000500
+Epoch [20/220], Average Loss: 31.5062, Best Loss: 31.5062, Learning Rate: 0.000450
+Epoch [30/220], Average Loss: 31.4131, Best Loss: 31.3526, Learning Rate: 0.000450
+Epoch [40/220], Average Loss: 30.4417, Best Loss: 30.4417, Learning Rate: 0.000405
+Epoch [50/220], Average Loss: 29.8301, Best Loss: 29.8301, Learning Rate: 0.000405
+Epoch [60/220], Average Loss: 29.2635, Best Loss: 28.9244, Learning Rate: 0.000365
+Epoch [70/220], Average Loss: 27.2955, Best Loss: 26.9674, Learning Rate: 0.000365
+Epoch [80/220], Average Loss: 25.1110, Best Loss: 25.1110, Learning Rate: 0.000328
+Epoch [90/220], Average Loss: 27.1305, Best Loss: 23.0562, Learning Rate: 0.000328
+Epoch [100/220], Average Loss: 23.0335, Best Loss: 22.3210, Learning Rate: 0.000295
+Epoch [110/220], Average Loss: 19.4682, Best Loss: 19.4682, Learning Rate: 0.000295
+Epoch [120/220], Average Loss: 19.5151, Best Loss: 18.3532, Learning Rate: 0.000266
+Epoch [130/220], Average Loss: 22.5113, Best Loss: 18.3532, Learning Rate: 0.000266
+Epoch [140/220], Average Loss: 16.2306, Best Loss: 16.0253, Learning Rate: 0.000239
+Epoch [150/220], Average Loss: 17.8467, Best Loss: 15.5132, Learning Rate: 0.000239
+Epoch [160/220], Average Loss: 16.2510, Best Loss: 14.4832, Learning Rate: 0.000215
+Epoch [170/220], Average Loss: 16.3665, Best Loss: 14.4624, Learning Rate: 0.000215
+Epoch [180/220], Average Loss: 18.6776, Best Loss: 14.2424, Learning Rate: 0.000194
+Epoch [190/220], Average Loss: 18.5018, Best Loss: 14.2424, Learning Rate: 0.000194
+Epoch [200/220], Average Loss: 16.9889, Best Loss: 14.1450, Learning Rate: 0.000174
+Epoch [210/220], Average Loss: 15.4155, Best Loss: 14.1450, Learning Rate: 0.000174
+Epoch [220/220], Average Loss: 15.3307, Best Loss: 13.9978, Learning Rate: 0.000157
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/AssignUniqueId/exec_AssignUniqueId.onnx
+Native model prediction time: 0.000664 seconds
+ONNX model prediction time: 0.001119 seconds
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+[Exec Hyperparams] operator=EnforceSingleRow, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 0.0320, Best Loss: 0.0279, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 0.0232, Best Loss: 0.0232, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 0.0222, Best Loss: 0.0190, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 0.0198, Best Loss: 0.0188, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 0.0189, Best Loss: 0.0153, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 0.0167, Best Loss: 0.0146, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 0.0157, Best Loss: 0.0146, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 0.0152, Best Loss: 0.0134, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 0.0131, Best Loss: 0.0131, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 0.0136, Best Loss: 0.0123, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/EnforceSingleRow/exec_EnforceSingleRow.onnx
+Native model prediction time: 0.000247 seconds
+ONNX model prediction time: 0.000093 seconds
+
+Training operator: FilterProject
+[Exec Hyperparams] operator=FilterProject, lr=0.0005, batch_size=32, epochs=220
+Epoch [10/220], Average Loss: 412.4300, Best Loss: 17.9298, Learning Rate: 0.000500
+Epoch [20/220], Average Loss: 18.0632, Best Loss: 16.2967, Learning Rate: 0.000450
+Epoch [30/220], Average Loss: 80.2134, Best Loss: 16.2967, Learning Rate: 0.000450
+Epoch [40/220], Average Loss: 199.7537, Best Loss: 16.2967, Learning Rate: 0.000405
+Epoch [50/220], Average Loss: 71.6837, Best Loss: 16.2967, Learning Rate: 0.000405
+Epoch [60/220], Average Loss: 146.2872, Best Loss: 16.2967, Learning Rate: 0.000365
+Epoch [70/220], Average Loss: 489.9094, Best Loss: 16.0543, Learning Rate: 0.000365
+Epoch [80/220], Average Loss: 73.1386, Best Loss: 16.0543, Learning Rate: 0.000328
+Epoch [90/220], Average Loss: 117.7057, Best Loss: 16.0543, Learning Rate: 0.000328
+Epoch [100/220], Average Loss: 78.5234, Best Loss: 16.0543, Learning Rate: 0.000295
+Epoch [110/220], Average Loss: 94.6036, Best Loss: 16.0543, Learning Rate: 0.000295
+Epoch [120/220], Average Loss: 127.5116, Best Loss: 16.0543, Learning Rate: 0.000266
+Epoch [130/220], Average Loss: 67.4896, Best Loss: 16.0543, Learning Rate: 0.000266
+Epoch [140/220], Average Loss: 141.7373, Best Loss: 16.0543, Learning Rate: 0.000239
+Epoch [150/220], Average Loss: 119.6200, Best Loss: 16.0543, Learning Rate: 0.000239
+Epoch [160/220], Average Loss: 82.5977, Best Loss: 16.0543, Learning Rate: 0.000215
+Epoch [170/220], Average Loss: 88.9450, Best Loss: 16.0543, Learning Rate: 0.000215
+Epoch [180/220], Average Loss: 56.6965, Best Loss: 16.0543, Learning Rate: 0.000194
+Epoch [190/220], Average Loss: 63.3431, Best Loss: 16.0543, Learning Rate: 0.000194
+Epoch [200/220], Average Loss: 101.6688, Best Loss: 16.0543, Learning Rate: 0.000174
+Epoch [210/220], Average Loss: 56.3068, Best Loss: 16.0543, Learning Rate: 0.000174
+Epoch [220/220], Average Loss: 106.3029, Best Loss: 16.0543, Learning Rate: 0.000157
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/FilterProject/exec_FilterProject.onnx
+Native model prediction time: 0.000303 seconds
+ONNX model prediction time: 0.000952 seconds
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+[Exec Hyperparams] operator=LocalMerge, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 8.0433, Best Loss: 8.0433, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 2.9293, Best Loss: 2.9056, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 2.8601, Best Loss: 2.7914, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 2.9566, Best Loss: 2.7212, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 2.6198, Best Loss: 2.6198, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 3.4321, Best Loss: 2.4170, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 2.8255, Best Loss: 2.4170, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 2.3915, Best Loss: 2.3915, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 4.3798, Best Loss: 2.1768, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 3.3921, Best Loss: 2.1768, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalMerge/exec_LocalMerge.onnx
+Native model prediction time: 0.000264 seconds
+ONNX model prediction time: 0.000183 seconds
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+[Exec Hyperparams] operator=TableScan, lr=0.0002, batch_size=16, epochs=300
+Epoch [10/300], Average Loss: 173.8101, Best Loss: 166.9662, Learning Rate: 0.000200
+Epoch [20/300], Average Loss: 173.4888, Best Loss: 158.5113, Learning Rate: 0.000180
+Epoch [30/300], Average Loss: 176.2658, Best Loss: 153.0878, Learning Rate: 0.000180
+Epoch [40/300], Average Loss: 196.3234, Best Loss: 153.0878, Learning Rate: 0.000162
+Epoch [50/300], Average Loss: 155.0557, Best Loss: 153.0878, Learning Rate: 0.000162
+Epoch [60/300], Average Loss: 168.3272, Best Loss: 140.8190, Learning Rate: 0.000146
+Epoch [70/300], Average Loss: 170.9081, Best Loss: 137.2483, Learning Rate: 0.000146
+Epoch [80/300], Average Loss: 161.5444, Best Loss: 137.2483, Learning Rate: 0.000131
+Epoch [90/300], Average Loss: 141.3098, Best Loss: 137.2483, Learning Rate: 0.000131
+Epoch [100/300], Average Loss: 152.6067, Best Loss: 137.2483, Learning Rate: 0.000118
+Epoch [110/300], Average Loss: 151.5540, Best Loss: 136.5662, Learning Rate: 0.000118
+Epoch [120/300], Average Loss: 150.8550, Best Loss: 136.5662, Learning Rate: 0.000106
+Epoch [130/300], Average Loss: 159.9133, Best Loss: 135.2295, Learning Rate: 0.000106
+Epoch [140/300], Average Loss: 189.6554, Best Loss: 135.2295, Learning Rate: 0.000096
+Epoch [150/300], Average Loss: 151.5280, Best Loss: 135.2295, Learning Rate: 0.000096
+Epoch [160/300], Average Loss: 155.4046, Best Loss: 135.2295, Learning Rate: 0.000086
+Epoch [170/300], Average Loss: 173.4973, Best Loss: 135.2295, Learning Rate: 0.000086
+Epoch [180/300], Average Loss: 146.2847, Best Loss: 135.2295, Learning Rate: 0.000077
+Epoch [190/300], Average Loss: 162.4312, Best Loss: 134.2910, Learning Rate: 0.000077
+Epoch [200/300], Average Loss: 147.8972, Best Loss: 134.2910, Learning Rate: 0.000070
+Epoch [210/300], Average Loss: 144.1874, Best Loss: 134.2910, Learning Rate: 0.000070
+Epoch [220/300], Average Loss: 158.0459, Best Loss: 134.2910, Learning Rate: 0.000063
+Epoch [230/300], Average Loss: 148.3930, Best Loss: 134.2910, Learning Rate: 0.000063
+Epoch [240/300], Average Loss: 142.9145, Best Loss: 134.2910, Learning Rate: 0.000056
+Epoch [250/300], Average Loss: 152.3791, Best Loss: 134.2910, Learning Rate: 0.000056
+Epoch [260/300], Average Loss: 161.5646, Best Loss: 134.2910, Learning Rate: 0.000051
+Epoch [270/300], Average Loss: 160.9837, Best Loss: 134.2910, Learning Rate: 0.000051
+Epoch [280/300], Average Loss: 144.4859, Best Loss: 134.2910, Learning Rate: 0.000046
+Epoch [290/300], Average Loss: 150.2103, Best Loss: 134.2910, Learning Rate: 0.000046
+Epoch [300/300], Average Loss: 151.1642, Best Loss: 134.2910, Learning Rate: 0.000041
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TableScan/exec_TableScan.onnx
+Native model prediction time: 0.000268 seconds
+ONNX model prediction time: 0.000136 seconds
+
+Training operator: MergeOperator
+[Exec Hyperparams] operator=MergeOperator, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 314.4283, Best Loss: 90.9854, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 188.0365, Best Loss: 90.9854, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 218.9441, Best Loss: 90.9854, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 222.1784, Best Loss: 75.4081, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 64.2421, Best Loss: 64.2421, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 88.9062, Best Loss: 64.2421, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 102.1193, Best Loss: 51.3496, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 69.9344, Best Loss: 47.9660, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 108.4161, Best Loss: 46.8231, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 38.3810, Best Loss: 38.3810, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/MergeOperator/exec_MergeOperator.onnx
+Native model prediction time: 0.000233 seconds
+ONNX model prediction time: 0.000133 seconds
+
+Training operator: ExplainAnalyzeOperator
+[Exec Hyperparams] operator=ExplainAnalyzeOperator, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 629.1247, Best Loss: 490.9746, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 1352.6241, Best Loss: 471.1730, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 784.1476, Best Loss: 377.2253, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 583.3069, Best Loss: 323.8670, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 1002.3612, Best Loss: 220.5226, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 809.1466, Best Loss: 220.5226, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 612.5084, Best Loss: 209.2879, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 417.5464, Best Loss: 117.3963, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 227.5918, Best Loss: 117.3963, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 145.1607, Best Loss: 117.3963, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExplainAnalyzeOperator/exec_ExplainAnalyzeOperator.onnx
+Native model prediction time: 0.000982 seconds
+ONNX model prediction time: 0.000127 seconds
+
+Training operator: TaskOutputOperator
+[Exec Hyperparams] operator=TaskOutputOperator, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 0.0349, Best Loss: 0.0343, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 0.0339, Best Loss: 0.0335, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 0.0332, Best Loss: 0.0332, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 0.0333, Best Loss: 0.0332, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 0.0336, Best Loss: 0.0330, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 0.0331, Best Loss: 0.0330, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 0.0330, Best Loss: 0.0326, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 0.0333, Best Loss: 0.0326, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 0.0327, Best Loss: 0.0326, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 0.0336, Best Loss: 0.0326, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TaskOutputOperator/exec_TaskOutputOperator.onnx
+Native model prediction time: 0.000304 seconds
+ONNX model prediction time: 0.000151 seconds
+
+Training operator: ExchangeOperator
+[Exec Hyperparams] operator=ExchangeOperator, lr=0.0005, batch_size=32, epochs=300
+Epoch [10/300], Average Loss: 141.3017, Best Loss: 137.5460, Learning Rate: 0.000500
+Epoch [20/300], Average Loss: 137.1274, Best Loss: 137.1274, Learning Rate: 0.000450
+Epoch [30/300], Average Loss: 135.9393, Best Loss: 135.9393, Learning Rate: 0.000450
+Epoch [40/300], Average Loss: 143.4602, Best Loss: 135.9393, Learning Rate: 0.000405
+Epoch [50/300], Average Loss: 144.3113, Best Loss: 135.9393, Learning Rate: 0.000405
+Epoch [60/300], Average Loss: 147.1934, Best Loss: 135.9393, Learning Rate: 0.000365
+Epoch [70/300], Average Loss: 140.9430, Best Loss: 135.8569, Learning Rate: 0.000365
+Epoch [80/300], Average Loss: 142.5469, Best Loss: 135.8569, Learning Rate: 0.000328
+Epoch [90/300], Average Loss: 140.2402, Best Loss: 135.8569, Learning Rate: 0.000328
+Epoch [100/300], Average Loss: 136.4437, Best Loss: 135.5197, Learning Rate: 0.000295
+Epoch [110/300], Average Loss: 143.6231, Best Loss: 135.5197, Learning Rate: 0.000295
+Epoch [120/300], Average Loss: 133.4910, Best Loss: 129.2784, Learning Rate: 0.000266
+Epoch [130/300], Average Loss: 142.6830, Best Loss: 129.2784, Learning Rate: 0.000266
+Epoch [140/300], Average Loss: 142.0419, Best Loss: 129.2784, Learning Rate: 0.000239
+Epoch [150/300], Average Loss: 135.8982, Best Loss: 129.2784, Learning Rate: 0.000239
+Epoch [160/300], Average Loss: 134.2645, Best Loss: 129.2784, Learning Rate: 0.000215
+Epoch [170/300], Average Loss: 137.5404, Best Loss: 129.2784, Learning Rate: 0.000215
+Epoch [180/300], Average Loss: 131.7699, Best Loss: 129.2784, Learning Rate: 0.000194
+Epoch [190/300], Average Loss: 130.2549, Best Loss: 128.5290, Learning Rate: 0.000194
+Epoch [200/300], Average Loss: 134.8507, Best Loss: 127.1773, Learning Rate: 0.000174
+Epoch [210/300], Average Loss: 132.2206, Best Loss: 124.8883, Learning Rate: 0.000174
+Epoch [220/300], Average Loss: 131.3094, Best Loss: 124.8883, Learning Rate: 0.000157
+Epoch [230/300], Average Loss: 130.9907, Best Loss: 124.8883, Learning Rate: 0.000157
+Epoch [240/300], Average Loss: 126.8834, Best Loss: 123.5535, Learning Rate: 0.000141
+Epoch [250/300], Average Loss: 129.0260, Best Loss: 122.8865, Learning Rate: 0.000141
+Epoch [260/300], Average Loss: 128.9806, Best Loss: 121.4914, Learning Rate: 0.000127
+Epoch [270/300], Average Loss: 122.5256, Best Loss: 118.9378, Learning Rate: 0.000127
+Epoch [280/300], Average Loss: 131.1193, Best Loss: 118.9378, Learning Rate: 0.000114
+Epoch [290/300], Average Loss: 120.2368, Best Loss: 118.9378, Learning Rate: 0.000114
+Epoch [300/300], Average Loss: 123.5428, Best Loss: 118.9378, Learning Rate: 0.000103
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExchangeOperator/exec_ExchangeOperator.onnx
+Native model prediction time: 0.000281 seconds
+ONNX model prediction time: 0.000126 seconds
+
+Training operator: OrderBy
+[Exec Hyperparams] operator=OrderBy, lr=0.0002, batch_size=16, epochs=220
+Epoch [10/220], Average Loss: 16.1322, Best Loss: 16.1322, Learning Rate: 0.000200
+Epoch [20/220], Average Loss: 15.5253, Best Loss: 15.4792, Learning Rate: 0.000180
+Epoch [30/220], Average Loss: 15.2424, Best Loss: 15.0642, Learning Rate: 0.000180
+Epoch [40/220], Average Loss: 14.6503, Best Loss: 14.4151, Learning Rate: 0.000162
+Epoch [50/220], Average Loss: 13.9666, Best Loss: 13.9666, Learning Rate: 0.000162
+Epoch [60/220], Average Loss: 13.7505, Best Loss: 13.7438, Learning Rate: 0.000146
+Epoch [70/220], Average Loss: 13.5271, Best Loss: 13.4204, Learning Rate: 0.000146
+Epoch [80/220], Average Loss: 13.0558, Best Loss: 13.0558, Learning Rate: 0.000131
+Epoch [90/220], Average Loss: 12.8732, Best Loss: 12.7764, Learning Rate: 0.000131
+Epoch [100/220], Average Loss: 12.8014, Best Loss: 12.5800, Learning Rate: 0.000118
+Epoch [110/220], Average Loss: 12.4390, Best Loss: 12.4390, Learning Rate: 0.000118
+Epoch [120/220], Average Loss: 12.5328, Best Loss: 12.4172, Learning Rate: 0.000106
+Epoch [130/220], Average Loss: 12.2794, Best Loss: 12.1658, Learning Rate: 0.000106
+Epoch [140/220], Average Loss: 12.2449, Best Loss: 12.0902, Learning Rate: 0.000096
+Epoch [150/220], Average Loss: 13.2142, Best Loss: 11.8886, Learning Rate: 0.000096
+Epoch [160/220], Average Loss: 12.1133, Best Loss: 11.6800, Learning Rate: 0.000086
+Epoch [170/220], Average Loss: 11.3998, Best Loss: 11.3998, Learning Rate: 0.000086
+Epoch [180/220], Average Loss: 11.0188, Best Loss: 10.9256, Learning Rate: 0.000077
+Epoch [190/220], Average Loss: 10.3102, Best Loss: 10.3102, Learning Rate: 0.000077
+Epoch [200/220], Average Loss: 10.7985, Best Loss: 9.9254, Learning Rate: 0.000070
+Epoch [210/220], Average Loss: 10.0924, Best Loss: 9.6838, Learning Rate: 0.000070
+Epoch [220/220], Average Loss: 10.1577, Best Loss: 9.4857, Learning Rate: 0.000063
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/OrderBy/exec_OrderBy.onnx
+Native model prediction time: 0.000282 seconds
+ONNX model prediction time: 0.000137 seconds
+
+Training operator: CallbackSink
+[Exec Hyperparams] operator=CallbackSink, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 0.0374, Best Loss: 0.0374, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 0.0356, Best Loss: 0.0297, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 0.0255, Best Loss: 0.0217, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 0.0319, Best Loss: 0.0217, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 0.0207, Best Loss: 0.0190, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 0.0207, Best Loss: 0.0173, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 0.0249, Best Loss: 0.0157, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 0.0167, Best Loss: 0.0157, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 0.0210, Best Loss: 0.0146, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 0.0192, Best Loss: 0.0146, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/CallbackSink/exec_CallbackSink.onnx
+Native model prediction time: 0.000306 seconds
+ONNX model prediction time: 0.000164 seconds
+
+Training operator: PartitionedOutput
+[Exec Hyperparams] operator=PartitionedOutput, lr=0.0005, batch_size=32, epochs=260
+Epoch [10/260], Average Loss: 93.6876, Best Loss: 93.6876, Learning Rate: 0.000500
+Epoch [20/260], Average Loss: 89.6597, Best Loss: 89.6597, Learning Rate: 0.000450
+Epoch [30/260], Average Loss: 89.9472, Best Loss: 89.6597, Learning Rate: 0.000450
+Epoch [40/260], Average Loss: 95.4084, Best Loss: 88.3903, Learning Rate: 0.000405
+Epoch [50/260], Average Loss: 88.3853, Best Loss: 87.5263, Learning Rate: 0.000405
+Epoch [60/260], Average Loss: 85.9545, Best Loss: 85.9545, Learning Rate: 0.000365
+Epoch [70/260], Average Loss: 85.3659, Best Loss: 82.9511, Learning Rate: 0.000365
+Epoch [80/260], Average Loss: 90.2799, Best Loss: 82.9511, Learning Rate: 0.000328
+Epoch [90/260], Average Loss: 91.9644, Best Loss: 82.9511, Learning Rate: 0.000328
+Epoch [100/260], Average Loss: 85.1300, Best Loss: 80.7873, Learning Rate: 0.000295
+Epoch [110/260], Average Loss: 88.3783, Best Loss: 80.7873, Learning Rate: 0.000295
+Epoch [120/260], Average Loss: 85.0983, Best Loss: 80.7873, Learning Rate: 0.000266
+Epoch [130/260], Average Loss: 86.6383, Best Loss: 80.0667, Learning Rate: 0.000266
+Epoch [140/260], Average Loss: 83.6155, Best Loss: 80.0667, Learning Rate: 0.000239
+Epoch [150/260], Average Loss: 83.6431, Best Loss: 78.6608, Learning Rate: 0.000239
+Epoch [160/260], Average Loss: 80.1587, Best Loss: 78.6608, Learning Rate: 0.000215
+Epoch [170/260], Average Loss: 84.1846, Best Loss: 77.5533, Learning Rate: 0.000215
+Epoch [180/260], Average Loss: 83.6170, Best Loss: 77.5533, Learning Rate: 0.000194
+Epoch [190/260], Average Loss: 92.1025, Best Loss: 77.5533, Learning Rate: 0.000194
+Epoch [200/260], Average Loss: 104.4395, Best Loss: 77.5533, Learning Rate: 0.000174
+Epoch [210/260], Average Loss: 80.9188, Best Loss: 77.0184, Learning Rate: 0.000174
+Epoch [220/260], Average Loss: 79.8871, Best Loss: 77.0184, Learning Rate: 0.000157
+Epoch [230/260], Average Loss: 85.4233, Best Loss: 76.2910, Learning Rate: 0.000157
+Epoch [240/260], Average Loss: 88.3375, Best Loss: 76.2910, Learning Rate: 0.000141
+Epoch [250/260], Average Loss: 85.9985, Best Loss: 76.2910, Learning Rate: 0.000141
+Epoch [260/260], Average Loss: 75.3833, Best Loss: 74.9057, Learning Rate: 0.000127
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/PartitionedOutput/exec_PartitionedOutput.onnx
+Native model prediction time: 0.000304 seconds
+ONNX model prediction time: 0.000149 seconds
+
+Training operator: LocalExchangeSourceOperator
+[Exec Hyperparams] operator=LocalExchangeSourceOperator, lr=0.0002, batch_size=16, epochs=260
+Epoch [10/260], Average Loss: 49.6969, Best Loss: 48.2602, Learning Rate: 0.000200
+Epoch [20/260], Average Loss: 48.8176, Best Loss: 46.8366, Learning Rate: 0.000180
+Epoch [30/260], Average Loss: 46.5462, Best Loss: 46.5462, Learning Rate: 0.000180
+Epoch [40/260], Average Loss: 46.4690, Best Loss: 46.3365, Learning Rate: 0.000162
+Epoch [50/260], Average Loss: 46.5422, Best Loss: 45.4606, Learning Rate: 0.000162
+Epoch [60/260], Average Loss: 46.2351, Best Loss: 45.2643, Learning Rate: 0.000146
+Epoch [70/260], Average Loss: 44.6991, Best Loss: 44.6991, Learning Rate: 0.000146
+Epoch [80/260], Average Loss: 46.6058, Best Loss: 44.6991, Learning Rate: 0.000131
+Epoch [90/260], Average Loss: 46.5236, Best Loss: 44.6991, Learning Rate: 0.000131
+Epoch [100/260], Average Loss: 44.9231, Best Loss: 44.6991, Learning Rate: 0.000118
+Epoch [110/260], Average Loss: 49.7518, Best Loss: 43.4679, Learning Rate: 0.000118
+Epoch [120/260], Average Loss: 47.8318, Best Loss: 43.4679, Learning Rate: 0.000106
+Epoch [130/260], Average Loss: 41.9723, Best Loss: 41.9723, Learning Rate: 0.000106
+Epoch [140/260], Average Loss: 47.4986, Best Loss: 41.9723, Learning Rate: 0.000096
+Epoch [150/260], Average Loss: 47.5673, Best Loss: 40.3457, Learning Rate: 0.000096
+Epoch [160/260], Average Loss: 43.5135, Best Loss: 40.3457, Learning Rate: 0.000086
+Epoch [170/260], Average Loss: 45.7958, Best Loss: 40.3457, Learning Rate: 0.000086
+Epoch [180/260], Average Loss: 47.8355, Best Loss: 40.3457, Learning Rate: 0.000077
+Epoch [190/260], Average Loss: 40.6939, Best Loss: 39.2259, Learning Rate: 0.000077
+Epoch [200/260], Average Loss: 45.2839, Best Loss: 39.2259, Learning Rate: 0.000070
+Epoch [210/260], Average Loss: 51.1249, Best Loss: 39.2259, Learning Rate: 0.000070
+Epoch [220/260], Average Loss: 51.3007, Best Loss: 38.1654, Learning Rate: 0.000063
+Epoch [230/260], Average Loss: 54.5798, Best Loss: 38.1654, Learning Rate: 0.000063
+Epoch [240/260], Average Loss: 48.2913, Best Loss: 38.1654, Learning Rate: 0.000056
+Epoch [250/260], Average Loss: 43.6525, Best Loss: 38.1654, Learning Rate: 0.000056
+Epoch [260/260], Average Loss: 53.4085, Best Loss: 38.1654, Learning Rate: 0.000051
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalExchangeSourceOperator/exec_LocalExchangeSourceOperator.onnx
+Native model prediction time: 0.000449 seconds
+ONNX model prediction time: 0.000134 seconds
+
+Training operator: HashBuilderOperator
+[Exec Hyperparams] operator=HashBuilderOperator, lr=0.0001, batch_size=16, epochs=320
+Epoch [10/320], Average Loss: 673.8295, Best Loss: 630.4446, Learning Rate: 0.000100
+Epoch [20/320], Average Loss: 597.5892, Best Loss: 561.7281, Learning Rate: 0.000090
+Epoch [30/320], Average Loss: 547.8888, Best Loss: 536.5906, Learning Rate: 0.000090
+Epoch [40/320], Average Loss: 525.7327, Best Loss: 514.6464, Learning Rate: 0.000081
+Epoch [50/320], Average Loss: 500.8954, Best Loss: 493.9239, Learning Rate: 0.000081
+Epoch [60/320], Average Loss: 491.3700, Best Loss: 455.1115, Learning Rate: 0.000073
+Epoch [70/320], Average Loss: 474.9577, Best Loss: 419.8149, Learning Rate: 0.000073
+Epoch [80/320], Average Loss: 473.4179, Best Loss: 419.8149, Learning Rate: 0.000066
+Epoch [90/320], Average Loss: 435.1077, Best Loss: 419.8149, Learning Rate: 0.000066
+Epoch [100/320], Average Loss: 437.7475, Best Loss: 416.4956, Learning Rate: 0.000059
+Epoch [110/320], Average Loss: 426.9951, Best Loss: 416.4956, Learning Rate: 0.000059
+Epoch [120/320], Average Loss: 453.9748, Best Loss: 408.5097, Learning Rate: 0.000053
+Epoch [130/320], Average Loss: 459.2150, Best Loss: 408.5097, Learning Rate: 0.000053
+Epoch [140/320], Average Loss: 404.6361, Best Loss: 404.6361, Learning Rate: 0.000048
+Epoch [150/320], Average Loss: 426.4193, Best Loss: 400.3884, Learning Rate: 0.000048
+Epoch [160/320], Average Loss: 426.1367, Best Loss: 399.5873, Learning Rate: 0.000043
+Epoch [170/320], Average Loss: 439.3021, Best Loss: 399.5873, Learning Rate: 0.000043
+Epoch [180/320], Average Loss: 440.5782, Best Loss: 399.5873, Learning Rate: 0.000039
+Epoch [190/320], Average Loss: 445.8572, Best Loss: 399.5873, Learning Rate: 0.000039
+Epoch [200/320], Average Loss: 471.5494, Best Loss: 395.5121, Learning Rate: 0.000035
+Epoch [210/320], Average Loss: 446.0695, Best Loss: 395.5121, Learning Rate: 0.000035
+Epoch [220/320], Average Loss: 435.6561, Best Loss: 395.5121, Learning Rate: 0.000031
+Epoch [230/320], Average Loss: 443.6242, Best Loss: 395.5121, Learning Rate: 0.000031
+Epoch [240/320], Average Loss: 442.6490, Best Loss: 395.5121, Learning Rate: 0.000028
+Epoch [250/320], Average Loss: 405.9114, Best Loss: 389.9947, Learning Rate: 0.000028
+Epoch [260/320], Average Loss: 424.1302, Best Loss: 389.9947, Learning Rate: 0.000025
+Epoch [270/320], Average Loss: 415.6545, Best Loss: 389.9947, Learning Rate: 0.000025
+Epoch [280/320], Average Loss: 416.3597, Best Loss: 389.9947, Learning Rate: 0.000023
+Epoch [290/320], Average Loss: 477.2098, Best Loss: 389.9947, Learning Rate: 0.000023
+Epoch [300/320], Average Loss: 417.5856, Best Loss: 389.9947, Learning Rate: 0.000021
+Epoch [310/320], Average Loss: 425.6683, Best Loss: 389.9947, Learning Rate: 0.000021
+Epoch [320/320], Average Loss: 442.9207, Best Loss: 389.9947, Learning Rate: 0.000019
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/HashBuilderOperator/exec_HashBuilderOperator.onnx
+Native model prediction time: 0.000229 seconds
+ONNX model prediction time: 0.000131 seconds
+
+Training operator: LookupJoinOperator
+[Exec Hyperparams] operator=LookupJoinOperator, lr=0.0002, batch_size=16, epochs=260
+Epoch [10/260], Average Loss: 230.4273, Best Loss: 215.8493, Learning Rate: 0.000200
+Epoch [20/260], Average Loss: 225.7988, Best Loss: 208.9897, Learning Rate: 0.000180
+Epoch [30/260], Average Loss: 220.5512, Best Loss: 202.5451, Learning Rate: 0.000180
+Epoch [40/260], Average Loss: 225.0694, Best Loss: 202.5451, Learning Rate: 0.000162
+Epoch [50/260], Average Loss: 217.7550, Best Loss: 202.5451, Learning Rate: 0.000162
+Epoch [60/260], Average Loss: 374.8198, Best Loss: 202.5451, Learning Rate: 0.000146
+Epoch [70/260], Average Loss: 214.9741, Best Loss: 202.5451, Learning Rate: 0.000146
+Epoch [80/260], Average Loss: 215.1110, Best Loss: 202.5451, Learning Rate: 0.000131
+Epoch [90/260], Average Loss: 230.6479, Best Loss: 202.5451, Learning Rate: 0.000131
+Epoch [100/260], Average Loss: 223.3928, Best Loss: 202.5451, Learning Rate: 0.000118
+Epoch [110/260], Average Loss: 211.6520, Best Loss: 199.7261, Learning Rate: 0.000118
+Epoch [120/260], Average Loss: 206.5589, Best Loss: 199.7261, Learning Rate: 0.000106
+Epoch [130/260], Average Loss: 214.5974, Best Loss: 195.4210, Learning Rate: 0.000106
+Epoch [140/260], Average Loss: 202.4798, Best Loss: 195.4210, Learning Rate: 0.000096
+Epoch [150/260], Average Loss: 287.8542, Best Loss: 188.7860, Learning Rate: 0.000096
+Epoch [160/260], Average Loss: 197.9604, Best Loss: 188.7860, Learning Rate: 0.000086
+Epoch [170/260], Average Loss: 204.6184, Best Loss: 188.7860, Learning Rate: 0.000086
+Epoch [180/260], Average Loss: 222.1502, Best Loss: 188.7860, Learning Rate: 0.000077
+Epoch [190/260], Average Loss: 197.9069, Best Loss: 188.7860, Learning Rate: 0.000077
+Epoch [200/260], Average Loss: 197.0957, Best Loss: 188.7860, Learning Rate: 0.000070
+Epoch [210/260], Average Loss: 193.5382, Best Loss: 188.7860, Learning Rate: 0.000070
+Epoch [220/260], Average Loss: 209.9379, Best Loss: 188.7860, Learning Rate: 0.000063
+Epoch [230/260], Average Loss: 200.9192, Best Loss: 188.7860, Learning Rate: 0.000063
+Epoch [240/260], Average Loss: 202.2841, Best Loss: 188.7860, Learning Rate: 0.000056
+Epoch [250/260], Average Loss: 209.7363, Best Loss: 188.7860, Learning Rate: 0.000056
+Epoch [260/260], Average Loss: 197.1024, Best Loss: 188.7860, Learning Rate: 0.000051
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LookupJoinOperator/exec_LookupJoinOperator.onnx
+Native model prediction time: 0.000233 seconds
+ONNX model prediction time: 0.000242 seconds
+
+Training operator: LocalExchangeSinkOperator
+[Exec Hyperparams] operator=LocalExchangeSinkOperator, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 5.7407, Best Loss: 5.7159, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 5.9384, Best Loss: 5.5354, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 5.4005, Best Loss: 5.4005, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 5.7973, Best Loss: 5.3081, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 5.0627, Best Loss: 5.0627, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 4.9266, Best Loss: 4.9177, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 5.4521, Best Loss: 4.7252, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 4.7204, Best Loss: 4.5435, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 4.2172, Best Loss: 4.1729, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 4.0703, Best Loss: 4.0166, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalExchangeSinkOperator/exec_LocalExchangeSinkOperator.onnx
+Native model prediction time: 0.000396 seconds
+ONNX model prediction time: 0.000169 seconds
+
+Training operator: Aggregation
+[Exec Hyperparams] operator=Aggregation, lr=0.0001, batch_size=16, epochs=300
+Epoch [10/300], Average Loss: 711.6771, Best Loss: 711.6771, Learning Rate: 0.000100
+Epoch [20/300], Average Loss: 643.5374, Best Loss: 636.9586, Learning Rate: 0.000090
+Epoch [30/300], Average Loss: 707.1438, Best Loss: 576.4734, Learning Rate: 0.000090
+Epoch [40/300], Average Loss: 674.9004, Best Loss: 576.4734, Learning Rate: 0.000081
+Epoch [50/300], Average Loss: 695.2356, Best Loss: 576.4734, Learning Rate: 0.000081
+Epoch [60/300], Average Loss: 643.5040, Best Loss: 576.4734, Learning Rate: 0.000073
+Epoch [70/300], Average Loss: 663.8324, Best Loss: 576.4734, Learning Rate: 0.000073
+Epoch [80/300], Average Loss: 658.2240, Best Loss: 576.4734, Learning Rate: 0.000066
+Epoch [90/300], Average Loss: 692.0996, Best Loss: 576.4734, Learning Rate: 0.000066
+Epoch [100/300], Average Loss: 721.2545, Best Loss: 576.4734, Learning Rate: 0.000059
+Epoch [110/300], Average Loss: 776.2866, Best Loss: 576.4734, Learning Rate: 0.000059
+Epoch [120/300], Average Loss: 798.5111, Best Loss: 576.4734, Learning Rate: 0.000053
+Epoch [130/300], Average Loss: 693.4431, Best Loss: 576.4734, Learning Rate: 0.000053
+Epoch [140/300], Average Loss: 670.9950, Best Loss: 573.1106, Learning Rate: 0.000048
+Epoch [150/300], Average Loss: 744.8028, Best Loss: 573.1106, Learning Rate: 0.000048
+Epoch [160/300], Average Loss: 730.1905, Best Loss: 573.1106, Learning Rate: 0.000043
+Epoch [170/300], Average Loss: 603.1353, Best Loss: 567.2342, Learning Rate: 0.000043
+Epoch [180/300], Average Loss: 750.2171, Best Loss: 567.2342, Learning Rate: 0.000039
+Epoch [190/300], Average Loss: 671.2201, Best Loss: 567.2342, Learning Rate: 0.000039
+Epoch [200/300], Average Loss: 735.4950, Best Loss: 567.2342, Learning Rate: 0.000035
+Epoch [210/300], Average Loss: 713.8749, Best Loss: 567.2342, Learning Rate: 0.000035
+Epoch [220/300], Average Loss: 706.5975, Best Loss: 567.2342, Learning Rate: 0.000031
+Epoch [230/300], Average Loss: 622.4866, Best Loss: 567.2342, Learning Rate: 0.000031
+Epoch [240/300], Average Loss: 763.4825, Best Loss: 567.2342, Learning Rate: 0.000028
+Epoch [250/300], Average Loss: 648.2059, Best Loss: 567.2342, Learning Rate: 0.000028
+Epoch [260/300], Average Loss: 732.5702, Best Loss: 567.2342, Learning Rate: 0.000025
+Epoch [270/300], Average Loss: 761.3234, Best Loss: 567.2342, Learning Rate: 0.000025
+Epoch [280/300], Average Loss: 699.9995, Best Loss: 567.2342, Learning Rate: 0.000023
+Epoch [290/300], Average Loss: 598.9073, Best Loss: 567.2342, Learning Rate: 0.000023
+Epoch [300/300], Average Loss: 730.9587, Best Loss: 567.2342, Learning Rate: 0.000021
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/Aggregation/exec_Aggregation.onnx
+Native model prediction time: 0.000255 seconds
+ONNX model prediction time: 0.000189 seconds
+
+Training operator: PartialAggregation
+[Exec Hyperparams] operator=PartialAggregation, lr=0.0001, batch_size=16, epochs=300
+Epoch [10/300], Average Loss: 557.4178, Best Loss: 496.1074, Learning Rate: 0.000100
+Epoch [20/300], Average Loss: 500.3947, Best Loss: 477.5384, Learning Rate: 0.000090
+Epoch [30/300], Average Loss: 481.7391, Best Loss: 461.1408, Learning Rate: 0.000090
+Epoch [40/300], Average Loss: 480.5252, Best Loss: 461.1408, Learning Rate: 0.000081
+Epoch [50/300], Average Loss: 470.7505, Best Loss: 461.1408, Learning Rate: 0.000081
+Epoch [60/300], Average Loss: 479.5178, Best Loss: 461.1408, Learning Rate: 0.000073
+Epoch [70/300], Average Loss: 495.6715, Best Loss: 461.1408, Learning Rate: 0.000073
+Epoch [80/300], Average Loss: 472.6612, Best Loss: 459.2931, Learning Rate: 0.000066
+Epoch [90/300], Average Loss: 820.5961, Best Loss: 459.2931, Learning Rate: 0.000066
+Epoch [100/300], Average Loss: 503.9141, Best Loss: 459.2931, Learning Rate: 0.000059
+Epoch [110/300], Average Loss: 513.2695, Best Loss: 459.2931, Learning Rate: 0.000059
+Epoch [120/300], Average Loss: 573.2946, Best Loss: 459.2931, Learning Rate: 0.000053
+Epoch [130/300], Average Loss: 488.8110, Best Loss: 459.2931, Learning Rate: 0.000053
+Epoch [140/300], Average Loss: 658.1601, Best Loss: 459.2931, Learning Rate: 0.000048
+Epoch [150/300], Average Loss: 1534.7032, Best Loss: 459.2931, Learning Rate: 0.000048
+Epoch [160/300], Average Loss: 482.2165, Best Loss: 459.2931, Learning Rate: 0.000043
+Epoch [170/300], Average Loss: 489.2207, Best Loss: 459.2931, Learning Rate: 0.000043
+Epoch [180/300], Average Loss: 490.2718, Best Loss: 459.2931, Learning Rate: 0.000039
+Epoch [190/300], Average Loss: 494.3415, Best Loss: 457.8254, Learning Rate: 0.000039
+Epoch [200/300], Average Loss: 481.3447, Best Loss: 457.8254, Learning Rate: 0.000035
+Epoch [210/300], Average Loss: 496.5538, Best Loss: 457.8254, Learning Rate: 0.000035
+Epoch [220/300], Average Loss: 480.3927, Best Loss: 457.8254, Learning Rate: 0.000031
+Epoch [230/300], Average Loss: 464.4723, Best Loss: 457.8254, Learning Rate: 0.000031
+Epoch [240/300], Average Loss: 508.5298, Best Loss: 456.9178, Learning Rate: 0.000028
+Epoch [250/300], Average Loss: 516.1881, Best Loss: 456.9178, Learning Rate: 0.000028
+Epoch [260/300], Average Loss: 500.1560, Best Loss: 456.9178, Learning Rate: 0.000025
+Epoch [270/300], Average Loss: 946.1469, Best Loss: 456.9178, Learning Rate: 0.000025
+Epoch [280/300], Average Loss: 896.6441, Best Loss: 456.9178, Learning Rate: 0.000023
+Epoch [290/300], Average Loss: 477.8333, Best Loss: 456.9178, Learning Rate: 0.000023
+Epoch [300/300], Average Loss: 578.4438, Best Loss: 456.9178, Learning Rate: 0.000021
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/PartialAggregation/exec_PartialAggregation.onnx
+Native model prediction time: 0.000294 seconds
+ONNX model prediction time: 0.000120 seconds
+
+Training operator: NestedLoopJoinBuild
+[Exec Hyperparams] operator=NestedLoopJoinBuild, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 0.1558, Best Loss: 0.1509, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 0.1461, Best Loss: 0.1433, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 0.1447, Best Loss: 0.1423, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 0.1445, Best Loss: 0.1417, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 0.1421, Best Loss: 0.1417, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 0.1412, Best Loss: 0.1412, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 0.1431, Best Loss: 0.1410, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 0.1403, Best Loss: 0.1403, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 0.1428, Best Loss: 0.1403, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 0.1403, Best Loss: 0.1400, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/NestedLoopJoinBuild/exec_NestedLoopJoinBuild.onnx
+Native model prediction time: 0.000251 seconds
+ONNX model prediction time: 0.000143 seconds
+
+Training operator: NestedLoopJoinProbe
+[Exec Hyperparams] operator=NestedLoopJoinProbe, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 0.8562, Best Loss: 0.8562, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 1.0581, Best Loss: 0.7612, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 0.7345, Best Loss: 0.7345, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 1.0652, Best Loss: 0.7345, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 2.3133, Best Loss: 0.5250, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 0.9660, Best Loss: 0.5250, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 4.0031, Best Loss: 0.5250, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 1.3503, Best Loss: 0.5250, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 1.3475, Best Loss: 0.5250, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 1.4145, Best Loss: 0.5250, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/NestedLoopJoinProbe/exec_NestedLoopJoinProbe.onnx
+Native model prediction time: 0.000269 seconds
+ONNX model prediction time: 0.000129 seconds
+All operator exec results have been saved to /home/candle/Project/serverless_tools/output/evaluations/dop_aware/all_operators_performance_exec.csv
+DOP-aware model training 完成，耗时: 1620.6843 秒
+✅ Training completed
+
+🧩 Exporting operator execution time under different DOP
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+✅ 已生成每个算子、每行数据的 DOP-预测时间曲线
+   曲线明细: /home/candle/Project/serverless_tools/scripts/../output/tpch/analysis/exact_train/operator_dop_pred_curve_per_row.csv
+   图目录: /home/candle/Project/serverless_tools/scripts/../output/tpch/analysis/exact_train/operator_curve_per_row
+✅ Operator-DOP export & plotting completed
+
+============================================================
+🎉 All tasks completed!
+============================================================

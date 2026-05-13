@@ -1,0 +1,20 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260512_151500.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🧩 Exporting operator execution time under different DOP
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+✅ 已生成每个算子、每行数据的 DOP-预测时间曲线
+   曲线明细: /home/candle/Project/serverless_tools/scripts/../output/tpch/analysis/exact_train/operator_dop_pred_curve_per_row.csv
+   图目录: /home/candle/Project/serverless_tools/scripts/../output/tpch/analysis/exact_train/operator_curve_per_row
+✅ Operator-DOP export & plotting completed
+
+============================================================
+🎉 All tasks completed!
+============================================================

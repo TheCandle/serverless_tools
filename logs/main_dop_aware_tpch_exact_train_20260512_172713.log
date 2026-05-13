@@ -1,0 +1,31 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260512_172713.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+⚡ Starting optimization: pipeline
+============================================================
+开始实验: PIPELINE OPERATOR-LEVEL OPTIMIZATION (MODEL:TPCH) 方法
+数据集: tpch
+训练模式: exact_train
+============================================================
+目录已创建: /home/candle/Project/serverless_tools/output/tpch
+目录已创建: /home/candle/Project/serverless_tools/output/tpch/models/exact_train
+目录已创建: /home/candle/Project/serverless_tools/output/tpch/predictions
+目录已创建: /home/candle/Project/serverless_tools/output/tpch/evaluations
+目录已创建: /home/candle/Project/serverless_tools/output/tpch/optimization_results
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+ONNX Manager: Loading non-DOP models from: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_non_dop_aware
+ONNX Manager: Loading DOP models from: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware
+开始 Pipeline operator-level optimization...
+==============================
+开始 DOP 优化流程
+==============================
+
+步骤 1: 构建基准查询树 (base_dop=64)...
+Backend TkAgg is interactive backend. Turning interactive mode on.

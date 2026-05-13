@@ -1,0 +1,177 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260512_195808.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+⚡ Starting optimization: pipeline
+============================================================
+开始实验: PIPELINE OPERATOR-LEVEL OPTIMIZATION (MODEL:TPCH) 方法
+数据集: tpch
+训练模式: exact_train
+============================================================
+目录已创建: /home/candle/Project/serverless_tools/output/tpch
+目录已创建: /home/candle/Project/serverless_tools/output/tpch/models/exact_train
+目录已创建: /home/candle/Project/serverless_tools/output/tpch/predictions
+目录已创建: /home/candle/Project/serverless_tools/output/tpch/evaluations
+目录已创建: /home/candle/Project/serverless_tools/output/tpch/optimization_results
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+ONNX Manager: Loading non-DOP models from: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_non_dop_aware
+ONNX Manager: Loading DOP models from: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware
+开始 Pipeline operator-level optimization...
+==============================
+开始 DOP 优化流程
+==============================
+
+步骤 1: 构建基准查询树 (base_dop=64)...
+基准查询树构建完成，共 1 个查询。
+
+步骤 2: 使用所有 DOP 数据更新节点信息...
+开始更新节点 DOP 信息...
+  处理 0 条非基准 DOP 数据...
+... 0 个查询的节点信息已更新。
+开始计算并行预测和插值...
+... 1 个查询的并行预测和插值计算完成。
+节点信息更新完成。
+
+步骤 3&4: 划分线程块，计算最优DOP并评估路径...
+
+[DEBUG_DOP] Query 5 @ after_compute_optimal_dops_for_query
+  TB 0: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.1']
+  TB 1: root=True, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 2: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 3: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.2']
+  TB 4: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 5: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.25']
+  TB 6: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.1']
+  TB 7: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 8: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:2899062336.05']
+  TB 9: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:7393424384.101']
+正在使用MOO优化器为 query 5 选择最优DOP配置...
+    Stage 0 endpoint range: [1, 1] -> candidates=N/A
+    Stage 1 endpoint range: [1, 1] -> candidates=[1]
+    Stage 2 endpoint range: [1, 1] -> candidates=[1]
+    Stage 3 endpoint range: [1, 1] -> candidates=[1]
+    Stage 4 endpoint range: [1, 1] -> candidates=[1]
+    Stage 5 endpoint range: [1, 1] -> candidates=[1]
+    Stage 6 endpoint range: [1, 1] -> candidates=[1]
+    Stage 7 endpoint range: [1, 1] -> candidates=[1]
+    Stage 8 endpoint range: [1, 1] -> candidates=[1]
+    Stage 9 endpoint range: [1, 1] -> candidates=[1]
+  MOO optimization: 10 thread blocks
+  Mode: Continuous DOP search in interval [min, max]
+==============================breaker===============================
+HashBuilderOperator
+==============================breaker===============================
+  PDG context built for MOO latency evaluation
+
+Compiled modules for significant speedup can not be used!
+https://pymoo.org/installation.html#installation
+
+To disable this warning:
+from pymoo.config import Config
+Config.warnings['not_compiled'] = False
+
+  NSGA-II optimization execution time: 0.1701 seconds
+  MOO found Pareto front with 1 solutions
+  Best solution: latency=7447286272.00, cost=7447326208.00
+  - Query 5 NSGA-II算法耗时: 0.1701 秒
+
+[DEBUG_DOP] Query 5 @ before_adjust_child_dops_for_redistribution
+  TB 0: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.1']
+  TB 1: root=True, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 2: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 3: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.2']
+  TB 4: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 5: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.25']
+  TB 6: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.1']
+  TB 7: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 8: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:2899062336.05']
+  TB 9: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:7393424384.101']
+
+[DEBUG_DOP] Query 5 @ after_adjust_child_dops_for_redistribution
+  TB 0: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.1']
+  TB 1: root=True, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 2: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 3: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.2']
+  TB 4: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 5: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.25']
+  TB 6: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.1']
+  TB 7: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:0.15']
+  TB 8: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:2899062336.05']
+  TB 9: root=False, optimal=1, candidate_count=1, candidates=[1]
+    candidate_pred_times(sample)=['1:7393424384.101']
+Query 5 的DOP配置完成
+线程块划分和最优DOP计算完成, 共处理 1 个查询。
+
+步骤 5: 更新节点预测时间以反映最优 DOP...
+开始根据最优 DOP 更新节点执行时间...
+... 30 个节点的预测执行时间已根据最优 DOP 更新。
+节点时间更新完成。
+
+步骤 6: 统计DOP边界选择情况...
+
+==================================================
+DOP边界选择统计:
+==================================================
+总线程块数: 10
+选择边界值: 10 (100.00%)
+  - 左边界(min): 10 (100.00%)
+  - 右边界(max): 0 (0.00%)
+选择中间值: 0 (0.00%)
+==================================================
+
+
+步骤 7: 输出详细结果到 /home/candle/Project/serverless_tools/output/tpch/optimization_results/pipeline_optimization.json...
+开始将详细查询信息写入 JSON 文件: /home/candle/Project/serverless_tools/output/tpch/optimization_results/pipeline_optimization.json
+成功将 1 个查询的详细信息写入到 /home/candle/Project/serverless_tools/output/tpch/optimization_results/pipeline_optimization.json
+
+==============================
+DOP 优化流程完成，总耗时: 0.52 秒
+==============================
+Pipeline operator-level optimization 完成，耗时: 0.5166 秒
+✅ Pipeline operator-level optimization completed
+✅ CSV results exported to: /home/candle/Project/serverless_tools/output/tpch/optimization_results/pipeline_optimization.csv
+============================================================
+实验完成: PIPELINE OPERATOR-LEVEL OPTIMIZATION 方法
+数据集: tpch
+输出路径: /home/candle/Project/serverless_tools/output/tpch/optimization_results/pipeline_optimization.json
+============================================================
+✅ Optimization completed
+
+============================================================
+🎉 All tasks completed!
+============================================================

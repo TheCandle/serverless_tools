@@ -1,0 +1,99 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260512_203354.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+
+Training operator: FilterProject
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+[Exec Hyperparams] operator=TableScan, lr=1e-05, batch_size=16, epochs=300
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1918, 14) y_train shape=(1918,) dop_train shape=(1918,)
+y_train min=0.017525 max=2972.502197 mean=228.230499
+dop_train min=2.000000 max=160.000000 mean=60.741398
+Epoch [10/300], Average Loss: 29313886.7627, Best Loss: 29313886.7627, Learning Rate: 0.000010
+Epoch [20/300], Average Loss: 28953154.2721, Best Loss: 27912560.3836, Learning Rate: 0.000009
+Epoch [30/300], Average Loss: 27246107.1792, Best Loss: 27246107.1792, Learning Rate: 0.000009
+Epoch [40/300], Average Loss: 27187108.8184, Best Loss: 26702650.6007, Learning Rate: 0.000008
+Epoch [50/300], Average Loss: 25698159.3305, Best Loss: 25393196.5552, Learning Rate: 0.000008
+Epoch [60/300], Average Loss: 25389954.2070, Best Loss: 25057175.5551, Learning Rate: 0.000007
+Epoch [70/300], Average Loss: 25212707.7828, Best Loss: 24394943.3801, Learning Rate: 0.000007
+Epoch [80/300], Average Loss: 24674759.5141, Best Loss: 24394943.3801, Learning Rate: 0.000007
+Epoch [90/300], Average Loss: 24488433.6868, Best Loss: 23962060.9641, Learning Rate: 0.000007
+Epoch [100/300], Average Loss: 24944869.0957, Best Loss: 23962060.9641, Learning Rate: 0.000006
+Epoch [110/300], Average Loss: 24734196.1742, Best Loss: 23962060.9641, Learning Rate: 0.000006
+Epoch [120/300], Average Loss: 23532259.9573, Best Loss: 23532259.9573, Learning Rate: 0.000005
+DOP-aware model training 完成，耗时: 87.4720 秒
+Traceback (most recent call last):
+  File "/home/candle/Project/serverless_tools/scripts/main.py", line 863, in <module>
+    main()
+  File "/home/candle/Project/serverless_tools/scripts/main.py", line 209, in main
+    success = train_dop_aware_models(DATASET, TRAIN_MODE, 
+  File "/home/candle/Project/serverless_tools/scripts/train.py", line 42, in train_dop_aware_models
+    train_func(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 338, in train_all_operators
+    process_and_train_curve(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 102, in process_and_train_curve
+    results_exec = train_one_operator_exec(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 229, in train_one_operator_exec
+    models_exec, training_times_exec = dop_model.train_exec_curve_model(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/model.py", line 335, in train_exec_curve_model
+    loss.backward()
+  File "/home/candle/.local/lib/python3.8/site-packages/torch/_tensor.py", line 521, in backward
+    torch.autograd.backward(
+  File "/home/candle/.local/lib/python3.8/site-packages/torch/autograd/__init__.py", line 289, in backward
+    _engine_run_backward(
+  File "/home/candle/.local/lib/python3.8/site-packages/torch/autograd/graph.py", line 769, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

@@ -1,0 +1,87 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260513_172751.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (1771 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+[Exec Hyperparams] operator=AssignUniqueId, lr=3e-05, batch_size=32, epochs=220
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(42, 10) y_train shape=(42,) dop_train shape=(42,)
+y_train min=0.436125 max=280.768738 mean=42.604568
+dop_train min=8.000000 max=160.000000 mean=72.000000
+Epoch [10/220], Average Loss: 124.6276, Best Loss: 124.6276, Learning Rate: 0.000030
+Epoch [20/220], Average Loss: 122.7342, Best Loss: 122.7342, Learning Rate: 0.000027
+Epoch [30/220], Average Loss: 120.9949, Best Loss: 120.9949, Learning Rate: 0.000027
+Epoch [40/220], Average Loss: 119.3269, Best Loss: 119.3269, Learning Rate: 0.000024
+Epoch [50/220], Average Loss: 117.7839, Best Loss: 117.7839, Learning Rate: 0.000024
+Epoch [60/220], Average Loss: 116.2991, Best Loss: 116.2991, Learning Rate: 0.000022
+Epoch [70/220], Average Loss: 114.9676, Best Loss: 114.9676, Learning Rate: 0.000022
+Epoch [80/220], Average Loss: 113.6485, Best Loss: 113.6485, Learning Rate: 0.000020
+Epoch [90/220], Average Loss: 112.4546, Best Loss: 112.4546, Learning Rate: 0.000020
+Epoch [100/220], Average Loss: 111.2683, Best Loss: 111.2683, Learning Rate: 0.000018
+Epoch [110/220], Average Loss: 110.1876, Best Loss: 110.1876, Learning Rate: 0.000018
+Epoch [120/220], Average Loss: 109.1131, Best Loss: 109.1131, Learning Rate: 0.000016
+Epoch [130/220], Average Loss: 108.1031, Best Loss: 108.1031, Learning Rate: 0.000016
+Epoch [140/220], Average Loss: 107.0615, Best Loss: 107.0615, Learning Rate: 0.000014
+Epoch [150/220], Average Loss: 106.1788, Best Loss: 106.1788, Learning Rate: 0.000014
+Epoch [160/220], Average Loss: 105.2865, Best Loss: 105.2865, Learning Rate: 0.000013
+Epoch [170/220], Average Loss: 104.4701, Best Loss: 104.4701, Learning Rate: 0.000013
+Epoch [180/220], Average Loss: 103.6580, Best Loss: 103.6580, Learning Rate: 0.000012
+Epoch [190/220], Average Loss: 102.9204, Best Loss: 102.9204, Learning Rate: 0.000012
+Epoch [200/220], Average Loss: 102.1894, Best Loss: 102.1894, Learning Rate: 0.000010
+Epoch [210/220], Average Loss: 101.5254, Best Loss: 101.5254, Learning Rate: 0.000010
+Epoch [220/220], Average Loss: 100.8679, Best Loss: 100.8679, Learning Rate: 0.000009
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(0, 10) y_test shape=(0,) dop_test shape=(0,)
+DOP-aware model training 完成，耗时: 2.6089 秒
+Traceback (most recent call last):
+  File "/home/candle/Project/serverless_tools/scripts/main.py", line 863, in <module>
+    main()
+  File "/home/candle/Project/serverless_tools/scripts/main.py", line 209, in main
+    success = train_dop_aware_models(DATASET, TRAIN_MODE, 
+  File "/home/candle/Project/serverless_tools/scripts/train.py", line 42, in train_dop_aware_models
+    train_func(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 342, in train_all_operators
+    process_and_train_curve(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 102, in process_and_train_curve
+    results_exec = train_one_operator_exec(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 245, in train_one_operator_exec
+    results_exec = dop_model.predict_and_evaluate_exec_curve(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/model.py", line 561, in predict_and_evaluate_exec_curve
+    f"y_test min={float(torch.min(y_test)):.6f} max={float(torch.max(y_test)):.6f} mean={float(torch.mean(y_test)):.6f}"
+RuntimeError: min(): Expected reduction dim to be specified for input.numel() == 0. Specify the reduction dim with the 'dim' argument.

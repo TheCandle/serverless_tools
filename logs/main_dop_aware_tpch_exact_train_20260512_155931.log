@@ -1,0 +1,148 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260512_155931.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+[Exec Hyperparams] operator=TableScan, lr=0.0002, batch_size=16, epochs=300
+Epoch [10/300], Average Loss: 292.6449, Best Loss: 199.3515, Learning Rate: 0.000200
+Epoch [20/300], Average Loss: 203.8574, Best Loss: 171.5286, Learning Rate: 0.000180
+Epoch [30/300], Average Loss: 157.3529, Best Loss: 157.3529, Learning Rate: 0.000180
+Epoch [40/300], Average Loss: 167.8376, Best Loss: 157.3529, Learning Rate: 0.000162
+Epoch [50/300], Average Loss: 161.3503, Best Loss: 150.3136, Learning Rate: 0.000162
+Epoch [60/300], Average Loss: 157.7890, Best Loss: 150.3136, Learning Rate: 0.000146
+Epoch [70/300], Average Loss: 159.5029, Best Loss: 146.1306, Learning Rate: 0.000146
+Epoch [80/300], Average Loss: 170.9846, Best Loss: 145.4054, Learning Rate: 0.000131
+Epoch [90/300], Average Loss: 180.1323, Best Loss: 145.4054, Learning Rate: 0.000131
+Epoch [100/300], Average Loss: 151.9600, Best Loss: 145.4054, Learning Rate: 0.000118
+Epoch [110/300], Average Loss: 157.2527, Best Loss: 145.4054, Learning Rate: 0.000118
+Epoch [120/300], Average Loss: 152.5732, Best Loss: 145.4054, Learning Rate: 0.000106
+Epoch [130/300], Average Loss: 185.0365, Best Loss: 145.4054, Learning Rate: 0.000106
+Epoch [140/300], Average Loss: 157.0103, Best Loss: 145.4054, Learning Rate: 0.000096
+Epoch [150/300], Average Loss: 149.0692, Best Loss: 145.4054, Learning Rate: 0.000096
+Epoch [160/300], Average Loss: 160.2743, Best Loss: 145.4054, Learning Rate: 0.000086
+Epoch [170/300], Average Loss: 161.1586, Best Loss: 139.2962, Learning Rate: 0.000086
+Epoch [180/300], Average Loss: 160.5966, Best Loss: 139.2962, Learning Rate: 0.000077
+Epoch [190/300], Average Loss: 163.6133, Best Loss: 139.2962, Learning Rate: 0.000077
+Epoch [200/300], Average Loss: 155.3002, Best Loss: 137.4993, Learning Rate: 0.000070
+Epoch [210/300], Average Loss: 156.4891, Best Loss: 137.4993, Learning Rate: 0.000070
+Epoch [220/300], Average Loss: 165.4049, Best Loss: 137.4993, Learning Rate: 0.000063
+Epoch [230/300], Average Loss: 163.7565, Best Loss: 137.4993, Learning Rate: 0.000063
+Epoch [240/300], Average Loss: 288.9981, Best Loss: 137.4993, Learning Rate: 0.000056
+Epoch [250/300], Average Loss: 151.2943, Best Loss: 137.4993, Learning Rate: 0.000056
+Epoch [260/300], Average Loss: 155.7703, Best Loss: 137.4993, Learning Rate: 0.000051
+Epoch [270/300], Average Loss: 154.4266, Best Loss: 137.4993, Learning Rate: 0.000051
+Epoch [280/300], Average Loss: 153.0191, Best Loss: 137.4993, Learning Rate: 0.000046
+Epoch [290/300], Average Loss: 151.0869, Best Loss: 137.4993, Learning Rate: 0.000046
+Epoch [300/300], Average Loss: 153.3012, Best Loss: 137.4993, Learning Rate: 0.000041
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TableScan/exec_TableScan.onnx
+Native model prediction time: 0.001376 seconds
+ONNX model prediction time: 0.001997 seconds
+
+Training operator: MergeOperator
+[Exec Hyperparams] operator=MergeOperator, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 314.4283, Best Loss: 90.9854, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 188.0365, Best Loss: 90.9854, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 218.9441, Best Loss: 90.9854, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 222.1784, Best Loss: 75.4081, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 64.2421, Best Loss: 64.2421, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 88.9062, Best Loss: 64.2421, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 102.1193, Best Loss: 51.3496, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 69.9344, Best Loss: 47.9660, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 108.4161, Best Loss: 46.8231, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 38.3810, Best Loss: 38.3810, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/MergeOperator/exec_MergeOperator.onnx
+Native model prediction time: 0.000268 seconds
+ONNX model prediction time: 0.000171 seconds
+
+Training operator: ExplainAnalyzeOperator
+[Exec Hyperparams] operator=ExplainAnalyzeOperator, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 629.1247, Best Loss: 490.9746, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 1352.6241, Best Loss: 471.1730, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 784.1476, Best Loss: 377.2253, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 583.3069, Best Loss: 323.8670, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 1002.3612, Best Loss: 220.5226, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 809.1466, Best Loss: 220.5226, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 612.5084, Best Loss: 209.2879, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 417.5464, Best Loss: 117.3963, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 227.5918, Best Loss: 117.3963, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 145.1607, Best Loss: 117.3963, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExplainAnalyzeOperator/exec_ExplainAnalyzeOperator.onnx
+Native model prediction time: 0.000880 seconds
+ONNX model prediction time: 0.000225 seconds
+
+Training operator: TaskOutputOperator
+[Exec Hyperparams] operator=TaskOutputOperator, lr=0.0005, batch_size=32, epochs=100
+Epoch [10/100], Average Loss: 0.0349, Best Loss: 0.0343, Learning Rate: 0.000500
+Epoch [20/100], Average Loss: 0.0339, Best Loss: 0.0335, Learning Rate: 0.000450
+Epoch [30/100], Average Loss: 0.0332, Best Loss: 0.0332, Learning Rate: 0.000450
+Epoch [40/100], Average Loss: 0.0333, Best Loss: 0.0332, Learning Rate: 0.000405
+Epoch [50/100], Average Loss: 0.0336, Best Loss: 0.0330, Learning Rate: 0.000405
+Epoch [60/100], Average Loss: 0.0331, Best Loss: 0.0330, Learning Rate: 0.000365
+Epoch [70/100], Average Loss: 0.0330, Best Loss: 0.0326, Learning Rate: 0.000365
+Epoch [80/100], Average Loss: 0.0333, Best Loss: 0.0326, Learning Rate: 0.000328
+Epoch [90/100], Average Loss: 0.0327, Best Loss: 0.0326, Learning Rate: 0.000328
+Epoch [100/100], Average Loss: 0.0336, Best Loss: 0.0326, Learning Rate: 0.000295
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TaskOutputOperator/exec_TaskOutputOperator.onnx
+Native model prediction time: 0.000230 seconds
+ONNX model prediction time: 0.000181 seconds
+
+Training operator: ExchangeOperator
+[Exec Hyperparams] operator=ExchangeOperator, lr=0.0005, batch_size=32, epochs=300
+Epoch [10/300], Average Loss: 146.9894, Best Loss: 142.6278, Learning Rate: 0.000500
+DOP-aware model training 完成，耗时: 227.3276 秒
+Traceback (most recent call last):
+  File "/home/candle/Project/serverless_tools/scripts/main.py", line 863, in <module>
+    main()
+  File "/home/candle/Project/serverless_tools/scripts/main.py", line 209, in main
+    success = train_dop_aware_models(DATASET, TRAIN_MODE, 
+  File "/home/candle/Project/serverless_tools/scripts/train.py", line 42, in train_dop_aware_models
+    train_func(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 336, in train_all_operators
+    process_and_train_curve(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 102, in process_and_train_curve
+    results_exec = train_one_operator_exec(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/train.py", line 229, in train_one_operator_exec
+    models_exec, training_times_exec = dop_model.train_exec_curve_model(
+  File "/home/candle/Project/serverless_tools/training/operator_dop_aware/model.py", line 300, in train_exec_curve_model
+    loss.backward()
+  File "/home/candle/.local/lib/python3.8/site-packages/torch/_tensor.py", line 521, in backward
+    torch.autograd.backward(
+  File "/home/candle/.local/lib/python3.8/site-packages/torch/autograd/__init__.py", line 289, in backward
+    _engine_run_backward(
+  File "/home/candle/.local/lib/python3.8/site-packages/torch/autograd/graph.py", line 769, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

@@ -1,0 +1,106 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260513_161950.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (176 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+
+Training operator: FilterProject
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+[Exec Hyperparams] operator=TableScan, lr=1e-05, batch_size=16, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1918, 14) y_train shape=(1918,) dop_train shape=(1918,)
+y_train min=0.017525 max=2972.502197 mean=228.230499
+dop_train min=2.000000 max=160.000000 mean=60.741398
+Epoch [10/100], Average Loss: 2148.9345, Best Loss: 2148.9345, Learning Rate: 0.000010
+Epoch [20/100], Average Loss: 2015.5832, Best Loss: 2015.5832, Learning Rate: 0.000009
+Epoch [30/100], Average Loss: 2058.4915, Best Loss: 1907.4794, Learning Rate: 0.000009
+Epoch [40/100], Average Loss: 1879.7120, Best Loss: 1711.4333, Learning Rate: 0.000008
+Epoch [50/100], Average Loss: 1517.7470, Best Loss: 1517.7470, Learning Rate: 0.000008
+Epoch [60/100], Average Loss: 1695.2985, Best Loss: 1326.8254, Learning Rate: 0.000007
+Epoch [70/100], Average Loss: 1289.4970, Best Loss: 1174.0015, Learning Rate: 0.000007
+Epoch [80/100], Average Loss: 965.2713, Best Loss: 965.2713, Learning Rate: 0.000007
+Epoch [90/100], Average Loss: 903.5554, Best Loss: 866.8680, Learning Rate: 0.000007
+Epoch [100/100], Average Loss: 710.1284, Best Loss: 710.1284, Learning Rate: 0.000006
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(16, 14) y_test shape=(16,) dop_test shape=(16,)
+y_test min=0.220188 max=1042.502197 mean=211.981155
+dop_test min=2.000000 max=128.000000 mean=60.125000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=73.7553 pred=139.9291 a=1.206374 b=21470.966797 c=-0.252210 d=0.515320 e=-0.128020
+idx=1 dop=64.0000 true=375.0023 pred=277.7363 a=1.106245 b=27798.705078 c=-0.172136 d=0.498710 e=-0.114363
+idx=2 dop=64.0000 true=134.5338 pred=150.5867 a=1.197201 b=22197.898438 c=-0.239476 d=0.514285 e=-0.119791
+idx=3 dop=16.0000 true=0.2247 pred=298.9819 a=1.363715 b=13194.637695 c=-0.404011 d=0.522267 e=-0.128678
+idx=4 dop=96.0000 true=68.5470 pred=110.6699 a=1.165201 b=23074.091797 c=-0.218887 d=0.511104 e=-0.152343
+idx=5 dop=96.0000 true=398.4398 pred=183.6001 a=1.098870 b=27937.074219 c=-0.165452 d=0.496949 e=-0.121686
+idx=6 dop=96.0000 true=127.6066 pred=124.5574 a=1.150097 b=24148.517578 c=-0.205213 d=0.509114 e=-0.136819
+idx=7 dop=24.0000 true=0.2298 pred=192.3896 a=1.343693 b=13915.435547 c=-0.379384 d=0.519043 e=-0.134388
+idx=8 dop=8.0000 true=386.2527 pred=1229.9045 a=1.285057 b=17814.542969 c=-0.325476 d=0.524316 e=-0.112504
+idx=9 dop=8.0000 true=1042.5022 pred=2664.5308 a=1.117878 b=27244.017578 c=-0.190556 d=0.504672 e=-0.107775
+idx=10 dop=8.0000 true=268.7523 pred=1284.1604 a=1.283241 b=18529.185547 c=-0.321863 d=0.521825 e=-0.096977
+idx=11 dop=2.0000 true=0.3105 pred=4555.8809 a=1.397820 b=12006.853516 c=-0.436893 d=0.528526 e=-0.115144
+idx=12 dop=128.0000 true=56.0197 pred=97.0973 a=1.132174 b=24218.179688 c=-0.199738 d=0.508962 e=-0.177774
+idx=13 dop=128.0000 true=347.4244 pred=139.3474 a=1.090763 b=28088.466797 c=-0.161413 d=0.496691 e=-0.129492
+idx=14 dop=128.0000 true=111.8774 pred=110.4297 a=1.115363 b=25250.269531 c=-0.179154 d=0.508558 e=-0.167311
+idx=15 dop=32.0000 true=0.2202 pred=145.1302 a=1.324845 b=14541.430664 c=-0.356106 d=0.516626 e=-0.142119
+[DEBUG][exec] ranges: a[1.090763, 1.397820] b[12006.853516, 28088.466797] c[-0.436893, -0.161413] d[0.496691, 0.528526] e[-0.177774, -0.096977] true[0.220188, 1042.502197] pred[97.097343, 4555.880859]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TableScan/exec_TableScan.onnx
+Native model prediction time: 0.000494 seconds
+ONNX model prediction time: 0.001925 seconds
+All operator exec results have been saved to /home/candle/Project/serverless_tools/output/evaluations/dop_aware/all_operators_performance_exec.csv
+DOP-aware model training 完成，耗时: 27.4686 秒
+✅ Training completed
+
+============================================================
+🎉 All tasks completed!
+============================================================

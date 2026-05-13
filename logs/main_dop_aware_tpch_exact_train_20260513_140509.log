@@ -1,0 +1,80 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260513_140509.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+
+Training operator: FilterProject
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+Backend TkAgg is interactive backend. Turning interactive mode on.
+[Exec Hyperparams] operator=TableScan, lr=1e-05, batch_size=16, epochs=300
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1918, 14) y_train shape=(1918,) dop_train shape=(1918,)
+y_train min=0.017525 max=2972.502197 mean=228.230499
+dop_train min=2.000000 max=160.000000 mean=60.741398
+Epoch [10/300], Average Loss: 1831.5179, Best Loss: 1831.5179, Learning Rate: 0.000010
+Epoch [20/300], Average Loss: 1092.0154, Best Loss: 1092.0154, Learning Rate: 0.000009
+Epoch [30/300], Average Loss: 450.4068, Best Loss: 450.4068, Learning Rate: 0.000009
+Epoch [40/300], Average Loss: 144.1839, Best Loss: 144.1839, Learning Rate: 0.000008
+Epoch [50/300], Average Loss: 39.6268, Best Loss: 39.6268, Learning Rate: 0.000008
+Epoch [60/300], Average Loss: 7.4482, Best Loss: 7.4482, Learning Rate: 0.000007
+Epoch [70/300], Average Loss: 3.5042, Best Loss: 3.0697, Learning Rate: 0.000007
+Epoch [80/300], Average Loss: 2.9419, Best Loss: 2.9419, Learning Rate: 0.000007
+Epoch [90/300], Average Loss: 2.7764, Best Loss: 2.7131, Learning Rate: 0.000007
+Epoch [100/300], Average Loss: 2.6648, Best Loss: 2.6131, Learning Rate: 0.000006
+Epoch [110/300], Average Loss: 2.3045, Best Loss: 2.2529, Learning Rate: 0.000006
+Epoch [120/300], Average Loss: 2.2642, Best Loss: 2.2121, Learning Rate: 0.000005
+Epoch [130/300], Average Loss: 2.3948, Best Loss: 2.0822, Learning Rate: 0.000005
+Epoch [140/300], Average Loss: 2.2470, Best Loss: 2.0084, Learning Rate: 0.000005
+Epoch [150/300], Average Loss: 1.9818, Best Loss: 1.9818, Learning Rate: 0.000005

@@ -1,0 +1,1280 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260513_173139.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (1771 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+[Exec Hyperparams] operator=AssignUniqueId, lr=3e-05, batch_size=32, epochs=220
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(42, 10) y_train shape=(42,) dop_train shape=(42,)
+y_train min=0.436125 max=280.768738 mean=42.604568
+dop_train min=8.000000 max=160.000000 mean=72.000000
+Epoch [10/220], Average Loss: 124.6276, Best Loss: 124.6276, Learning Rate: 0.000030
+Epoch [20/220], Average Loss: 122.7342, Best Loss: 122.7342, Learning Rate: 0.000027
+Epoch [30/220], Average Loss: 120.9949, Best Loss: 120.9949, Learning Rate: 0.000027
+Epoch [40/220], Average Loss: 119.3269, Best Loss: 119.3269, Learning Rate: 0.000024
+Epoch [50/220], Average Loss: 117.7839, Best Loss: 117.7839, Learning Rate: 0.000024
+Epoch [60/220], Average Loss: 116.2991, Best Loss: 116.2991, Learning Rate: 0.000022
+Epoch [70/220], Average Loss: 114.9676, Best Loss: 114.9676, Learning Rate: 0.000022
+Epoch [80/220], Average Loss: 113.6485, Best Loss: 113.6485, Learning Rate: 0.000020
+Epoch [90/220], Average Loss: 112.4546, Best Loss: 112.4546, Learning Rate: 0.000020
+Epoch [100/220], Average Loss: 111.2683, Best Loss: 111.2683, Learning Rate: 0.000018
+Epoch [110/220], Average Loss: 110.1876, Best Loss: 110.1876, Learning Rate: 0.000018
+Epoch [120/220], Average Loss: 109.1131, Best Loss: 109.1131, Learning Rate: 0.000016
+Epoch [130/220], Average Loss: 108.1031, Best Loss: 108.1031, Learning Rate: 0.000016
+Epoch [140/220], Average Loss: 107.0615, Best Loss: 107.0615, Learning Rate: 0.000014
+Epoch [150/220], Average Loss: 106.1788, Best Loss: 106.1788, Learning Rate: 0.000014
+Epoch [160/220], Average Loss: 105.2865, Best Loss: 105.2865, Learning Rate: 0.000013
+Epoch [170/220], Average Loss: 104.4701, Best Loss: 104.4701, Learning Rate: 0.000013
+Epoch [180/220], Average Loss: 103.6580, Best Loss: 103.6580, Learning Rate: 0.000012
+Epoch [190/220], Average Loss: 102.9204, Best Loss: 102.9204, Learning Rate: 0.000012
+Epoch [200/220], Average Loss: 102.1894, Best Loss: 102.1894, Learning Rate: 0.000010
+Epoch [210/220], Average Loss: 101.5254, Best Loss: 101.5254, Learning Rate: 0.000010
+Epoch [220/220], Average Loss: 100.8679, Best Loss: 100.8679, Learning Rate: 0.000009
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(0, 10) y_test shape=(0,) dop_test shape=(0,)
+[DEBUG][eval_exec] empty test set detected; skip min/max/mean stats.
+[WARN][eval_exec] empty test set, skip evaluation for this operator.
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+[Exec Hyperparams] operator=EnforceSingleRow, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(42, 10) y_train shape=(42,) dop_train shape=(42,)
+y_train min=0.037000 max=0.194000 mean=0.102786
+dop_train min=1.000000 max=1.000000 mean=1.000000
+Epoch [10/100], Average Loss: 10.0791, Best Loss: 10.0791, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 10.0759, Best Loss: 10.0759, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 10.0731, Best Loss: 10.0731, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 10.0704, Best Loss: 10.0704, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 10.0678, Best Loss: 10.0678, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 10.0652, Best Loss: 10.0652, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 10.0627, Best Loss: 10.0627, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 10.0602, Best Loss: 10.0602, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 10.0579, Best Loss: 10.0579, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 10.0555, Best Loss: 10.0555, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(11, 10) y_test shape=(11,) dop_test shape=(11,)
+y_test min=0.037000 max=0.084000 mean=0.053545
+dop_test min=1.000000 max=1.000000 mean=1.000000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=1.0000 true=0.0430 pred=25790.4141 a=1.017259 b=25790.357422 c=0.052131 d=0.462825 e=0.003887
+idx=1 dop=1.0000 true=0.0370 pred=25785.8906 a=1.019240 b=25785.837891 c=0.043790 d=0.464231 e=0.009962
+idx=2 dop=1.0000 true=0.0650 pred=25666.3301 a=1.016900 b=25666.277344 c=0.053508 d=0.461694 e=0.000163
+idx=3 dop=1.0000 true=0.0660 pred=25748.3613 a=1.020987 b=25748.318359 c=0.033864 d=0.466301 e=0.009758
+idx=4 dop=1.0000 true=0.0490 pred=25705.5469 a=1.021155 b=25705.515625 c=0.024021 d=0.468815 e=0.006854
+idx=5 dop=1.0000 true=0.0440 pred=25675.0762 a=1.017447 b=25675.021484 c=0.054107 d=0.461656 e=0.000542
+idx=6 dop=1.0000 true=0.0840 pred=25697.8848 a=1.017318 b=25697.830078 c=0.053858 d=0.462157 e=0.000887
+idx=7 dop=1.0000 true=0.0550 pred=25790.4141 a=1.017259 b=25790.357422 c=0.052131 d=0.462825 e=0.003887
+idx=8 dop=1.0000 true=0.0470 pred=25785.8906 a=1.019240 b=25785.837891 c=0.043790 d=0.464231 e=0.009962
+idx=9 dop=1.0000 true=0.0470 pred=25666.3301 a=1.016900 b=25666.277344 c=0.053508 d=0.461694 e=0.000163
+idx=10 dop=1.0000 true=0.0520 pred=25748.3613 a=1.020987 b=25748.318359 c=0.033864 d=0.466301 e=0.009758
+[DEBUG][exec] ranges: a[1.016900, 1.021155] b[25666.277344, 25790.357422] c[0.024021, 0.054107] d[0.461656, 0.468815] e[0.000163, 0.009962] true[0.037000, 0.084000] pred[25666.330078, 25790.414062]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/EnforceSingleRow/exec_EnforceSingleRow.onnx
+Native model prediction time: 0.000378 seconds
+ONNX model prediction time: 0.000268 seconds
+
+Training operator: FilterProject
+[Exec Hyperparams] operator=FilterProject, lr=3e-05, batch_size=32, epochs=220
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(3724, 13) y_train shape=(3724,) dop_train shape=(3724,)
+y_train min=0.015750 max=962.203735 mean=15.910522
+dop_train min=1.000000 max=160.000000 mean=62.766380
+Epoch [10/220], Average Loss: 637.9819, Best Loss: 637.9819, Learning Rate: 0.000030
+Epoch [20/220], Average Loss: 512.2982, Best Loss: 512.2982, Learning Rate: 0.000027
+Epoch [30/220], Average Loss: 360.2138, Best Loss: 360.2138, Learning Rate: 0.000027
+Epoch [40/220], Average Loss: 203.6987, Best Loss: 203.6987, Learning Rate: 0.000024
+Epoch [50/220], Average Loss: 89.0199, Best Loss: 89.0199, Learning Rate: 0.000024
+Epoch [60/220], Average Loss: 32.1101, Best Loss: 32.1101, Learning Rate: 0.000022
+Epoch [70/220], Average Loss: 12.8269, Best Loss: 12.8269, Learning Rate: 0.000022
+Epoch [80/220], Average Loss: 5.3182, Best Loss: 5.3182, Learning Rate: 0.000020
+Epoch [90/220], Average Loss: 2.7517, Best Loss: 2.7517, Learning Rate: 0.000020
+Epoch [100/220], Average Loss: 1.4771, Best Loss: 1.4771, Learning Rate: 0.000018
+Epoch [110/220], Average Loss: 0.9262, Best Loss: 0.9262, Learning Rate: 0.000018
+Epoch [120/220], Average Loss: 0.7812, Best Loss: 0.7746, Learning Rate: 0.000016
+Epoch [130/220], Average Loss: 0.7345, Best Loss: 0.7216, Learning Rate: 0.000016
+Epoch [140/220], Average Loss: 0.6834, Best Loss: 0.6834, Learning Rate: 0.000014
+Epoch [150/220], Average Loss: 0.6683, Best Loss: 0.6683, Learning Rate: 0.000014
+Epoch [160/220], Average Loss: 0.6321, Best Loss: 0.6321, Learning Rate: 0.000013
+Epoch [170/220], Average Loss: 0.6534, Best Loss: 0.6321, Learning Rate: 0.000013
+Epoch [180/220], Average Loss: 0.6340, Best Loss: 0.6202, Learning Rate: 0.000012
+Epoch [190/220], Average Loss: 0.6389, Best Loss: 0.6122, Learning Rate: 0.000012
+Epoch [200/220], Average Loss: 0.6184, Best Loss: 0.6122, Learning Rate: 0.000010
+Epoch [210/220], Average Loss: 0.6048, Best Loss: 0.6007, Learning Rate: 0.000010
+Epoch [220/220], Average Loss: 0.6116, Best Loss: 0.5966, Learning Rate: 0.000009
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(312, 13) y_test shape=(312,) dop_test shape=(312,)
+y_test min=0.026400 max=182.705002 mean=6.114227
+dop_test min=1.000000 max=160.000000 mean=60.240383
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=5.7991 pred=0.7864 a=1.570526 b=461.219147 c=0.137475 d=0.316437 e=-0.398006
+idx=1 dop=64.0000 true=0.5927 pred=0.2480 a=1.701982 b=85.391731 c=0.218569 d=0.268129 e=-0.490659
+idx=2 dop=64.0000 true=0.0448 pred=0.2222 a=1.737227 b=48.835430 c=0.246947 d=0.253158 e=-0.521028
+idx=3 dop=64.0000 true=0.3725 pred=0.2400 a=1.697074 b=100.043800 c=0.206645 d=0.271729 e=-0.485838
+idx=4 dop=64.0000 true=0.2291 pred=0.3487 a=1.676863 b=211.673416 c=0.182407 d=0.289167 e=-0.456662
+idx=5 dop=64.0000 true=30.4464 pred=48.3216 a=1.384504 b=15181.980469 c=0.106120 d=0.422996 e=-0.231097
+idx=6 dop=64.0000 true=5.0728 pred=0.7117 a=1.580433 b=373.165955 c=0.163896 d=0.307370 e=-0.398402
+idx=7 dop=96.0000 true=4.1333 pred=1.3094 a=1.507923 b=1339.601074 c=0.062541 d=0.338100 e=-0.356920
+idx=8 dop=96.0000 true=0.4376 pred=0.2023 a=1.631817 b=310.561493 c=0.119400 d=0.296786 e=-0.441350
+idx=9 dop=96.0000 true=0.0418 pred=0.1383 a=1.669932 b=184.639801 c=0.143162 d=0.282472 e=-0.471823
+idx=10 dop=96.0000 true=0.2599 pred=0.1951 a=1.632052 b=360.360901 c=0.109735 d=0.299138 e=-0.444443
+idx=11 dop=96.0000 true=0.1836 pred=0.3129 a=1.629430 b=565.082520 c=0.101576 d=0.307771 e=-0.433777
+idx=12 dop=96.0000 true=22.3857 pred=33.5840 a=1.384843 b=18509.544922 c=0.081484 d=0.425471 e=-0.270178
+idx=13 dop=96.0000 true=3.3943 pred=1.4434 a=1.501811 b=1328.442993 c=0.084007 d=0.336189 e=-0.346992
+idx=14 dop=8.0000 true=35.8537 pred=0.6482 a=1.768378 b=19.924717 c=0.394323 d=0.242320 e=-0.508458
+idx=15 dop=8.0000 true=4.7838 pred=0.2054 a=1.843347 b=3.840525 c=0.475390 d=0.201794 e=-0.600964
+idx=16 dop=8.0000 true=0.0655 pred=0.1553 a=1.865818 b=2.024451 c=0.507274 d=0.187712 e=-0.635948
+idx=17 dop=8.0000 true=3.9550 pred=0.1983 a=1.845022 b=3.975066 c=0.467584 d=0.202359 e=-0.599596
+idx=18 dop=8.0000 true=1.9600 pred=0.2515 a=1.828864 b=6.364119 c=0.437797 d=0.213346 e=-0.572707
+idx=19 dop=8.0000 true=182.7050 pred=299.7009 a=1.419323 b=5727.859375 c=0.235987 d=0.398781 e=-0.214929
+idx=20 dop=8.0000 true=27.2000 pred=0.4891 a=1.780704 b=13.896201 c=0.415718 d=0.230599 e=-0.524980
+idx=21 dop=128.0000 true=2.8861 pred=1.4386 a=1.510991 b=2369.893799 c=0.043442 d=0.342636 e=-0.341910
+idx=22 dop=128.0000 true=0.3567 pred=0.2020 a=1.623346 b=599.484680 c=0.091160 d=0.303679 e=-0.423374
+idx=23 dop=128.0000 true=0.0291 pred=0.1067 a=1.657347 b=369.266968 c=0.107212 d=0.290711 e=-0.451511
+idx=24 dop=128.0000 true=0.1836 pred=0.1748 a=1.626876 b=672.891907 c=0.080039 d=0.305858 e=-0.429240
+idx=25 dop=128.0000 true=0.1429 pred=0.2056 a=1.623265 b=944.919434 c=0.061405 d=0.312708 e=-0.433229
+idx=26 dop=128.0000 true=16.4811 pred=22.9859 a=1.398630 b=19998.818359 c=0.087522 d=0.426660 e=-0.291581
+idx=27 dop=128.0000 true=2.5310 pred=1.8210 a=1.496025 b=2551.702637 c=0.066405 d=0.345051 e=-0.329612
+idx=28 dop=160.0000 true=2.2604 pred=0.9961 a=1.552227 b=2908.985107 c=0.044911 d=0.336235 e=-0.353957
+idx=29 dop=160.0000 true=0.3081 pred=0.1901 a=1.644911 b=859.161682 c=0.087597 d=0.301121 e=-0.417199
+[DEBUG][exec] ranges: a[1.384502, 1.873727] b[1.531078, 20390.912109] c[0.043347, 0.527434] d[0.182532, 0.426661] e[-0.647219, -0.209934] true[0.026400, 182.705002] pred[0.074725, 299.700867]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/FilterProject/exec_FilterProject.onnx
+Native model prediction time: 0.000841 seconds
+ONNX model prediction time: 0.000433 seconds
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+[Exec Hyperparams] operator=LocalMerge, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(392, 31) y_train shape=(392,) dop_train shape=(392,)
+y_train min=0.027750 max=340.002747 mean=17.440126
+dop_train min=4.000000 max=4.000000 mean=4.000000
+Epoch [10/100], Average Loss: 7.7004, Best Loss: 7.6431, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 7.6403, Best Loss: 7.6299, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 7.6134, Best Loss: 7.6134, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 7.6464, Best Loss: 7.6134, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 7.5987, Best Loss: 7.5987, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 7.6369, Best Loss: 7.5725, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 7.6361, Best Loss: 7.5635, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 7.5648, Best Loss: 7.5585, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 7.6251, Best Loss: 7.5321, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 7.5799, Best Loss: 7.5321, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(32, 31) y_test shape=(32,) dop_test shape=(32,)
+y_test min=1.371000 max=340.002747 mean=185.228943
+dop_test min=4.000000 max=4.000000 mean=4.000000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=4.0000 true=302.5027 pred=3439.3186 a=1.244414 b=19309.513672 c=-0.082166 d=0.438393 e=-0.540638
+idx=1 dop=4.0000 true=310.0023 pred=3399.0039 a=1.248798 b=19199.662109 c=-0.089008 d=0.436507 e=-0.545378
+idx=2 dop=4.0000 true=184.9902 pred=3833.2893 a=1.203048 b=20320.449219 c=-0.029579 d=0.454533 e=-0.426728
+idx=3 dop=4.0000 true=315.0023 pred=3339.8186 a=1.255653 b=19045.734375 c=-0.100186 d=0.433809 e=-0.556899
+idx=4 dop=4.0000 true=327.5023 pred=3307.8145 a=1.260179 b=18982.085938 c=-0.109268 d=0.432426 e=-0.559057
+idx=5 dop=4.0000 true=213.6257 pred=3715.1150 a=1.213983 b=19995.189453 c=-0.039882 d=0.449784 e=-0.459942
+idx=6 dop=4.0000 true=285.0032 pred=3514.8423 a=1.236238 b=19510.837891 c=-0.070402 d=0.441837 e=-0.524324
+idx=7 dop=4.0000 true=330.0020 pred=3492.7898 a=1.238132 b=19439.449219 c=-0.073330 d=0.440640 e=-0.521505
+idx=8 dop=4.0000 true=322.5025 pred=3416.0669 a=1.246746 b=19241.146484 c=-0.086102 d=0.437207 e=-0.539063
+idx=9 dop=4.0000 true=191.3135 pred=3826.8933 a=1.203631 b=20302.951172 c=-0.030030 d=0.454275 e=-0.428270
+idx=10 dop=4.0000 true=307.5023 pred=3400.9102 a=1.249081 b=19217.904297 c=-0.090407 d=0.436209 e=-0.533945
+idx=11 dop=4.0000 true=340.0027 pred=3348.4521 a=1.256189 b=19109.068359 c=-0.101714 d=0.433985 e=-0.541930
+idx=12 dop=4.0000 true=232.6447 pred=3692.3599 a=1.216558 b=19943.857422 c=-0.043015 d=0.449014 e=-0.467977
+idx=13 dop=4.0000 true=277.5023 pred=3572.1982 a=1.229530 b=19645.423828 c=-0.060799 d=0.444205 e=-0.504195
+idx=14 dop=4.0000 true=302.5040 pred=3409.3801 a=1.248121 b=19240.210938 c=-0.087691 d=0.437148 e=-0.552129
+idx=15 dop=4.0000 true=310.0023 pred=3333.6873 a=1.256822 b=19041.689453 c=-0.100726 d=0.433694 e=-0.570265
+idx=16 dop=4.0000 true=192.1248 pred=3838.4736 a=1.202584 b=20334.824219 c=-0.029290 d=0.454780 e=-0.425625
+idx=17 dop=4.0000 true=320.0023 pred=3358.7317 a=1.253458 b=19095.296875 c=-0.096899 d=0.434546 e=-0.549756
+idx=18 dop=4.0000 true=332.5038 pred=3301.6895 a=1.260759 b=18962.212891 c=-0.110238 d=0.432197 e=-0.561440
+idx=19 dop=4.0000 true=236.1985 pred=3696.7456 a=1.216051 b=19953.501953 c=-0.042333 d=0.449182 e=-0.466458
+idx=20 dop=4.0000 true=270.0023 pred=3541.4360 a=1.233098 b=19572.960938 c=-0.065859 d=0.442949 e=-0.514856
+idx=21 dop=4.0000 true=2.0252 pred=5038.4844 a=1.081843 b=22575.462891 c=0.047342 d=0.481800 e=-0.119822
+idx=22 dop=4.0000 true=2.9275 pred=4964.1294 a=1.087567 b=22419.603516 c=0.039066 d=0.480293 e=-0.122254
+idx=23 dop=4.0000 true=1.4318 pred=5080.8013 a=1.079890 b=22703.503906 c=0.054628 d=0.483998 e=-0.129005
+idx=24 dop=4.0000 true=2.4775 pred=4854.9287 a=1.096087 b=22187.044922 c=0.031857 d=0.478985 e=-0.134935
+idx=25 dop=4.0000 true=2.0455 pred=4742.6030 a=1.105331 b=21953.376953 c=0.023921 d=0.476886 e=-0.145632
+idx=26 dop=4.0000 true=1.9182 pred=5083.9302 a=1.079772 b=22713.763672 c=0.053064 d=0.483505 e=-0.126908
+idx=27 dop=4.0000 true=2.0907 pred=5079.0010 a=1.079982 b=22698.357422 c=0.050792 d=0.482742 e=-0.124191
+idx=28 dop=4.0000 true=2.4075 pred=5038.3555 a=1.081839 b=22574.759766 c=0.047410 d=0.481813 e=-0.119858
+idx=29 dop=4.0000 true=2.6700 pred=4964.1792 a=1.087224 b=22409.160156 c=0.040276 d=0.480585 e=-0.123617
+[DEBUG][exec] ranges: a[1.079772, 1.260759] b[18962.212891, 22713.763672] c[-0.110238, 0.054731] d[0.432197, 0.484064] e[-0.570265, -0.119822] true[1.371000, 340.002747] pred[3301.689453, 5083.930176]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalMerge/exec_LocalMerge.onnx
+Native model prediction time: 0.000516 seconds
+ONNX model prediction time: 0.000250 seconds
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+[Exec Hyperparams] operator=TableScan, lr=3e-05, batch_size=32, epochs=400
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1918, 14) y_train shape=(1918,) dop_train shape=(1918,)
+y_train min=0.017525 max=2972.502197 mean=228.230499
+dop_train min=2.000000 max=160.000000 mean=60.741398
+Epoch [10/400], Average Loss: 446.4216, Best Loss: 446.4216, Learning Rate: 0.000030
+Epoch [20/400], Average Loss: 439.7704, Best Loss: 426.9107, Learning Rate: 0.000027
+Epoch [30/400], Average Loss: 360.6921, Best Loss: 360.6921, Learning Rate: 0.000027
+Epoch [40/400], Average Loss: 304.0495, Best Loss: 299.9285, Learning Rate: 0.000024
+Epoch [50/400], Average Loss: 217.7337, Best Loss: 217.7337, Learning Rate: 0.000024
+Epoch [60/400], Average Loss: 154.8916, Best Loss: 153.6893, Learning Rate: 0.000022
+Epoch [70/400], Average Loss: 97.5182, Best Loss: 97.5182, Learning Rate: 0.000022
+Epoch [80/400], Average Loss: 56.7537, Best Loss: 56.7537, Learning Rate: 0.000020
+Epoch [90/400], Average Loss: 37.5364, Best Loss: 37.5364, Learning Rate: 0.000020
+Epoch [100/400], Average Loss: 22.9619, Best Loss: 21.9730, Learning Rate: 0.000018
+Epoch [110/400], Average Loss: 10.7193, Best Loss: 10.7193, Learning Rate: 0.000018
+Epoch [120/400], Average Loss: 6.2074, Best Loss: 6.2074, Learning Rate: 0.000016
+Epoch [130/400], Average Loss: 3.9774, Best Loss: 3.9774, Learning Rate: 0.000016
+Epoch [140/400], Average Loss: 2.9238, Best Loss: 2.6023, Learning Rate: 0.000014
+Epoch [150/400], Average Loss: 1.9568, Best Loss: 1.9568, Learning Rate: 0.000014
+Epoch [160/400], Average Loss: 1.7960, Best Loss: 1.7052, Learning Rate: 0.000013
+Epoch [170/400], Average Loss: 1.4762, Best Loss: 1.4762, Learning Rate: 0.000013
+Epoch [180/400], Average Loss: 1.4440, Best Loss: 1.4440, Learning Rate: 0.000012
+Epoch [190/400], Average Loss: 1.9010, Best Loss: 1.4000, Learning Rate: 0.000012
+Epoch [200/400], Average Loss: 1.4699, Best Loss: 1.3346, Learning Rate: 0.000010
+Epoch [210/400], Average Loss: 1.3526, Best Loss: 1.3022, Learning Rate: 0.000010
+Epoch [220/400], Average Loss: 1.3262, Best Loss: 1.2608, Learning Rate: 0.000009
+Epoch [230/400], Average Loss: 1.2702, Best Loss: 1.2403, Learning Rate: 0.000009
+Epoch [240/400], Average Loss: 1.2681, Best Loss: 1.2403, Learning Rate: 0.000008
+Epoch [250/400], Average Loss: 1.2244, Best Loss: 1.1940, Learning Rate: 0.000008
+Epoch [260/400], Average Loss: 1.3095, Best Loss: 1.1940, Learning Rate: 0.000008
+Epoch [270/400], Average Loss: 1.3151, Best Loss: 1.1782, Learning Rate: 0.000008
+Epoch [280/400], Average Loss: 1.2342, Best Loss: 1.1782, Learning Rate: 0.000007
+Epoch [290/400], Average Loss: 1.2661, Best Loss: 1.1782, Learning Rate: 0.000007
+Epoch [300/400], Average Loss: 1.2053, Best Loss: 1.1735, Learning Rate: 0.000006
+Epoch [310/400], Average Loss: 1.1859, Best Loss: 1.1654, Learning Rate: 0.000006
+Epoch [320/400], Average Loss: 1.2109, Best Loss: 1.1324, Learning Rate: 0.000006
+Epoch [330/400], Average Loss: 1.1745, Best Loss: 1.1324, Learning Rate: 0.000006
+Epoch [340/400], Average Loss: 1.2109, Best Loss: 1.1308, Learning Rate: 0.000005
+Epoch [350/400], Average Loss: 1.1659, Best Loss: 1.1308, Learning Rate: 0.000005
+Epoch [360/400], Average Loss: 1.1883, Best Loss: 1.1308, Learning Rate: 0.000005
+Epoch [370/400], Average Loss: 1.2086, Best Loss: 1.1234, Learning Rate: 0.000005
+Epoch [380/400], Average Loss: 1.1886, Best Loss: 1.0846, Learning Rate: 0.000004
+Epoch [390/400], Average Loss: 1.2503, Best Loss: 1.0846, Learning Rate: 0.000004
+Epoch [400/400], Average Loss: 1.2468, Best Loss: 1.0846, Learning Rate: 0.000004
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(150, 14) y_test shape=(150,) dop_test shape=(150,)
+y_test min=0.053958 max=1208.752075 mean=135.950333
+dop_test min=2.000000 max=160.000000 mean=56.759998
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=73.7553 pred=6.4556 a=1.228551 b=915.430420 c=0.244550 d=0.447873 e=-0.648383
+idx=1 dop=64.0000 true=375.0023 pred=402.8464 a=1.080848 b=36396.105469 c=-0.332679 d=0.559488 e=-0.047917
+idx=2 dop=64.0000 true=134.5338 pred=10.0184 a=1.215432 b=1441.226807 c=0.211396 d=0.455570 e=-0.580154
+idx=3 dop=16.0000 true=0.2247 pred=0.3582 a=1.401367 b=5.149685 c=0.603687 d=0.341834 e=-1.305052
+idx=4 dop=96.0000 true=68.5470 pred=9.5472 a=1.218834 b=2404.157471 c=0.108339 d=0.455037 e=-0.541004
+idx=5 dop=96.0000 true=398.4398 pred=337.9425 a=1.036530 b=38973.929688 c=-0.390298 d=0.584625 e=-0.060756
+idx=6 dop=96.0000 true=127.6066 pred=17.4334 a=1.198339 b=4120.380859 c=0.064670 d=0.462995 e=-0.459998
+idx=7 dop=24.0000 true=0.2298 pred=0.4040 a=1.395329 b=9.384660 c=0.518967 d=0.341878 e=-1.245513
+idx=8 dop=8.0000 true=386.2527 pred=8.2810 a=1.270714 b=111.756538 c=0.496542 d=0.429628 e=-0.888430
+idx=9 dop=8.0000 true=1042.5022 pred=2837.7009 a=1.147247 b=30842.041016 c=-0.222457 d=0.521027 e=-0.058858
+idx=10 dop=8.0000 true=268.7523 pred=14.3447 a=1.262391 b=193.895401 c=0.442091 d=0.439191 e=-0.801953
+idx=11 dop=2.0000 true=0.3105 pred=0.2379 a=1.410904 b=1.831926 c=0.754033 d=0.342909 e=-1.407371
+idx=12 dop=128.0000 true=56.0197 pred=12.4966 a=1.221314 b=4914.813965 c=-0.018069 d=0.461301 e=-0.454206
+idx=13 dop=128.0000 true=347.4244 pred=328.2119 a=0.990711 b=41221.531250 c=-0.445240 d=0.610350 e=-0.073363
+idx=14 dop=128.0000 true=111.8774 pred=26.7009 a=1.189763 b=8893.670898 c=-0.062284 d=0.471413 e=-0.355158
+idx=15 dop=32.0000 true=0.2202 pred=0.3628 a=1.392027 b=15.909758 c=0.437458 d=0.341452 e=-1.193484
+idx=16 dop=160.0000 true=44.1917 pred=14.2675 a=1.223257 b=7925.805664 c=-0.125188 d=0.461609 e=-0.382138
+idx=17 dop=160.0000 true=349.6900 pred=336.9015 a=0.948458 b=43035.871094 c=-0.496347 d=0.634254 e=-0.082024
+idx=18 dop=160.0000 true=74.1276 pred=23.8951 a=1.189198 b=10785.115234 c=-0.150000 d=0.463763 e=-0.330443
+idx=19 dop=40.0000 true=0.3307 pred=0.3087 a=1.387351 b=27.721455 c=0.361187 d=0.342836 e=-1.136656
+idx=20 dop=16.0000 true=243.1275 pred=5.3151 a=1.263338 b=154.059082 c=0.460040 d=0.432747 e=-0.851611
+idx=21 dop=16.0000 true=743.7522 pred=1319.3348 a=1.145171 b=31595.974609 c=-0.239334 d=0.523937 e=-0.050907
+idx=22 dop=16.0000 true=191.8774 pred=8.9623 a=1.254265 b=270.145813 c=0.405798 d=0.442446 e=-0.764304
+idx=23 dop=4.0000 true=0.1857 pred=0.0515 a=1.412339 b=1.938706 c=0.736837 d=0.340614 e=-1.403664
+idx=24 dop=32.0000 true=138.4419 pred=4.8006 a=1.249261 b=289.029358 c=0.387571 d=0.438706 e=-0.779560
+idx=25 dop=32.0000 true=476.8771 pred=661.2789 a=1.129367 b=33220.097656 c=-0.270607 d=0.533130 e=-0.036363
+idx=26 dop=32.0000 true=140.6272 pred=7.8119 a=1.238290 b=505.334717 c=0.336729 d=0.448229 e=-0.694640
+idx=27 dop=8.0000 true=0.1839 pred=0.1711 a=1.409731 b=2.627217 c=0.692196 d=0.340243 e=-1.373436
+idx=28 dop=64.0000 true=106.2555 pred=6.5268 a=1.228236 b=925.783936 c=0.244133 d=0.448251 e=-0.646832
+idx=29 dop=64.0000 true=444.3774 pred=402.9274 a=1.080816 b=36398.601562 c=-0.332731 d=0.559510 e=-0.047912
+[DEBUG][exec] ranges: a[0.948389, 1.570688] b[0.029026, 43038.980469] c[-0.496442, 1.041034] d[0.252245, 0.634298] e[-2.040095, -0.036363] true[0.053958, 1208.752075] pred[-0.788837, 2837.700928]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TableScan/exec_TableScan.onnx
+Native model prediction time: 0.000525 seconds
+ONNX model prediction time: 0.000370 seconds
+
+Training operator: MergeOperator
+[Exec Hyperparams] operator=MergeOperator, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(392, 31) y_train shape=(392,) dop_train shape=(392,)
+y_train min=0.140000 max=4300.000000 mean=210.960999
+dop_train min=1.000000 max=1.000000 mean=1.000000
+Epoch [10/100], Average Loss: 8.1770, Best Loss: 8.0825, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 8.0936, Best Loss: 8.0651, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 8.0527, Best Loss: 8.0527, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 8.1179, Best Loss: 8.0527, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 8.0584, Best Loss: 8.0502, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 8.1245, Best Loss: 8.0270, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 8.1292, Best Loss: 7.9940, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 8.0392, Best Loss: 7.9940, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 8.1300, Best Loss: 7.9864, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 8.0503, Best Loss: 7.9864, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(32, 31) y_test shape=(32,) dop_test shape=(32,)
+y_test min=22.160000 max=4300.000000 mean=2213.628662
+dop_test min=1.000000 max=1.000000 mean=1.000000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=1.0000 true=3070.0000 pred=16177.6797 a=1.097011 b=16178.119141 c=-0.011124 d=0.420847 e=-0.428772
+idx=1 dop=1.0000 true=3240.0000 pred=15933.3320 a=1.100815 b=15933.787109 c=-0.019513 d=0.418735 e=-0.435735
+idx=2 dop=1.0000 true=3310.0000 pred=16763.4746 a=1.088892 b=16763.878906 c=0.008149 d=0.430173 e=-0.411317
+idx=3 dop=1.0000 true=2470.0000 pred=15762.4170 a=1.105180 b=15762.884766 c=-0.024550 d=0.419129 e=-0.442984
+idx=4 dop=1.0000 true=2550.0000 pred=15555.9648 a=1.109364 b=15556.453125 c=-0.035749 d=0.417362 e=-0.452290
+idx=5 dop=1.0000 true=3080.0000 pred=16627.4141 a=1.090480 b=16627.826172 c=0.004033 d=0.426959 e=-0.416222
+idx=6 dop=1.0000 true=3270.0000 pred=16415.7812 a=1.093031 b=16416.208984 c=-0.004148 d=0.422572 e=-0.423141
+idx=7 dop=1.0000 true=3530.0000 pred=16203.8281 a=1.096876 b=16204.265625 c=-0.009696 d=0.421761 e=-0.427595
+idx=8 dop=1.0000 true=4220.0000 pred=15896.2373 a=1.100529 b=15896.697266 c=-0.022168 d=0.417066 e=-0.437786
+idx=9 dop=1.0000 true=3870.0000 pred=16726.7793 a=1.089206 b=16727.183594 c=0.007163 d=0.428887 e=-0.412780
+idx=10 dop=1.0000 true=3010.0000 pred=15749.4307 a=1.105158 b=15749.899414 c=-0.025264 d=0.418717 e=-0.443381
+idx=11 dop=1.0000 true=2390.0000 pred=15624.7490 a=1.109512 b=15625.232422 c=-0.032841 d=0.419453 e=-0.450112
+idx=12 dop=1.0000 true=3490.0000 pred=16595.5742 a=1.090653 b=16595.990234 c=0.002384 d=0.425720 e=-0.417525
+idx=13 dop=1.0000 true=3850.0000 pred=16409.7480 a=1.093038 b=16410.175781 c=-0.004481 d=0.422323 e=-0.423535
+idx=14 dop=1.0000 true=3460.0000 pred=16135.7617 a=1.096754 b=16136.206055 c=-0.013943 d=0.418989 e=-0.431068
+idx=15 dop=1.0000 true=3560.0000 pred=15878.8291 a=1.100426 b=15879.291016 c=-0.023389 d=0.416316 e=-0.438737
+idx=16 dop=1.0000 true=4300.0000 pred=16719.6328 a=1.089370 b=16720.037109 c=0.006875 d=0.428781 e=-0.412935
+idx=17 dop=1.0000 true=3150.0000 pred=15714.9316 a=1.105005 b=15715.403320 c=-0.027627 d=0.417491 e=-0.444349
+idx=18 dop=1.0000 true=2650.0000 pred=15550.1396 a=1.109283 b=15550.627930 c=-0.035966 d=0.417140 e=-0.452450
+idx=19 dop=1.0000 true=4220.0000 pred=16557.9199 a=1.090902 b=16558.339844 c=0.000458 d=0.424323 e=-0.419034
+idx=20 dop=1.0000 true=3830.0000 pred=16379.7227 a=1.093160 b=16380.154297 c=-0.006081 d=0.421231 e=-0.425370
+idx=21 dop=1.0000 true=27.1600 pred=22404.4043 a=1.057053 b=22404.447266 c=0.071811 d=0.481788 e=-0.114784
+idx=22 dop=1.0000 true=24.9800 pred=22231.3242 a=1.061069 b=22231.365234 c=0.070259 d=0.479893 e=-0.112205
+idx=23 dop=1.0000 true=33.4000 pred=22425.6465 a=1.055876 b=22425.701172 c=0.072778 d=0.485167 e=-0.126737
+idx=24 dop=1.0000 true=22.1600 pred=21953.7246 a=1.064875 b=21953.779297 c=0.065692 d=0.477909 e=-0.120729
+idx=25 dop=1.0000 true=27.4500 pred=21679.7930 a=1.067259 b=21679.863281 c=0.061188 d=0.475515 e=-0.130923
+idx=26 dop=1.0000 true=31.6800 pred=22432.9844 a=1.056098 b=22433.037109 c=0.072720 d=0.484233 e=-0.124207
+idx=27 dop=1.0000 true=31.3800 pred=22437.6367 a=1.056146 b=22437.685547 c=0.071627 d=0.483209 e=-0.120384
+idx=28 dop=1.0000 true=24.7400 pred=22399.0430 a=1.057190 b=22399.083984 c=0.072248 d=0.482065 e=-0.113306
+idx=29 dop=1.0000 true=29.3100 pred=22230.7578 a=1.061169 b=22230.798828 c=0.070253 d=0.479922 e=-0.112049
+[DEBUG][exec] ranges: a[1.055876, 1.109512] b[15550.627930, 22437.685547] c[-0.035966, 0.072778] d[0.416316, 0.485167] e[-0.452450, -0.112049] true[22.160000, 4300.000000] pred[15550.139648, 22437.636719]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/MergeOperator/exec_MergeOperator.onnx
+Native model prediction time: 0.000600 seconds
+ONNX model prediction time: 0.000313 seconds
+
+Training operator: ExplainAnalyzeOperator
+[Exec Hyperparams] operator=ExplainAnalyzeOperator, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(483, 31) y_train shape=(483,) dop_train shape=(483,)
+y_train min=2.017000 max=208.240005 mean=75.767189
+dop_train min=1.000000 max=1.000000 mean=1.000000
+Epoch [10/100], Average Loss: 6.5912, Best Loss: 6.2255, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 6.3820, Best Loss: 6.0396, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 6.5294, Best Loss: 6.0396, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 6.1439, Best Loss: 6.0188, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 6.1685, Best Loss: 6.0110, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 6.3246, Best Loss: 6.0110, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 6.2319, Best Loss: 6.0110, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 5.9549, Best Loss: 5.9549, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 6.5012, Best Loss: 5.9321, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 6.2304, Best Loss: 5.9249, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(32, 31) y_test shape=(32,) dop_test shape=(32,)
+y_test min=3.077000 max=8.422000 mean=5.158625
+dop_test min=1.000000 max=1.000000 mean=1.000000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=1.0000 true=5.0120 pred=16709.8945 a=1.079609 b=16710.072266 c=0.092433 d=0.470282 e=-0.268691
+idx=1 dop=1.0000 true=4.9020 pred=16446.3477 a=1.083493 b=16446.533203 c=0.087676 d=0.468920 e=-0.272553
+idx=2 dop=1.0000 true=5.1320 pred=17160.5625 a=1.072326 b=17160.724609 c=0.100978 d=0.472904 e=-0.263238
+idx=3 dop=1.0000 true=4.9130 pred=16175.6318 a=1.087604 b=16175.825195 c=0.082700 d=0.467610 e=-0.276081
+idx=4 dop=1.0000 true=5.3830 pred=15904.6768 a=1.091648 b=15904.878906 c=0.077800 d=0.466345 e=-0.279815
+idx=5 dop=1.0000 true=4.8520 pred=17090.5898 a=1.073367 b=17090.753906 c=0.099505 d=0.472528 e=-0.264131
+idx=6 dop=1.0000 true=4.9920 pred=16965.1309 a=1.075446 b=16965.298828 c=0.097002 d=0.471714 e=-0.265329
+idx=7 dop=1.0000 true=5.1820 pred=16713.7070 a=1.079533 b=16713.882812 c=0.092539 d=0.470263 e=-0.268524
+idx=8 dop=1.0000 true=8.1420 pred=16446.3965 a=1.083494 b=16446.582031 c=0.087676 d=0.468920 e=-0.272550
+idx=9 dop=1.0000 true=5.0820 pred=17162.3516 a=1.072283 b=17162.513672 c=0.101019 d=0.472894 e=-0.263167
+idx=10 dop=1.0000 true=8.1830 pred=16173.4717 a=1.087644 b=16173.665039 c=0.082656 d=0.467618 e=-0.276171
+idx=11 dop=1.0000 true=5.0520 pred=15900.6787 a=1.091748 b=15900.880859 c=0.077689 d=0.466361 e=-0.279964
+idx=12 dop=1.0000 true=4.9220 pred=17094.5391 a=1.073288 b=17094.703125 c=0.099599 d=0.472505 e=-0.263948
+idx=13 dop=1.0000 true=5.1520 pred=16968.7988 a=1.075363 b=16968.966797 c=0.097108 d=0.471699 e=-0.265187
+idx=14 dop=1.0000 true=5.0920 pred=16709.8711 a=1.079608 b=16710.048828 c=0.092433 d=0.470283 e=-0.268695
+idx=15 dop=1.0000 true=5.0620 pred=16442.0137 a=1.083573 b=16442.199219 c=0.087589 d=0.468936 e=-0.272736
+idx=16 dop=1.0000 true=8.4220 pred=17149.0508 a=1.072536 b=17149.212891 c=0.100712 d=0.472975 e=-0.263779
+idx=17 dop=1.0000 true=7.8420 pred=16167.5869 a=1.087775 b=16167.780273 c=0.082531 d=0.467643 e=-0.276403
+idx=18 dop=1.0000 true=5.6820 pred=15910.9814 a=1.091504 b=15911.182617 c=0.077970 d=0.466320 e=-0.279572
+idx=19 dop=1.0000 true=6.2620 pred=17090.6250 a=1.073370 b=17090.789062 c=0.099506 d=0.472527 e=-0.264125
+idx=20 dop=1.0000 true=5.2020 pred=16965.0742 a=1.075442 b=16965.242188 c=0.097001 d=0.471715 e=-0.265338
+idx=21 dop=1.0000 true=3.8890 pred=21552.0938 a=1.090907 b=21552.162109 c=0.077954 d=0.478166 e=-0.146624
+idx=22 dop=1.0000 true=4.2210 pred=21371.4316 a=1.095554 b=21371.505859 c=0.073749 d=0.476776 e=-0.148883
+idx=23 dop=1.0000 true=3.4370 pred=21724.1055 a=1.083834 b=21724.164062 c=0.088756 d=0.479773 e=-0.145661
+idx=24 dop=1.0000 true=3.9810 pred=21150.2090 a=1.100233 b=21150.292969 c=0.069073 d=0.475659 e=-0.153083
+idx=25 dop=1.0000 true=4.4590 pred=20909.3594 a=1.105548 b=20909.455078 c=0.062944 d=0.474975 e=-0.157703
+idx=26 dop=1.0000 true=3.0770 pred=21714.9785 a=1.084503 b=21715.037109 c=0.087420 d=0.479715 e=-0.145896
+idx=27 dop=1.0000 true=5.1600 pred=21680.5352 a=1.086498 b=21680.597656 c=0.084236 d=0.479394 e=-0.146564
+idx=28 dop=1.0000 true=3.7480 pred=21551.5234 a=1.090852 b=21551.591797 c=0.077985 d=0.478163 e=-0.146736
+idx=29 dop=1.0000 true=3.7070 pred=21372.4941 a=1.095589 b=21372.568359 c=0.073668 d=0.476793 e=-0.148736
+[DEBUG][exec] ranges: a[1.072283, 1.105548] b[15900.880859, 21724.164062] c[0.062944, 0.101019] d[0.466320, 0.479773] e[-0.279964, -0.145661] true[3.077000, 8.422000] pred[15900.678711, 21724.105469]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExplainAnalyzeOperator/exec_ExplainAnalyzeOperator.onnx
+Native model prediction time: 0.000717 seconds
+ONNX model prediction time: 0.000238 seconds
+
+Training operator: TaskOutputOperator
+[Exec Hyperparams] operator=TaskOutputOperator, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(483, 31) y_train shape=(483,) dop_train shape=(483,)
+y_train min=0.075000 max=1.186000 mean=0.143797
+dop_train min=1.000000 max=1.000000 mean=1.000000
+Epoch [10/100], Average Loss: 9.9315, Best Loss: 9.9265, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 9.9112, Best Loss: 9.9112, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 9.9052, Best Loss: 9.9052, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 9.8946, Best Loss: 9.8946, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 9.8761, Best Loss: 9.8761, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 9.8716, Best Loss: 9.8716, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 9.8582, Best Loss: 9.8568, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 9.8401, Best Loss: 9.8401, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 9.8319, Best Loss: 9.8287, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 9.8106, Best Loss: 9.8106, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(32, 31) y_test shape=(32,) dop_test shape=(32,)
+y_test min=0.083000 max=0.412000 mean=0.115281
+dop_test min=1.000000 max=1.000000 mean=1.000000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=1.0000 true=0.0850 pred=21917.5469 a=1.062433 b=21917.595703 c=0.058246 d=0.482049 e=-0.107514
+idx=1 dop=1.0000 true=0.0880 pred=21536.9551 a=1.066981 b=21537.007812 c=0.056218 d=0.479425 e=-0.110068
+idx=2 dop=1.0000 true=0.0970 pred=21937.2109 a=1.057060 b=21937.271484 c=0.065073 d=0.483455 e=-0.125530
+idx=3 dop=1.0000 true=0.0860 pred=21004.8887 a=1.069486 b=21004.957031 c=0.055687 d=0.477169 e=-0.125826
+idx=4 dop=1.0000 true=0.1100 pred=20396.9844 a=1.072610 b=20397.076172 c=0.053956 d=0.474670 e=-0.146548
+idx=5 dop=1.0000 true=0.0860 pred=21956.9883 a=1.057560 b=21957.046875 c=0.064293 d=0.483196 e=-0.122304
+idx=6 dop=1.0000 true=0.0830 pred=21989.9043 a=1.058154 b=21989.958984 c=0.063182 d=0.482731 e=-0.116230
+idx=7 dop=1.0000 true=0.0940 pred=21917.2578 a=1.062432 b=21917.306641 c=0.058237 d=0.482051 e=-0.107525
+idx=8 dop=1.0000 true=0.1100 pred=21536.8613 a=1.066983 b=21536.914062 c=0.056211 d=0.479426 e=-0.110073
+idx=9 dop=1.0000 true=0.0990 pred=21938.0234 a=1.057065 b=21938.083984 c=0.065071 d=0.483457 e=-0.125490
+idx=10 dop=1.0000 true=0.1160 pred=21005.5078 a=1.069483 b=21005.576172 c=0.055693 d=0.477170 e=-0.125816
+idx=11 dop=1.0000 true=0.0970 pred=20396.7051 a=1.072611 b=20396.796875 c=0.053952 d=0.474670 e=-0.146552
+idx=12 dop=1.0000 true=0.0960 pred=21956.9883 a=1.057560 b=21957.046875 c=0.064293 d=0.483196 e=-0.122304
+idx=13 dop=1.0000 true=0.0970 pred=21990.2070 a=1.058157 b=21990.261719 c=0.063182 d=0.482732 e=-0.116215
+idx=14 dop=1.0000 true=0.0860 pred=21917.6367 a=1.062433 b=21917.685547 c=0.058249 d=0.482049 e=-0.107511
+idx=15 dop=1.0000 true=0.0860 pred=21537.6387 a=1.066971 b=21537.691406 c=0.056269 d=0.479423 e=-0.110041
+idx=16 dop=1.0000 true=0.1130 pred=21937.2109 a=1.057060 b=21937.271484 c=0.065073 d=0.483455 e=-0.125530
+idx=17 dop=1.0000 true=0.1260 pred=21005.5078 a=1.069483 b=21005.576172 c=0.055693 d=0.477170 e=-0.125816
+idx=18 dop=1.0000 true=0.0980 pred=20396.5645 a=1.072611 b=20396.656250 c=0.053951 d=0.474669 e=-0.146553
+idx=19 dop=1.0000 true=0.1050 pred=21956.7637 a=1.057559 b=21956.822266 c=0.064293 d=0.483195 e=-0.122315
+idx=20 dop=1.0000 true=0.1050 pred=21990.2070 a=1.058157 b=21990.261719 c=0.063182 d=0.482732 e=-0.116215
+idx=21 dop=1.0000 true=0.1410 pred=20702.3047 a=1.059785 b=20702.414062 c=0.056598 d=0.478216 e=-0.166303
+idx=22 dop=1.0000 true=0.4120 pred=20315.7578 a=1.064531 b=20315.875000 c=0.053194 d=0.476254 e=-0.169943
+idx=23 dop=1.0000 true=0.0940 pred=21047.1895 a=1.054788 b=21047.291016 c=0.062548 d=0.480117 e=-0.164017
+idx=24 dop=1.0000 true=0.1290 pred=19884.6523 a=1.068805 b=19884.777344 c=0.050103 d=0.474302 e=-0.176673
+idx=25 dop=1.0000 true=0.1280 pred=19361.9316 a=1.072652 b=19362.074219 c=0.046468 d=0.472810 e=-0.189275
+idx=26 dop=1.0000 true=0.0950 pred=21023.1445 a=1.055269 b=21023.246094 c=0.062041 d=0.479882 e=-0.163484
+idx=27 dop=1.0000 true=0.1480 pred=20953.6074 a=1.056237 b=20953.710938 c=0.060902 d=0.479494 e=-0.163286
+idx=28 dop=1.0000 true=0.1130 pred=20702.0410 a=1.059786 b=20702.150391 c=0.056598 d=0.478215 e=-0.166313
+idx=29 dop=1.0000 true=0.1020 pred=20315.1992 a=1.064531 b=20315.316406 c=0.053195 d=0.476252 e=-0.169968
+[DEBUG][exec] ranges: a[1.054788, 1.072652] b[19362.074219, 21990.261719] c[0.046468, 0.065073] d[0.472810, 0.483457] e[-0.189275, -0.107511] true[0.083000, 0.412000] pred[19361.931641, 21990.207031]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TaskOutputOperator/exec_TaskOutputOperator.onnx
+Native model prediction time: 0.000427 seconds
+ONNX model prediction time: 0.000329 seconds
+
+Training operator: ExchangeOperator
+[Exec Hyperparams] operator=ExchangeOperator, lr=3e-05, batch_size=32, epochs=300
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(2912, 31) y_train shape=(2912,) dop_train shape=(2912,)
+y_train min=0.001437 max=6902.502930 mean=157.268112
+dop_train min=2.000000 max=160.000000 mean=65.819710
+Epoch [10/300], Average Loss: 403.7687, Best Loss: 403.7687, Learning Rate: 0.000030
+Epoch [20/300], Average Loss: 354.4147, Best Loss: 354.4147, Learning Rate: 0.000027
+Epoch [30/300], Average Loss: 277.2307, Best Loss: 277.2307, Learning Rate: 0.000027
+Epoch [40/300], Average Loss: 187.4726, Best Loss: 187.4726, Learning Rate: 0.000024
+Epoch [50/300], Average Loss: 113.1929, Best Loss: 113.1929, Learning Rate: 0.000024
+Epoch [60/300], Average Loss: 63.4098, Best Loss: 63.4098, Learning Rate: 0.000022
+Epoch [70/300], Average Loss: 32.1944, Best Loss: 32.1944, Learning Rate: 0.000022
+Epoch [80/300], Average Loss: 16.0236, Best Loss: 16.0236, Learning Rate: 0.000020
+Epoch [90/300], Average Loss: 8.8381, Best Loss: 8.8381, Learning Rate: 0.000020
+Epoch [100/300], Average Loss: 4.9707, Best Loss: 4.9552, Learning Rate: 0.000018
+Epoch [110/300], Average Loss: 3.1952, Best Loss: 3.1952, Learning Rate: 0.000018
+Epoch [120/300], Average Loss: 2.1175, Best Loss: 2.0715, Learning Rate: 0.000016
+Epoch [130/300], Average Loss: 1.5703, Best Loss: 1.5703, Learning Rate: 0.000016
+Epoch [140/300], Average Loss: 1.2976, Best Loss: 1.2976, Learning Rate: 0.000014
+Epoch [150/300], Average Loss: 1.1423, Best Loss: 1.1423, Learning Rate: 0.000014
+Epoch [160/300], Average Loss: 1.1335, Best Loss: 1.0810, Learning Rate: 0.000013
+Epoch [170/300], Average Loss: 1.0827, Best Loss: 1.0741, Learning Rate: 0.000013
+Epoch [180/300], Average Loss: 1.0925, Best Loss: 1.0198, Learning Rate: 0.000012
+Epoch [190/300], Average Loss: 1.2234, Best Loss: 1.0198, Learning Rate: 0.000012
+Epoch [200/300], Average Loss: 1.0435, Best Loss: 1.0198, Learning Rate: 0.000010
+Epoch [210/300], Average Loss: 0.9899, Best Loss: 0.9758, Learning Rate: 0.000010
+Epoch [220/300], Average Loss: 1.0365, Best Loss: 0.9646, Learning Rate: 0.000009
+Epoch [230/300], Average Loss: 0.9742, Best Loss: 0.9544, Learning Rate: 0.000009
+Epoch [240/300], Average Loss: 0.9884, Best Loss: 0.9303, Learning Rate: 0.000008
+Epoch [250/300], Average Loss: 1.0234, Best Loss: 0.9179, Learning Rate: 0.000008
+Epoch [260/300], Average Loss: 0.9708, Best Loss: 0.9120, Learning Rate: 0.000008
+Epoch [270/300], Average Loss: 0.9768, Best Loss: 0.9120, Learning Rate: 0.000008
+Epoch [280/300], Average Loss: 0.9456, Best Loss: 0.9120, Learning Rate: 0.000007
+Epoch [290/300], Average Loss: 0.8985, Best Loss: 0.8985, Learning Rate: 0.000007
+Epoch [300/300], Average Loss: 1.0347, Best Loss: 0.8932, Learning Rate: 0.000006
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(193, 31) y_test shape=(193,) dop_test shape=(193,)
+y_test min=0.006744 max=290.003754 mean=18.641493
+dop_test min=2.000000 max=160.000000 mean=69.222801
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=14.0703 pred=0.5645 a=1.758171 b=881.190369 c=0.134465 d=0.386968 e=-0.695930
+idx=1 dop=64.0000 true=46.8809 pred=3.0037 a=1.628036 b=2558.225586 c=0.107778 d=0.416385 e=-0.538966
+idx=2 dop=64.0000 true=0.0121 pred=0.2935 a=1.848759 b=227.144806 c=0.254431 d=0.340643 e=-0.859678
+idx=3 dop=64.0000 true=6.4954 pred=0.4584 a=1.810632 b=386.190338 c=0.235516 d=0.354792 e=-0.778831
+idx=4 dop=64.0000 true=48.5961 pred=2.5174 a=1.636741 b=1926.411133 c=0.176833 d=0.396103 e=-0.531493
+idx=5 dop=96.0000 true=9.5011 pred=0.8052 a=1.654969 b=2604.788818 c=0.009858 d=0.423178 e=-0.627919
+idx=6 dop=96.0000 true=31.8799 pred=5.0619 a=1.528041 b=6096.986816 c=-0.018788 d=0.445928 e=-0.497547
+idx=7 dop=96.0000 true=0.0116 pred=0.1615 a=1.729160 b=1152.506592 c=0.073090 d=0.395922 e=-0.714361
+idx=8 dop=96.0000 true=4.9214 pred=0.6426 a=1.670426 b=1882.538940 c=0.055490 d=0.409510 e=-0.636572
+idx=9 dop=96.0000 true=36.5650 pred=6.7974 a=1.482059 b=6175.121582 c=0.015016 d=0.441518 e=-0.440509
+idx=10 dop=8.0000 true=91.1459 pred=1.1934 a=1.906113 b=69.552605 c=0.418787 d=0.306557 e=-0.919897
+idx=11 dop=8.0000 true=283.7531 pred=119.9478 a=1.561507 b=3077.595947 c=0.290303 d=0.400151 e=-0.401724
+idx=12 dop=8.0000 true=0.0371 pred=-0.0111 a=1.956414 b=9.223241 c=0.595324 d=0.248487 e=-1.166946
+idx=13 dop=8.0000 true=48.6900 pred=0.1792 a=1.944401 b=16.028652 c=0.572976 d=0.261102 e=-1.088076
+idx=14 dop=8.0000 true=47.3187 pred=1.0307 a=1.906651 b=53.222736 c=0.519126 d=0.288352 e=-0.924587
+idx=15 dop=128.0000 true=6.7500 pred=1.5821 a=1.574358 b=6053.062988 c=-0.087717 d=0.444470 e=-0.573812
+idx=16 dop=128.0000 true=22.7390 pred=7.3027 a=1.465901 b=10920.656250 c=-0.119042 d=0.463673 e=-0.466029
+idx=17 dop=128.0000 true=0.0082 pred=0.2422 a=1.632421 b=3331.908936 c=-0.042965 d=0.426133 e=-0.628269
+idx=18 dop=128.0000 true=3.4211 pred=1.3497 a=1.573347 b=4909.796387 c=-0.056214 d=0.436560 e=-0.557981
+idx=19 dop=128.0000 true=26.1744 pred=7.3684 a=1.445837 b=9482.119141 c=-0.079376 d=0.454188 e=-0.428320
+idx=20 dop=160.0000 true=5.2177 pred=1.9913 a=1.524616 b=9761.520508 c=-0.169023 d=0.457415 e=-0.542999
+idx=21 dop=160.0000 true=17.6302 pred=6.7169 a=1.453824 b=14536.897461 c=-0.174643 d=0.466645 e=-0.497721
+idx=22 dop=160.0000 true=0.0078 pred=0.2929 a=1.574739 b=6221.669434 c=-0.130466 d=0.441965 e=-0.581588
+idx=23 dop=160.0000 true=2.1653 pred=2.1758 a=1.511143 b=8785.201172 c=-0.141509 d=0.452954 e=-0.516558
+idx=24 dop=160.0000 true=13.1899 pred=7.1252 a=1.424899 b=12536.560547 c=-0.144923 d=0.462610 e=-0.426901
+idx=25 dop=16.0000 true=54.1295 pred=0.5506 a=1.892282 b=97.160484 c=0.385793 d=0.315739 e=-0.886925
+idx=26 dop=16.0000 true=161.2534 pred=42.9844 a=1.555689 b=3179.275391 c=0.267583 d=0.402095 e=-0.400322
+idx=27 dop=16.0000 true=0.0268 pred=0.0769 a=1.947156 b=14.850498 c=0.547261 d=0.260523 e=-1.117140
+idx=28 dop=16.0000 true=26.6559 pred=0.2064 a=1.932927 b=25.474131 c=0.527418 d=0.273158 e=-1.038196
+idx=29 dop=16.0000 true=30.1911 pred=0.5491 a=1.897649 b=67.947418 c=0.484214 d=0.295862 e=-0.903151
+[DEBUG][exec] ranges: a[1.414238, 1.962180] b[6.545691, 14707.090820] c[-0.174815, 0.624609] d[0.240004, 0.466645] e[-1.205056, -0.315710] true[0.006744, 290.003754] pred[-0.031726, 294.220215]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/ExchangeOperator/exec_ExchangeOperator.onnx
+Native model prediction time: 0.000555 seconds
+ONNX model prediction time: 0.000224 seconds
+
+Training operator: OrderBy
+[Exec Hyperparams] operator=OrderBy, lr=3e-05, batch_size=32, epochs=220
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(392, 31) y_train shape=(392,) dop_train shape=(392,)
+y_train min=0.037010 max=863.901245 mean=18.208452
+dop_train min=8.000000 max=160.000000 mean=72.000000
+Epoch [10/220], Average Loss: 217.6569, Best Loss: 213.7153, Learning Rate: 0.000030
+Epoch [20/220], Average Loss: 210.7196, Best Loss: 208.8934, Learning Rate: 0.000027
+Epoch [30/220], Average Loss: 204.9271, Best Loss: 204.9271, Learning Rate: 0.000027
+Epoch [40/220], Average Loss: 206.1619, Best Loss: 203.6701, Learning Rate: 0.000024
+Epoch [50/220], Average Loss: 198.6193, Best Loss: 198.6193, Learning Rate: 0.000024
+Epoch [60/220], Average Loss: 198.6024, Best Loss: 197.6110, Learning Rate: 0.000022
+Epoch [70/220], Average Loss: 195.5833, Best Loss: 189.2499, Learning Rate: 0.000022
+Epoch [80/220], Average Loss: 188.7500, Best Loss: 186.2130, Learning Rate: 0.000020
+Epoch [90/220], Average Loss: 188.3135, Best Loss: 182.1395, Learning Rate: 0.000020
+Epoch [100/220], Average Loss: 179.2779, Best Loss: 178.1307, Learning Rate: 0.000018
+Epoch [110/220], Average Loss: 175.2437, Best Loss: 175.2437, Learning Rate: 0.000018
+Epoch [120/220], Average Loss: 169.2025, Best Loss: 169.2025, Learning Rate: 0.000016
+Epoch [130/220], Average Loss: 171.7413, Best Loss: 165.9114, Learning Rate: 0.000016
+Epoch [140/220], Average Loss: 165.3107, Best Loss: 161.6645, Learning Rate: 0.000014
+Epoch [150/220], Average Loss: 163.2058, Best Loss: 160.5702, Learning Rate: 0.000014
+Epoch [160/220], Average Loss: 158.7487, Best Loss: 155.0681, Learning Rate: 0.000013
+Epoch [170/220], Average Loss: 157.5966, Best Loss: 151.4237, Learning Rate: 0.000013
+Epoch [180/220], Average Loss: 150.7670, Best Loss: 150.7670, Learning Rate: 0.000012
+Epoch [190/220], Average Loss: 150.9979, Best Loss: 148.1811, Learning Rate: 0.000012
+Epoch [200/220], Average Loss: 143.2585, Best Loss: 140.9506, Learning Rate: 0.000010
+Epoch [210/220], Average Loss: 145.7684, Best Loss: 140.9506, Learning Rate: 0.000010
+Epoch [220/220], Average Loss: 140.0774, Best Loss: 139.7953, Learning Rate: 0.000009
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(32, 31) y_test shape=(32,) dop_test shape=(32,)
+y_test min=0.214375 max=863.901245 mean=194.437378
+dop_test min=8.000000 max=160.000000 mean=72.250000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=153.5623 pred=294.7600 a=1.076269 b=25886.982422 c=0.067256 d=0.486880 e=-0.290535
+idx=1 dop=96.0000 true=92.8328 pred=201.3140 a=1.067660 b=26271.234375 c=0.073444 d=0.479946 e=-0.292924
+idx=2 dop=8.0000 true=829.5000 pred=2512.5505 a=1.093410 b=24410.986328 c=0.062092 d=0.479884 e=-0.299928
+idx=3 dop=128.0000 true=61.0100 pred=150.6738 a=1.068084 b=26786.253906 c=0.056825 d=0.485122 e=-0.319712
+idx=4 dop=160.0000 true=50.2711 pred=131.3840 a=1.049471 b=26895.078125 c=0.084838 d=0.469467 e=-0.306785
+idx=5 dop=16.0000 true=490.0450 pred=1192.3970 a=1.092459 b=24654.191406 c=0.061972 d=0.485463 e=-0.287694
+idx=6 dop=32.0000 true=311.5097 pred=587.3450 a=1.082620 b=25022.064453 c=0.071186 d=0.484764 e=-0.279476
+idx=7 dop=64.0000 true=209.2912 pred=296.0012 a=1.074871 b=25843.119141 c=0.070323 d=0.486031 e=-0.286457
+idx=8 dop=96.0000 true=117.4570 pred=199.3123 a=1.070400 b=26344.312500 c=0.067488 d=0.481268 e=-0.299444
+idx=9 dop=8.0000 true=841.9250 pred=2506.0701 a=1.103382 b=24858.351562 c=0.050957 d=0.492691 e=-0.288453
+idx=10 dop=128.0000 true=76.9450 pred=149.9733 a=1.068987 b=26781.802734 c=0.055549 d=0.484271 e=-0.321964
+idx=11 dop=160.0000 true=68.6256 pred=131.4343 a=1.048396 b=26738.382812 c=0.092491 d=0.470779 e=-0.295406
+idx=12 dop=16.0000 true=508.7269 pred=1203.7792 a=1.092215 b=24872.662109 c=0.061661 d=0.486886 e=-0.286601
+idx=13 dop=32.0000 true=355.4303 pred=590.6263 a=1.082806 b=25178.880859 c=0.067584 d=0.486543 e=-0.280795
+idx=14 dop=64.0000 true=131.6884 pred=296.3538 a=1.074572 b=25841.384766 c=0.072037 d=0.483739 e=-0.289854
+idx=15 dop=96.0000 true=83.5417 pred=201.4150 a=1.067902 b=26314.529297 c=0.073396 d=0.478537 e=-0.296407
+idx=16 dop=8.0000 true=863.9012 pred=2484.8335 a=1.097439 b=24344.835938 c=0.059813 d=0.481481 e=-0.296994
+idx=17 dop=128.0000 true=65.5956 pred=149.5312 a=1.070320 b=26888.148438 c=0.049083 d=0.487514 e=-0.329881
+idx=18 dop=160.0000 true=54.7589 pred=130.0474 a=1.051464 b=26892.039062 c=0.082459 d=0.473771 e=-0.306055
+idx=19 dop=16.0000 true=533.4744 pred=1201.2747 a=1.089081 b=24606.099609 c=0.065122 d=0.481946 e=-0.292579
+idx=20 dop=32.0000 true=307.3550 pred=590.2438 a=1.083564 b=25229.078125 c=0.066063 d=0.487695 e=-0.281111
+idx=21 dop=64.0000 true=0.5155 pred=242.9817 a=1.094281 b=22997.171875 c=0.039137 d=0.490311 e=-0.095139
+idx=22 dop=96.0000 true=0.4149 pred=173.9135 a=1.074337 b=23403.271484 c=0.040599 d=0.492631 e=-0.110587
+idx=23 dop=8.0000 true=4.8362 pred=1833.8945 a=1.175329 b=21127.169922 c=0.004674 d=0.479817 e=-0.178829
+idx=24 dop=128.0000 true=0.2488 pred=136.9979 a=1.061342 b=23524.814453 c=0.059098 d=0.490526 e=-0.116600
+idx=25 dop=160.0000 true=0.2144 pred=116.3377 a=1.048610 b=23680.142578 c=0.068566 d=0.490244 e=-0.131239
+idx=26 dop=16.0000 true=1.8775 pred=867.4016 a=1.156664 b=21431.113281 c=0.009084 d=0.482137 e=-0.159600
+idx=27 dop=32.0000 true=1.0194 pred=435.8507 a=1.131712 b=22016.820312 c=0.021265 d=0.485780 e=-0.134447
+idx=28 dop=64.0000 true=0.5222 pred=240.0171 a=1.096950 b=22976.859375 c=0.030585 d=0.490580 e=-0.101874
+idx=29 dop=96.0000 true=0.4329 pred=173.7401 a=1.074571 b=23404.814453 c=0.040403 d=0.492587 e=-0.108591
+[DEBUG][exec] ranges: a[1.048396, 1.175329] b[21127.169922, 26895.078125] c[0.004667, 0.092491] d[0.469467, 0.492820] e[-0.329881, -0.095139] true[0.214375, 863.901245] pred[116.337692, 2512.550537]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/OrderBy/exec_OrderBy.onnx
+Native model prediction time: 0.000489 seconds
+ONNX model prediction time: 0.000759 seconds
+
+Training operator: CallbackSink
+[Exec Hyperparams] operator=CallbackSink, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(392, 31) y_train shape=(392,) dop_train shape=(392,)
+y_train min=0.048896 max=0.997500 mean=0.121717
+dop_train min=8.000000 max=160.000000 mean=72.000000
+Epoch [10/100], Average Loss: 312.3974, Best Loss: 311.0140, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 301.9359, Best Loss: 301.9359, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 295.9322, Best Loss: 295.9322, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 290.6539, Best Loss: 290.6539, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 281.8112, Best Loss: 281.8112, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 277.6658, Best Loss: 277.6658, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 271.5426, Best Loss: 270.3063, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 261.1508, Best Loss: 261.1508, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 257.2138, Best Loss: 255.0766, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 251.3988, Best Loss: 251.2420, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(32, 31) y_test shape=(32,) dop_test shape=(32,)
+y_test min=0.073288 max=0.997500 mean=0.308381
+dop_test min=8.000000 max=160.000000 mean=72.250000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=0.2666 pred=262.8673 a=1.087880 b=24207.107422 c=0.070320 d=0.500676 e=-0.140240
+idx=1 dop=96.0000 true=0.2126 pred=171.1952 a=1.086901 b=24348.417969 c=0.078988 d=0.498456 e=-0.157574
+idx=2 dop=8.0000 true=0.9413 pred=2323.8560 a=1.112147 b=23472.072266 c=0.081725 d=0.487460 e=-0.083994
+idx=3 dop=128.0000 true=0.2065 pred=124.7589 a=1.088347 b=24351.416016 c=0.093120 d=0.494889 e=-0.190666
+idx=4 dop=160.0000 true=0.1569 pred=99.9415 a=1.083737 b=24187.900391 c=0.107709 d=0.490134 e=-0.189422
+idx=5 dop=16.0000 true=0.5856 pred=1112.6639 a=1.103023 b=23683.757812 c=0.078541 d=0.492749 e=-0.089946
+idx=6 dop=32.0000 true=0.3947 pred=539.7678 a=1.094044 b=23914.837891 c=0.072262 d=0.498671 e=-0.108274
+idx=7 dop=64.0000 true=0.2634 pred=263.4249 a=1.086975 b=24166.597656 c=0.071012 d=0.500406 e=-0.136126
+idx=8 dop=96.0000 true=0.2215 pred=170.3121 a=1.088501 b=24403.134766 c=0.077214 d=0.499018 e=-0.164601
+idx=9 dop=8.0000 true=0.9975 pred=2371.5750 a=1.105828 b=23641.578125 c=0.076808 d=0.491266 e=-0.089107
+idx=10 dop=128.0000 true=0.2124 pred=124.3237 a=1.089177 b=24367.621094 c=0.091586 d=0.495231 e=-0.194587
+idx=11 dop=160.0000 true=0.1517 pred=101.0429 a=1.081154 b=24126.982422 c=0.111217 d=0.489189 e=-0.176007
+idx=12 dop=16.0000 true=0.5663 pred=1110.6033 a=1.103383 b=23663.441406 c=0.079059 d=0.492195 e=-0.089332
+idx=13 dop=32.0000 true=0.3837 pred=539.8606 a=1.094081 b=23922.105469 c=0.071826 d=0.498926 e=-0.108242
+idx=14 dop=64.0000 true=0.2770 pred=263.0740 a=1.087566 b=24194.316406 c=0.070472 d=0.500629 e=-0.138813
+idx=15 dop=96.0000 true=0.2240 pred=170.7746 a=1.087670 b=24375.384766 c=0.078133 d=0.498735 e=-0.160993
+idx=16 dop=8.0000 true=0.9613 pred=2327.3857 a=1.111670 b=23484.435547 c=0.081327 d=0.487734 e=-0.084174
+idx=17 dop=128.0000 true=0.2078 pred=123.4321 a=1.090817 b=24392.576172 c=0.088461 d=0.495956 e=-0.202198
+idx=18 dop=160.0000 true=0.1601 pred=100.1032 a=1.083268 b=24165.785156 c=0.109167 d=0.489645 e=-0.187081
+idx=19 dop=16.0000 true=0.5256 pred=1102.9114 a=1.105169 b=23616.099609 c=0.079612 d=0.491014 e=-0.086806
+idx=20 dop=32.0000 true=0.3850 pred=540.1307 a=1.093966 b=23924.544922 c=0.071804 d=0.498894 e=-0.108739
+idx=21 dop=64.0000 true=0.1333 pred=271.7141 a=1.071659 b=23400.521484 c=0.052633 d=0.488187 e=-0.090624
+idx=22 dop=96.0000 true=0.1122 pred=178.7590 a=1.068022 b=23356.455078 c=0.055703 d=0.492165 e=-0.127425
+idx=23 dop=8.0000 true=0.2216 pred=2080.6099 a=1.140896 b=22311.943359 c=0.035434 d=0.472728 e=-0.165798
+idx=24 dop=128.0000 true=0.0738 pred=136.6562 a=1.059967 b=23292.509766 c=0.072065 d=0.491670 e=-0.159750
+idx=25 dop=160.0000 true=0.0733 pred=109.0522 a=1.057787 b=23259.404297 c=0.068131 d=0.491229 e=-0.191820
+idx=26 dop=16.0000 true=0.2022 pred=998.2307 a=1.123973 b=22522.820312 c=0.042730 d=0.477030 e=-0.145379
+idx=27 dop=32.0000 true=0.1766 pred=478.3450 a=1.112993 b=22639.537109 c=0.044982 d=0.477040 e=-0.131087
+idx=28 dop=64.0000 true=0.1041 pred=271.4457 a=1.071824 b=23393.333984 c=0.052451 d=0.488081 e=-0.088096
+idx=29 dop=96.0000 true=0.1359 pred=179.5951 a=1.067045 b=23360.742188 c=0.056095 d=0.492193 e=-0.125630
+[DEBUG][exec] ranges: a[1.057787, 1.140896] b[22311.943359, 24403.134766] c[0.035434, 0.111217] d[0.472728, 0.500676] e[-0.202198, -0.083994] true[0.073288, 0.997500] pred[99.941505, 2371.574951]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/CallbackSink/exec_CallbackSink.onnx
+Native model prediction time: 0.000746 seconds
+ONNX model prediction time: 0.000201 seconds
+
+Training operator: PartitionedOutput
+[Exec Hyperparams] operator=PartitionedOutput, lr=3e-05, batch_size=32, epochs=260
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(3304, 31) y_train shape=(3304,) dop_train shape=(3304,)
+y_train min=0.026575 max=6241.918945 mean=114.731453
+dop_train min=1.000000 max=160.000000 mean=54.754238
+Epoch [10/260], Average Loss: 434.9975, Best Loss: 434.9975, Learning Rate: 0.000030
+Epoch [20/260], Average Loss: 368.5621, Best Loss: 368.5621, Learning Rate: 0.000027
+Epoch [30/260], Average Loss: 266.6007, Best Loss: 266.6007, Learning Rate: 0.000027
+Epoch [40/260], Average Loss: 152.7726, Best Loss: 152.7726, Learning Rate: 0.000024
+Epoch [50/260], Average Loss: 73.2131, Best Loss: 73.2131, Learning Rate: 0.000024
+Epoch [60/260], Average Loss: 27.3041, Best Loss: 27.3041, Learning Rate: 0.000022
+Epoch [70/260], Average Loss: 10.1917, Best Loss: 10.1917, Learning Rate: 0.000022
+Epoch [80/260], Average Loss: 3.9904, Best Loss: 3.9904, Learning Rate: 0.000020
+Epoch [90/260], Average Loss: 1.8776, Best Loss: 1.8776, Learning Rate: 0.000020
+Epoch [100/260], Average Loss: 1.1414, Best Loss: 1.1414, Learning Rate: 0.000018
+Epoch [110/260], Average Loss: 1.0094, Best Loss: 0.9705, Learning Rate: 0.000018
+Epoch [120/260], Average Loss: 0.9374, Best Loss: 0.9060, Learning Rate: 0.000016
+Epoch [130/260], Average Loss: 0.9034, Best Loss: 0.8809, Learning Rate: 0.000016
+Epoch [140/260], Average Loss: 0.8916, Best Loss: 0.8438, Learning Rate: 0.000014
+Epoch [150/260], Average Loss: 0.8293, Best Loss: 0.8248, Learning Rate: 0.000014
+Epoch [160/260], Average Loss: 0.8435, Best Loss: 0.7812, Learning Rate: 0.000013
+Epoch [170/260], Average Loss: 0.7718, Best Loss: 0.7718, Learning Rate: 0.000013
+Epoch [180/260], Average Loss: 0.8080, Best Loss: 0.7519, Learning Rate: 0.000012
+Epoch [190/260], Average Loss: 0.8018, Best Loss: 0.7436, Learning Rate: 0.000012
+Epoch [200/260], Average Loss: 0.7446, Best Loss: 0.7400, Learning Rate: 0.000010
+Epoch [210/260], Average Loss: 0.7385, Best Loss: 0.7192, Learning Rate: 0.000010
+Epoch [220/260], Average Loss: 0.7073, Best Loss: 0.6936, Learning Rate: 0.000009
+Epoch [230/260], Average Loss: 0.6861, Best Loss: 0.6861, Learning Rate: 0.000009
+Epoch [240/260], Average Loss: 0.7229, Best Loss: 0.6859, Learning Rate: 0.000008
+Epoch [250/260], Average Loss: 0.7599, Best Loss: 0.6859, Learning Rate: 0.000008
+Epoch [260/260], Average Loss: 0.6989, Best Loss: 0.6627, Learning Rate: 0.000008
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(225, 31) y_test shape=(225,) dop_test shape=(225,)
+y_test min=0.048281 max=788.073730 mean=82.072975
+dop_test min=1.000000 max=160.000000 mean=48.733334
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=4.0000 true=382.6125 pred=55.8738 a=1.704625 b=592.592773 c=0.238769 d=0.344245 e=-0.289898
+idx=1 dop=64.0000 true=60.1266 pred=68.0462 a=1.297065 b=14887.739258 c=0.086492 d=0.452170 e=-0.144112
+idx=2 dop=64.0000 true=170.2566 pred=113.5050 a=1.236846 b=19385.548828 c=0.078745 d=0.460764 e=-0.142981
+idx=3 dop=64.0000 true=43.6672 pred=7.2461 a=1.497071 b=3312.861328 c=0.181441 d=0.392726 e=-0.232751
+idx=4 dop=64.0000 true=7.5644 pred=0.6277 a=1.785387 b=163.703033 c=0.271827 d=0.306039 e=-0.440500
+idx=5 dop=16.0000 true=0.0602 pred=0.2106 a=1.919486 b=7.146556 c=0.424528 d=0.223878 e=-0.614010
+idx=6 dop=4.0000 true=410.5000 pred=79.3737 a=1.683015 b=817.859314 c=0.199999 d=0.353057 e=-0.276220
+idx=7 dop=96.0000 true=41.1912 pred=65.3024 a=1.252674 b=19780.792969 c=0.054774 d=0.458413 e=-0.170010
+idx=8 dop=96.0000 true=108.7812 pred=79.9694 a=1.227252 b=21571.142578 c=0.060966 d=0.459779 e=-0.166957
+idx=9 dop=96.0000 true=36.7741 pred=11.2301 a=1.412225 b=6692.178223 c=0.121756 d=0.413173 e=-0.193266
+idx=10 dop=96.0000 true=5.0581 pred=0.6937 a=1.696818 b=592.514587 c=0.170654 d=0.341638 e=-0.374375
+idx=11 dop=24.0000 true=0.0623 pred=0.2051 a=1.903544 b=13.214002 c=0.356989 d=0.237675 e=-0.585842
+idx=12 dop=4.0000 true=384.0075 pred=36.2426 a=1.731611 b=397.679321 c=0.308579 d=0.334014 e=-0.305485
+idx=13 dop=8.0000 true=226.5188 pred=18.5468 a=1.696798 b=619.976257 c=0.320164 d=0.338632 e=-0.298196
+idx=14 dop=8.0000 true=756.8912 pred=594.6834 a=1.360725 b=10066.372070 c=0.203705 d=0.437180 e=-0.135995
+idx=15 dop=8.0000 true=215.8100 pred=11.8359 a=1.710467 b=402.165710 c=0.360637 d=0.327067 e=-0.349591
+idx=16 dop=8.0000 true=37.1225 pred=0.4580 a=1.900246 b=12.301414 c=0.482285 d=0.237462 e=-0.568761
+idx=17 dop=2.0000 true=0.1235 pred=0.5749 a=1.942351 b=2.371419 c=0.544282 d=0.199898 e=-0.667344
+idx=18 dop=4.0000 true=395.7375 pred=67.7809 a=1.699653 b=715.202454 c=0.173977 d=0.346710 e=-0.285824
+idx=19 dop=128.0000 true=42.3330 pred=49.5457 a=1.251650 b=21330.484375 c=0.066084 d=0.450206 e=-0.190117
+idx=20 dop=128.0000 true=82.9055 pred=58.2194 a=1.230987 b=22688.804688 c=0.069289 d=0.451292 e=-0.191060
+idx=21 dop=128.0000 true=31.2546 pred=13.3406 a=1.362818 b=9651.569336 c=0.072100 d=0.424572 e=-0.192507
+idx=22 dop=128.0000 true=3.8083 pred=0.7656 a=1.632871 b=1330.272827 c=0.108217 d=0.363092 e=-0.346544
+idx=23 dop=32.0000 true=0.0764 pred=0.1867 a=1.885781 b=23.734142 c=0.298597 d=0.250595 e=-0.559383
+idx=24 dop=4.0000 true=382.6075 pred=80.2966 a=1.692437 b=839.348633 c=0.141453 d=0.350140 e=-0.284712
+idx=25 dop=160.0000 true=39.7409 pred=30.6580 a=1.282007 b=20365.746094 c=0.046620 d=0.443559 e=-0.207864
+idx=26 dop=160.0000 true=59.3753 pred=49.5260 a=1.225945 b=24662.558594 c=0.084116 d=0.439509 e=-0.224306
+idx=27 dop=160.0000 true=29.5349 pred=11.4804 a=1.353132 b=10943.391602 c=0.033354 d=0.427031 e=-0.205173
+idx=28 dop=160.0000 true=6.2054 pred=0.8478 a=1.591027 b=2214.893799 c=0.074282 d=0.374289 e=-0.338128
+idx=29 dop=40.0000 true=0.0630 pred=0.1518 a=1.867733 b=40.701702 c=0.245334 d=0.262713 e=-0.536235
+[DEBUG][exec] ranges: a[1.224225, 1.942351] b[2.371419, 24938.103516] c[0.033350, 0.544282] d[0.199898, 0.461842] e[-0.667344, -0.128976] true[0.048281, 788.073730] pred[0.151808, 605.120728]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/PartitionedOutput/exec_PartitionedOutput.onnx
+Native model prediction time: 0.000637 seconds
+ONNX model prediction time: 0.000310 seconds
+
+Training operator: LocalExchangeSourceOperator
+[Exec Hyperparams] operator=LocalExchangeSourceOperator, lr=3e-05, batch_size=32, epochs=260
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(2184, 31) y_train shape=(2184,) dop_train shape=(2184,)
+y_train min=0.019000 max=2775.838867 mean=54.886982
+dop_train min=1.000000 max=160.000000 mean=60.567307
+Epoch [10/260], Average Loss: 373.3016, Best Loss: 373.3016, Learning Rate: 0.000030
+Epoch [20/260], Average Loss: 352.2762, Best Loss: 349.3000, Learning Rate: 0.000027
+Epoch [30/260], Average Loss: 314.1805, Best Loss: 314.1805, Learning Rate: 0.000027
+Epoch [40/260], Average Loss: 263.4368, Best Loss: 263.4368, Learning Rate: 0.000024
+Epoch [50/260], Average Loss: 209.7728, Best Loss: 209.7728, Learning Rate: 0.000024
+Epoch [60/260], Average Loss: 151.8492, Best Loss: 151.8492, Learning Rate: 0.000022
+Epoch [70/260], Average Loss: 111.9303, Best Loss: 111.8569, Learning Rate: 0.000022
+Epoch [80/260], Average Loss: 71.0228, Best Loss: 71.0228, Learning Rate: 0.000020
+Epoch [90/260], Average Loss: 49.3817, Best Loss: 47.6061, Learning Rate: 0.000020
+Epoch [100/260], Average Loss: 27.0381, Best Loss: 27.0381, Learning Rate: 0.000018
+Epoch [110/260], Average Loss: 18.3264, Best Loss: 18.1930, Learning Rate: 0.000018
+Epoch [120/260], Average Loss: 12.1845, Best Loss: 12.1845, Learning Rate: 0.000016
+Epoch [130/260], Average Loss: 8.5972, Best Loss: 8.4550, Learning Rate: 0.000016
+Epoch [140/260], Average Loss: 5.9252, Best Loss: 5.9252, Learning Rate: 0.000014
+Epoch [150/260], Average Loss: 4.4630, Best Loss: 4.2220, Learning Rate: 0.000014
+Epoch [160/260], Average Loss: 3.1376, Best Loss: 3.1376, Learning Rate: 0.000013
+Epoch [170/260], Average Loss: 2.5463, Best Loss: 2.5463, Learning Rate: 0.000013
+Epoch [180/260], Average Loss: 2.1224, Best Loss: 2.1224, Learning Rate: 0.000012
+Epoch [190/260], Average Loss: 1.8038, Best Loss: 1.7831, Learning Rate: 0.000012
+Epoch [200/260], Average Loss: 1.5953, Best Loss: 1.5716, Learning Rate: 0.000010
+Epoch [210/260], Average Loss: 1.3921, Best Loss: 1.3921, Learning Rate: 0.000010
+Epoch [220/260], Average Loss: 1.2814, Best Loss: 1.2814, Learning Rate: 0.000009
+Epoch [230/260], Average Loss: 1.2898, Best Loss: 1.2433, Learning Rate: 0.000009
+Epoch [240/260], Average Loss: 1.2178, Best Loss: 1.1891, Learning Rate: 0.000008
+Epoch [250/260], Average Loss: 1.1662, Best Loss: 1.1328, Learning Rate: 0.000008
+Epoch [260/260], Average Loss: 1.1852, Best Loss: 1.1300, Learning Rate: 0.000008
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(183, 31) y_test shape=(183,) dop_test shape=(183,)
+y_test min=0.045025 max=121.318748 mean=12.385286
+dop_test min=1.000000 max=160.000000 mean=61.524590
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=13.8617 pred=0.9611 a=1.801484 b=591.306396 c=0.271553 d=0.433667 e=-1.017216
+idx=1 dop=64.0000 true=20.6473 pred=1.2699 a=1.755919 b=947.581360 c=0.244102 d=0.443564 e=-0.912766
+idx=2 dop=64.0000 true=0.1478 pred=0.7695 a=1.865550 b=242.895645 c=0.321895 d=0.423755 e=-1.209572
+idx=3 dop=64.0000 true=14.7802 pred=3.2361 a=1.644160 b=2441.002197 c=0.205664 d=0.448526 e=-0.709881
+idx=4 dop=96.0000 true=8.7260 pred=1.4729 a=1.671264 b=2254.715088 c=0.142100 d=0.449724 e=-0.730826
+idx=5 dop=96.0000 true=17.0564 pred=2.1998 a=1.621228 b=3165.445312 c=0.113046 d=0.459183 e=-0.654768
+idx=6 dop=96.0000 true=0.1628 pred=0.7944 a=1.772718 b=927.934814 c=0.193577 d=0.439437 e=-0.928293
+idx=7 dop=96.0000 true=10.6343 pred=6.3668 a=1.511239 b=6053.395508 c=0.092597 d=0.462283 e=-0.510831
+idx=8 dop=8.0000 true=107.3838 pred=0.2136 a=1.938498 b=36.864594 c=0.505661 d=0.400473 e=-1.603862
+idx=9 dop=8.0000 true=94.1363 pred=1.8199 a=1.897598 b=109.736130 c=0.445301 d=0.418923 e=-1.365718
+idx=10 dop=8.0000 true=0.1879 pred=-0.2553 a=1.957902 b=16.266232 c=0.552884 d=0.391264 e=-1.780020
+idx=11 dop=8.0000 true=91.0488 pred=0.7754 a=1.921318 b=62.988586 c=0.474045 d=0.406326 e=-1.487269
+idx=12 dop=128.0000 true=6.6416 pred=2.2976 a=1.568667 b=5060.889160 c=0.039327 d=0.460081 e=-0.573421
+idx=13 dop=128.0000 true=14.7775 pred=3.0215 a=1.541020 b=5814.766602 c=0.028037 d=0.464973 e=-0.536772
+idx=14 dop=128.0000 true=0.1613 pred=0.7247 a=1.679819 b=2433.974121 c=0.084478 d=0.451508 e=-0.733040
+idx=15 dop=128.0000 true=7.9836 pred=10.0493 a=1.425464 b=10546.307617 c=0.000855 d=0.467178 e=-0.414570
+idx=16 dop=160.0000 true=10.1638 pred=2.9016 a=1.512474 b=7863.647949 c=-0.022958 d=0.460990 e=-0.507294
+idx=17 dop=160.0000 true=22.6181 pred=1.9259 a=1.542811 b=6622.790039 c=-0.016030 d=0.460019 e=-0.541869
+idx=18 dop=160.0000 true=0.0985 pred=0.5668 a=1.617728 b=4314.770996 c=0.003788 d=0.456971 e=-0.644716
+idx=19 dop=160.0000 true=12.8716 pred=12.1706 a=1.378613 b=14375.626953 c=-0.057568 d=0.463605 e=-0.376258
+idx=20 dop=16.0000 true=61.5925 pred=0.2173 a=1.925444 b=57.071777 c=0.472333 d=0.405625 e=-1.511154
+idx=21 dop=16.0000 true=52.3006 pred=1.1530 a=1.868984 b=192.726898 c=0.403509 d=0.426864 e=-1.247372
+idx=22 dop=16.0000 true=0.2006 pred=-0.0241 a=1.949821 b=24.165257 c=0.521581 d=0.395939 e=-1.696064
+idx=23 dop=16.0000 true=50.7375 pred=0.5782 a=1.898890 b=111.544014 c=0.435619 d=0.412827 e=-1.366905
+idx=24 dop=32.0000 true=28.3937 pred=0.5543 a=1.895296 b=125.172852 c=0.408906 d=0.415181 e=-1.345391
+idx=25 dop=32.0000 true=31.7459 pred=1.0863 a=1.830216 b=363.496582 c=0.346597 d=0.434246 e=-1.114198
+idx=26 dop=32.0000 true=0.1955 pred=0.4049 a=1.929198 b=52.852432 c=0.458547 d=0.405490 e=-1.530444
+idx=27 dop=32.0000 true=27.3166 pred=1.0919 a=1.830042 b=377.226837 c=0.350761 d=0.426683 e=-1.111048
+idx=28 dop=64.0000 true=12.6325 pred=0.9604 a=1.801759 b=589.309753 c=0.271854 d=0.433625 e=-1.017984
+idx=29 dop=64.0000 true=24.1330 pred=1.2088 a=1.762625 b=890.506958 c=0.246705 d=0.442097 e=-0.925976
+[DEBUG][exec] ranges: a[1.378613, 1.962456] b[12.603113, 14375.626953] c[-0.057568, 0.571463] d[0.387804, 0.467329] e[-1.833190, -0.376258] true[0.045025, 121.318748] pred[-0.255893, 83.031143]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalExchangeSourceOperator/exec_LocalExchangeSourceOperator.onnx
+Native model prediction time: 0.000576 seconds
+ONNX model prediction time: 0.000328 seconds
+
+Training operator: HashBuilderOperator
+[Exec Hyperparams] operator=HashBuilderOperator, lr=3e-05, batch_size=32, epochs=320
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1393, 31) y_train shape=(1393,) dop_train shape=(1393,)
+y_train min=0.083125 max=22582.500000 mean=717.950195
+dop_train min=2.000000 max=160.000000 mean=67.894470
+Epoch [10/320], Average Loss: 292.4771, Best Loss: 251.1613, Learning Rate: 0.000030
+Epoch [20/320], Average Loss: 237.5339, Best Loss: 233.1565, Learning Rate: 0.000027
+Epoch [30/320], Average Loss: 249.4184, Best Loss: 224.9723, Learning Rate: 0.000027
+Epoch [40/320], Average Loss: 237.6610, Best Loss: 208.0841, Learning Rate: 0.000024
+Epoch [50/320], Average Loss: 190.9937, Best Loss: 190.4045, Learning Rate: 0.000024
+Epoch [60/320], Average Loss: 169.2015, Best Loss: 169.2015, Learning Rate: 0.000022
+Epoch [70/320], Average Loss: 169.3660, Best Loss: 158.7623, Learning Rate: 0.000022
+Epoch [80/320], Average Loss: 128.5042, Best Loss: 128.5042, Learning Rate: 0.000020
+Epoch [90/320], Average Loss: 118.5061, Best Loss: 107.6536, Learning Rate: 0.000020
+Epoch [100/320], Average Loss: 86.1823, Best Loss: 86.1823, Learning Rate: 0.000018
+Epoch [110/320], Average Loss: 70.3400, Best Loss: 70.3400, Learning Rate: 0.000018
+Epoch [120/320], Average Loss: 55.2202, Best Loss: 55.2202, Learning Rate: 0.000016
+Epoch [130/320], Average Loss: 52.4511, Best Loss: 49.0051, Learning Rate: 0.000016
+Epoch [140/320], Average Loss: 36.7177, Best Loss: 36.6829, Learning Rate: 0.000014
+Epoch [150/320], Average Loss: 31.3209, Best Loss: 30.8325, Learning Rate: 0.000014
+Epoch [160/320], Average Loss: 26.0411, Best Loss: 24.1716, Learning Rate: 0.000013
+Epoch [170/320], Average Loss: 18.4759, Best Loss: 18.4759, Learning Rate: 0.000013
+Epoch [180/320], Average Loss: 20.4669, Best Loss: 17.7625, Learning Rate: 0.000012
+Epoch [190/320], Average Loss: 14.4929, Best Loss: 14.4929, Learning Rate: 0.000012
+Epoch [200/320], Average Loss: 12.1959, Best Loss: 12.1959, Learning Rate: 0.000010
+Epoch [210/320], Average Loss: 10.8678, Best Loss: 10.8678, Learning Rate: 0.000010
+Epoch [220/320], Average Loss: 11.9305, Best Loss: 10.3092, Learning Rate: 0.000009
+Epoch [230/320], Average Loss: 10.5830, Best Loss: 8.9744, Learning Rate: 0.000009
+Epoch [240/320], Average Loss: 8.8530, Best Loss: 7.6368, Learning Rate: 0.000008
+Epoch [250/320], Average Loss: 8.6830, Best Loss: 7.5954, Learning Rate: 0.000008
+Epoch [260/320], Average Loss: 7.3764, Best Loss: 7.1657, Learning Rate: 0.000008
+Epoch [270/320], Average Loss: 6.5374, Best Loss: 6.5374, Learning Rate: 0.000008
+Epoch [280/320], Average Loss: 6.5220, Best Loss: 6.3272, Learning Rate: 0.000007
+Epoch [290/320], Average Loss: 6.5930, Best Loss: 5.9137, Learning Rate: 0.000007
+Epoch [300/320], Average Loss: 6.1450, Best Loss: 5.7626, Learning Rate: 0.000006
+Epoch [310/320], Average Loss: 5.9468, Best Loss: 5.5072, Learning Rate: 0.000006
+Epoch [320/320], Average Loss: 5.3068, Best Loss: 5.1937, Learning Rate: 0.000006
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(107, 31) y_test shape=(107,) dop_test shape=(107,)
+y_test min=0.121563 max=770.000000 mean=139.725632
+dop_test min=8.000000 max=160.000000 mean=72.299065
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=241.7925 pred=42.0110 a=1.287452 b=8578.611328 c=0.258000 d=0.467029 e=-0.343728
+idx=1 dop=64.0000 true=0.1702 pred=68.6230 a=1.211497 b=10386.124023 c=0.224004 d=0.473686 e=-0.323087
+idx=2 dop=64.0000 true=296.0431 pred=18.0763 a=1.381814 b=5085.115234 c=0.344529 d=0.455643 e=-0.452249
+idx=3 dop=96.0000 true=351.6617 pred=49.6021 a=1.223627 b=12854.747070 c=0.185508 d=0.472299 e=-0.250176
+idx=4 dop=96.0000 true=0.2892 pred=90.7439 a=1.142163 b=16490.062500 c=0.133133 d=0.485551 e=-0.250321
+idx=5 dop=96.0000 true=278.7585 pred=33.0715 a=1.269413 b=10333.354492 c=0.225665 d=0.466927 e=-0.301569
+idx=6 dop=8.0000 true=532.1900 pred=24.9771 a=1.617919 b=701.893860 c=0.643357 d=0.421972 e=-0.844299
+idx=7 dop=8.0000 true=0.2101 pred=28.0471 a=1.597028 b=757.308044 c=0.632762 d=0.425967 e=-0.840793
+idx=8 dop=8.0000 true=743.7500 pred=43.9035 a=1.568241 b=1127.333984 c=0.583061 d=0.429745 e=-0.751939
+idx=9 dop=128.0000 true=294.4767 pred=72.7795 a=1.145077 b=18565.076172 c=0.117676 d=0.479649 e=-0.169642
+idx=10 dop=128.0000 true=0.1480 pred=92.2987 a=1.110374 b=19986.517578 c=0.102554 d=0.489228 e=-0.202589
+idx=11 dop=128.0000 true=282.7943 pred=58.0806 a=1.171413 b=16740.175781 c=0.133658 d=0.476930 e=-0.202235
+idx=12 dop=160.0000 true=171.3336 pred=77.8385 a=1.107135 b=21227.365234 c=0.085167 d=0.480985 e=-0.165744
+idx=13 dop=160.0000 true=0.1602 pred=95.6455 a=1.074929 b=22212.294922 c=0.084387 d=0.475706 e=-0.209975
+idx=14 dop=160.0000 true=136.1959 pred=75.7704 a=1.111647 b=21140.361328 c=0.084102 d=0.479833 e=-0.163771
+idx=15 dop=16.0000 true=383.1425 pred=15.6962 a=1.565826 b=1117.957275 c=0.575513 d=0.430696 e=-0.757415
+idx=16 dop=16.0000 true=0.2269 pred=32.2036 a=1.475707 b=1863.152954 c=0.510355 d=0.440378 e=-0.666905
+idx=17 dop=16.0000 true=453.1250 pred=25.3913 a=1.521321 b=1649.898560 c=0.527403 d=0.436857 e=-0.679339
+idx=18 dop=32.0000 true=242.1616 pred=13.2758 a=1.495261 b=2082.872559 c=0.479965 d=0.441281 e=-0.636293
+idx=19 dop=32.0000 true=0.2251 pred=45.8218 a=1.337418 b=4584.733398 c=0.373818 d=0.455252 e=-0.482902
+idx=20 dop=32.0000 true=320.1050 pred=17.7864 a=1.465711 b=2611.388672 c=0.456211 d=0.444578 e=-0.589661
+idx=21 dop=64.0000 true=289.1195 pred=37.0203 a=1.301263 b=7955.239746 c=0.269896 d=0.465662 e=-0.360500
+idx=22 dop=64.0000 true=0.1772 pred=71.3622 a=1.206770 b=10601.146484 c=0.220214 d=0.474168 e=-0.318661
+idx=23 dop=64.0000 true=372.8503 pred=17.9100 a=1.383077 b=5059.402344 c=0.344938 d=0.455462 e=-0.452817
+idx=24 dop=96.0000 true=341.3883 pred=55.0031 a=1.212040 b=13572.464844 c=0.175975 d=0.473508 e=-0.236114
+idx=25 dop=96.0000 true=0.1845 pred=90.8497 a=1.142021 b=16498.919922 c=0.133052 d=0.485566 e=-0.250226
+idx=26 dop=96.0000 true=314.6044 pred=33.4950 a=1.268069 b=10410.111328 c=0.224764 d=0.467066 e=-0.300387
+idx=27 dop=8.0000 true=605.5925 pred=25.5184 a=1.615885 b=714.557007 c=0.640975 d=0.422321 e=-0.841044
+idx=28 dop=8.0000 true=0.2536 pred=28.0979 a=1.596848 b=758.434387 c=0.632569 d=0.425996 e=-0.840525
+idx=29 dop=8.0000 true=760.0000 pred=41.3821 a=1.574257 b=1074.853516 c=0.589281 d=0.428770 e=-0.760681
+[DEBUG][exec] ranges: a[1.074929, 1.617919] b[701.893860, 22547.072266] c[0.074681, 0.643357] d[0.421972, 0.489309] e[-0.853089, -0.163771] true[0.121563, 770.000000] pred[13.275772, 95.645470]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/HashBuilderOperator/exec_HashBuilderOperator.onnx
+Native model prediction time: 0.000484 seconds
+ONNX model prediction time: 0.000305 seconds
+
+Training operator: LookupJoinOperator
+[Exec Hyperparams] operator=LookupJoinOperator, lr=3e-05, batch_size=32, epochs=260
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1393, 31) y_train shape=(1393,) dop_train shape=(1393,)
+y_train min=0.021000 max=10446.190430 mean=253.860886
+dop_train min=2.000000 max=160.000000 mean=67.893036
+Epoch [10/260], Average Loss: 369.9229, Best Loss: 298.4647, Learning Rate: 0.000030
+Epoch [20/260], Average Loss: 275.6602, Best Loss: 275.6602, Learning Rate: 0.000027
+Epoch [30/260], Average Loss: 296.7232, Best Loss: 265.8922, Learning Rate: 0.000027
+Epoch [40/260], Average Loss: 303.6134, Best Loss: 242.4724, Learning Rate: 0.000024
+Epoch [50/260], Average Loss: 219.6162, Best Loss: 219.3502, Learning Rate: 0.000024
+Epoch [60/260], Average Loss: 190.4591, Best Loss: 190.4591, Learning Rate: 0.000022
+Epoch [70/260], Average Loss: 200.7362, Best Loss: 179.2702, Learning Rate: 0.000022
+Epoch [80/260], Average Loss: 138.1624, Best Loss: 138.1624, Learning Rate: 0.000020
+Epoch [90/260], Average Loss: 119.0163, Best Loss: 110.5791, Learning Rate: 0.000020
+Epoch [100/260], Average Loss: 86.2435, Best Loss: 86.2435, Learning Rate: 0.000018
+Epoch [110/260], Average Loss: 67.0765, Best Loss: 67.0765, Learning Rate: 0.000018
+Epoch [120/260], Average Loss: 49.7270, Best Loss: 49.7270, Learning Rate: 0.000016
+Epoch [130/260], Average Loss: 40.8304, Best Loss: 39.2452, Learning Rate: 0.000016
+Epoch [140/260], Average Loss: 29.3304, Best Loss: 29.3304, Learning Rate: 0.000014
+Epoch [150/260], Average Loss: 22.5956, Best Loss: 22.2404, Learning Rate: 0.000014
+Epoch [160/260], Average Loss: 16.2670, Best Loss: 16.2670, Learning Rate: 0.000013
+Epoch [170/260], Average Loss: 11.5457, Best Loss: 11.5457, Learning Rate: 0.000013
+Epoch [180/260], Average Loss: 9.7663, Best Loss: 9.4708, Learning Rate: 0.000012
+Epoch [190/260], Average Loss: 7.3838, Best Loss: 7.3708, Learning Rate: 0.000012
+Epoch [200/260], Average Loss: 5.7669, Best Loss: 5.7669, Learning Rate: 0.000010
+Epoch [210/260], Average Loss: 4.5973, Best Loss: 4.3746, Learning Rate: 0.000010
+Epoch [220/260], Average Loss: 4.0042, Best Loss: 3.9805, Learning Rate: 0.000009
+Epoch [230/260], Average Loss: 3.1959, Best Loss: 3.0601, Learning Rate: 0.000009
+Epoch [240/260], Average Loss: 3.0854, Best Loss: 2.6228, Learning Rate: 0.000008
+Epoch [250/260], Average Loss: 2.6711, Best Loss: 2.3154, Learning Rate: 0.000008
+Epoch [260/260], Average Loss: 2.5534, Best Loss: 2.1213, Learning Rate: 0.000008
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(107, 31) y_test shape=(107,) dop_test shape=(107,)
+y_test min=0.054208 max=656.213745 mean=67.511513
+dop_test min=8.000000 max=160.000000 mean=72.299065
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=47.5158 pred=2.8724 a=1.576267 b=1952.875977 c=0.209982 d=0.387011 e=-0.955057
+idx=1 dop=64.0000 true=15.0958 pred=5.5550 a=1.518210 b=2995.557617 c=0.183790 d=0.394339 e=-0.816414
+idx=2 dop=64.0000 true=129.2881 pred=61.9944 a=1.268111 b=12034.726562 c=0.101928 d=0.455441 e=-0.342475
+idx=3 dop=96.0000 true=32.7528 pred=5.2541 a=1.469157 b=4015.171387 c=0.162979 d=0.414579 e=-0.741233
+idx=4 dop=96.0000 true=10.3998 pred=6.9052 a=1.442599 b=4743.289062 c=0.156148 d=0.414112 e=-0.681837
+idx=5 dop=96.0000 true=97.4971 pred=85.1091 a=1.170320 b=17678.970703 c=0.076161 d=0.475663 e=-0.196587
+idx=6 dop=8.0000 true=235.0712 pred=13.7467 a=1.724808 b=523.851562 c=0.282850 d=0.344601 e=-1.338570
+idx=7 dop=8.0000 true=75.2575 pred=41.0756 a=1.636360 b=1252.265991 c=0.221029 d=0.361887 e=-1.072400
+idx=8 dop=8.0000 true=606.2600 pred=230.7004 a=1.449694 b=4707.310059 c=0.161696 d=0.415419 e=-0.659938
+idx=9 dop=128.0000 true=21.8991 pred=9.2104 a=1.375530 b=6939.412109 c=0.122307 d=0.436569 e=-0.572610
+idx=10 dop=128.0000 true=6.9075 pred=11.6168 a=1.351576 b=7859.987305 c=0.118885 d=0.436650 e=-0.524647
+idx=11 dop=128.0000 true=64.2994 pred=103.8661 a=1.100323 b=21516.142578 c=0.064515 d=0.483345 e=-0.119563
+idx=12 dop=160.0000 true=16.1836 pred=15.6664 a=1.290656 b=10573.284180 c=0.098108 d=0.454596 e=-0.435611
+idx=13 dop=160.0000 true=5.1150 pred=16.4223 a=1.285030 b=10788.085938 c=0.098398 d=0.452350 e=-0.425242
+idx=14 dop=160.0000 true=51.0938 pred=108.0981 a=1.063844 b=23790.900391 c=0.055286 d=0.483281 e=-0.084300
+idx=15 dop=16.0000 true=158.4937 pred=4.9260 a=1.707614 b=624.679443 c=0.275331 d=0.349772 e=-1.289056
+idx=16 dop=16.0000 true=47.4819 pred=14.0808 a=1.628856 b=1329.198120 c=0.220978 d=0.364299 e=-1.055516
+idx=17 dop=16.0000 true=352.6737 pred=100.8870 a=1.428829 b=5307.085449 c=0.154476 d=0.420485 e=-0.620849
+idx=18 dop=32.0000 true=98.9097 pred=2.5607 a=1.667177 b=918.667786 c=0.255386 d=0.361760 e=-1.177247
+idx=19 dop=32.0000 true=30.4041 pred=6.5540 a=1.596858 b=1713.208496 c=0.211040 d=0.373382 e=-0.981270
+idx=20 dop=32.0000 true=208.2663 pred=60.0436 a=1.376136 b=7065.850586 c=0.135862 d=0.432334 e=-0.526035
+idx=21 dop=64.0000 true=45.0989 pred=2.9371 a=1.574476 b=1984.295288 c=0.207853 d=0.387775 e=-0.948816
+idx=22 dop=64.0000 true=14.1742 pred=5.4571 a=1.519841 b=2960.960693 c=0.184417 d=0.394725 e=-0.820192
+idx=23 dop=64.0000 true=177.6328 pred=62.8549 a=1.266471 b=12119.282227 c=0.101760 d=0.455624 e=-0.339601
+idx=24 dop=96.0000 true=32.4046 pred=5.2698 a=1.468898 b=4024.668945 c=0.162405 d=0.414757 e=-0.739967
+idx=25 dop=96.0000 true=9.8601 pred=6.9069 a=1.442591 b=4744.646973 c=0.155893 d=0.414381 e=-0.681748
+idx=26 dop=96.0000 true=144.5105 pred=90.0810 a=1.163196 b=18118.212891 c=0.074792 d=0.476440 e=-0.184730
+idx=27 dop=8.0000 true=241.6600 pred=13.5272 a=1.725890 b=517.189026 c=0.283881 d=0.344126 e=-1.342875
+idx=28 dop=8.0000 true=68.3550 pred=39.6555 a=1.639508 b=1217.723999 c=0.222709 d=0.361055 e=-1.081195
+idx=29 dop=8.0000 true=655.1937 pred=238.6056 a=1.445463 b=4825.670898 c=0.160212 d=0.416089 e=-0.652175
+[DEBUG][exec] ranges: a[1.061487, 1.809316] b[173.453003, 24037.730469] c[0.053801, 0.346117] d[0.312999, 0.483345] e[-1.673541, -0.080935] true[0.054208, 656.213745] pred[0.200336, 238.605560]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LookupJoinOperator/exec_LookupJoinOperator.onnx
+Native model prediction time: 0.000425 seconds
+ONNX model prediction time: 0.000274 seconds
+
+Training operator: LocalExchangeSinkOperator
+[Exec Hyperparams] operator=LocalExchangeSinkOperator, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(2184, 31) y_train shape=(2184,) dop_train shape=(2184,)
+y_train min=0.011000 max=1485.942139 mean=5.589438
+dop_train min=1.000000 max=160.000000 mean=59.175823
+Epoch [10/100], Average Loss: 548.4615, Best Loss: 548.4615, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 518.4770, Best Loss: 518.4770, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 457.6407, Best Loss: 457.6407, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 395.7675, Best Loss: 390.6063, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 306.9686, Best Loss: 306.9686, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 230.8430, Best Loss: 229.8826, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 164.6488, Best Loss: 164.6488, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 111.1763, Best Loss: 111.1763, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 76.2488, Best Loss: 76.2488, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 52.3379, Best Loss: 52.3379, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(183, 31) y_test shape=(183,) dop_test shape=(183,)
+y_test min=0.018500 max=10.101750 mean=1.107507
+dop_test min=1.000000 max=160.000000 mean=56.360657
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=5.4391 pred=83.3642 a=1.250469 b=14920.308594 c=0.190415 d=0.463978 e=-0.210516
+idx=1 dop=64.0000 true=0.0360 pred=51.6109 a=1.319726 b=12177.301758 c=0.235235 d=0.452650 e=-0.271816
+idx=2 dop=64.0000 true=2.2246 pred=66.3203 a=1.283726 b=13568.703125 c=0.209543 d=0.458698 e=-0.238950
+idx=3 dop=64.0000 true=0.5412 pred=77.6238 a=1.260889 b=14493.162109 c=0.193643 d=0.461648 e=-0.216099
+idx=4 dop=96.0000 true=5.7670 pred=171.9821 a=1.069869 b=22609.037109 c=0.094167 d=0.488989 e=-0.098505
+idx=5 dop=96.0000 true=0.0300 pred=124.8640 a=1.115219 b=20117.525391 c=0.126446 d=0.483797 e=-0.140290
+idx=6 dop=96.0000 true=1.6412 pred=145.7412 a=1.093113 b=21264.751953 c=0.114270 d=0.485382 e=-0.121469
+idx=7 dop=96.0000 true=0.6434 pred=156.7861 a=1.082536 b=21815.191406 c=0.107770 d=0.484936 e=-0.111655
+idx=8 dop=8.0000 true=10.1018 pred=169.4770 a=1.588288 b=4593.224609 c=0.436173 d=0.401143 e=-0.474653
+idx=9 dop=8.0000 true=0.0410 pred=113.6405 a=1.642823 b=3443.921631 c=0.483582 d=0.387640 e=-0.535412
+idx=10 dop=8.0000 true=3.6779 pred=134.2266 a=1.620845 b=3889.195068 c=0.461998 d=0.392980 e=-0.506832
+idx=11 dop=8.0000 true=1.6738 pred=155.1604 a=1.601029 b=4316.875000 c=0.442811 d=0.397406 e=-0.482255
+idx=12 dop=128.0000 true=5.7201 pred=173.9876 a=1.028652 b=25519.751953 c=0.053466 d=0.492016 e=-0.090458
+idx=13 dop=128.0000 true=0.0236 pred=151.5369 a=1.041986 b=23653.951172 c=0.084700 d=0.490349 e=-0.115120
+idx=14 dop=128.0000 true=1.2630 pred=161.8278 a=1.034203 b=24351.228516 c=0.071785 d=0.491042 e=-0.102848
+idx=15 dop=128.0000 true=0.6747 pred=166.4783 a=1.031148 b=24693.748047 c=0.066131 d=0.491074 e=-0.097863
+idx=16 dop=160.0000 true=0.7672 pred=170.8199 a=1.009225 b=28609.244141 c=0.027872 d=0.483891 e=-0.133849
+idx=17 dop=160.0000 true=0.0185 pred=156.5729 a=1.012607 b=26604.087891 c=0.059637 d=0.488354 e=-0.107767
+idx=18 dop=160.0000 true=0.4249 pred=159.7517 a=1.010307 b=26843.525391 c=0.054168 d=0.485123 e=-0.105289
+idx=19 dop=160.0000 true=0.2868 pred=164.2166 a=1.007759 b=27251.320312 c=0.049944 d=0.483741 e=-0.109200
+idx=20 dop=16.0000 true=7.5077 pred=75.7593 a=1.548932 b=5493.412598 c=0.402091 d=0.409640 e=-0.437626
+idx=21 dop=16.0000 true=0.0448 pred=49.3670 a=1.605897 b=4164.876465 c=0.448551 d=0.396342 e=-0.497744
+idx=22 dop=16.0000 true=3.2652 pred=59.4610 a=1.581685 b=4706.069824 c=0.426557 d=0.401878 e=-0.468725
+idx=23 dop=16.0000 true=1.2204 pred=69.2196 a=1.561443 b=5191.114746 c=0.408009 d=0.406114 e=-0.444715
+idx=24 dop=32.0000 true=5.8105 pred=49.9956 a=1.462472 b=7771.450684 c=0.333444 d=0.426916 e=-0.363319
+idx=25 dop=32.0000 true=0.0370 pred=31.8982 a=1.523499 b=6034.973633 c=0.378516 d=0.414123 e=-0.423163
+idx=26 dop=32.0000 true=2.7769 pred=39.6529 a=1.494075 b=6831.499512 c=0.355187 d=0.420104 e=-0.392388
+idx=27 dop=32.0000 true=0.8143 pred=46.2775 a=1.472866 b=7444.156250 c=0.337967 d=0.423961 e=-0.369915
+idx=28 dop=64.0000 true=8.0536 pred=88.6219 a=1.241363 b=15287.458008 c=0.185391 d=0.465458 e=-0.203504
+idx=29 dop=64.0000 true=0.0364 pred=51.5853 a=1.319795 b=12174.575195 c=0.235277 d=0.452644 e=-0.271887
+[DEBUG][exec] ranges: a[1.007731, 1.666511] b[3019.194824, 28609.244141] c[0.027872, 0.506686] d[0.381527, 0.492016] e[-0.560471, -0.090458] true[0.018500, 10.101750] pred[31.897705, 7160.083984]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/LocalExchangeSinkOperator/exec_LocalExchangeSinkOperator.onnx
+Native model prediction time: 0.000759 seconds
+ONNX model prediction time: 0.000358 seconds
+
+Training operator: Aggregation
+[Exec Hyperparams] operator=Aggregation, lr=3e-05, batch_size=32, epochs=300
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(700, 31) y_train shape=(700,) dop_train shape=(700,)
+y_train min=0.074625 max=23087.248047 mean=839.918274
+dop_train min=1.000000 max=160.000000 mean=58.508572
+Epoch [10/300], Average Loss: 49.5733, Best Loss: 32.6938, Learning Rate: 0.000030
+Epoch [20/300], Average Loss: 31.7489, Best Loss: 31.7489, Learning Rate: 0.000027
+Epoch [30/300], Average Loss: 31.5553, Best Loss: 30.3024, Learning Rate: 0.000027
+Epoch [40/300], Average Loss: 49.1907, Best Loss: 29.1329, Learning Rate: 0.000024
+Epoch [50/300], Average Loss: 29.4948, Best Loss: 27.6855, Learning Rate: 0.000024
+Epoch [60/300], Average Loss: 32.1214, Best Loss: 26.0480, Learning Rate: 0.000022
+Epoch [70/300], Average Loss: 35.8012, Best Loss: 25.7999, Learning Rate: 0.000022
+Epoch [80/300], Average Loss: 24.0501, Best Loss: 23.1854, Learning Rate: 0.000020
+Epoch [90/300], Average Loss: 24.9953, Best Loss: 21.6305, Learning Rate: 0.000020
+Epoch [100/300], Average Loss: 20.8223, Best Loss: 20.8223, Learning Rate: 0.000018
+Epoch [110/300], Average Loss: 21.3875, Best Loss: 20.6326, Learning Rate: 0.000018
+Epoch [120/300], Average Loss: 17.3779, Best Loss: 17.3779, Learning Rate: 0.000016
+Epoch [130/300], Average Loss: 19.0802, Best Loss: 16.8810, Learning Rate: 0.000016
+Epoch [140/300], Average Loss: 17.7199, Best Loss: 16.1036, Learning Rate: 0.000014
+Epoch [150/300], Average Loss: 16.8666, Best Loss: 16.1036, Learning Rate: 0.000014
+Epoch [160/300], Average Loss: 15.0467, Best Loss: 14.4958, Learning Rate: 0.000013
+Epoch [170/300], Average Loss: 12.8410, Best Loss: 12.8410, Learning Rate: 0.000013
+Epoch [180/300], Average Loss: 15.1620, Best Loss: 12.5949, Learning Rate: 0.000012
+Epoch [190/300], Average Loss: 12.0939, Best Loss: 11.7492, Learning Rate: 0.000012
+Epoch [200/300], Average Loss: 13.3436, Best Loss: 11.4348, Learning Rate: 0.000010
+Epoch [210/300], Average Loss: 13.5300, Best Loss: 10.8899, Learning Rate: 0.000010
+Epoch [220/300], Average Loss: 13.1833, Best Loss: 10.2625, Learning Rate: 0.000009
+Epoch [230/300], Average Loss: 14.9763, Best Loss: 9.5482, Learning Rate: 0.000009
+Epoch [240/300], Average Loss: 9.9790, Best Loss: 9.1773, Learning Rate: 0.000008
+Epoch [250/300], Average Loss: 9.7149, Best Loss: 9.0843, Learning Rate: 0.000008
+Epoch [260/300], Average Loss: 9.2831, Best Loss: 9.0843, Learning Rate: 0.000008
+Epoch [270/300], Average Loss: 8.9712, Best Loss: 8.4625, Learning Rate: 0.000008
+Epoch [280/300], Average Loss: 8.5489, Best Loss: 7.8511, Learning Rate: 0.000007
+Epoch [290/300], Average Loss: 8.9899, Best Loss: 7.7886, Learning Rate: 0.000007
+Epoch [300/300], Average Loss: 8.2194, Best Loss: 7.2903, Learning Rate: 0.000006
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(43, 31) y_test shape=(43,) dop_test shape=(43,)
+y_test min=0.220000 max=784.438721 mean=209.211853
+dop_test min=1.000000 max=160.000000 mean=54.023254
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=313.0763 pred=190.0331 a=1.135814 b=21364.722656 c=0.059341 d=0.484016 e=-0.174526
+idx=1 dop=96.0000 true=261.1890 pred=169.2322 a=1.074972 b=22821.511719 c=0.058192 d=0.486030 e=-0.136439
+idx=2 dop=8.0000 true=705.7550 pred=1338.9247 a=1.259652 b=18380.878906 c=0.061585 d=0.468221 e=-0.259691
+idx=3 dop=128.0000 true=265.2715 pred=153.8397 a=1.038656 b=23657.523438 c=0.072303 d=0.481770 e=-0.124919
+idx=4 dop=160.0000 true=142.8342 pred=139.9409 a=1.015614 b=24076.894531 c=0.094259 d=0.475281 e=-0.127135
+idx=5 dop=16.0000 true=536.1925 pred=601.2673 a=1.241916 b=18814.714844 c=0.061426 d=0.470736 e=-0.246974
+idx=6 dop=32.0000 true=402.9219 pred=302.1042 a=1.205668 b=19712.078125 c=0.060910 d=0.475665 e=-0.222498
+idx=7 dop=64.0000 true=299.9844 pred=193.7717 a=1.132104 b=21452.701172 c=0.058171 d=0.484512 e=-0.172494
+idx=8 dop=96.0000 true=307.9892 pred=169.7589 a=1.074419 b=22834.904297 c=0.058278 d=0.486074 e=-0.136016
+idx=9 dop=8.0000 true=758.2662 pred=1338.9500 a=1.259646 b=18380.998047 c=0.061586 d=0.468221 e=-0.259687
+idx=10 dop=128.0000 true=256.4417 pred=154.4416 a=1.037984 b=23672.273438 c=0.072852 d=0.481822 e=-0.124634
+idx=11 dop=160.0000 true=170.5541 pred=139.7274 a=1.015866 b=24071.257812 c=0.093981 d=0.475349 e=-0.127267
+idx=12 dop=16.0000 true=484.3737 pred=601.3670 a=1.241872 b=18815.546875 c=0.061440 d=0.470740 e=-0.246945
+idx=13 dop=32.0000 true=433.5266 pred=304.6424 a=1.203896 b=19755.894531 c=0.061003 d=0.475940 e=-0.221124
+idx=14 dop=64.0000 true=246.0278 pred=190.8381 a=1.135015 b=21384.294922 c=0.059065 d=0.484130 e=-0.174091
+idx=15 dop=96.0000 true=213.5346 pred=169.9087 a=1.074275 b=22839.949219 c=0.058284 d=0.486106 e=-0.135836
+idx=16 dop=8.0000 true=784.4387 pred=1338.8510 a=1.259668 b=18380.509766 c=0.061581 d=0.468219 e=-0.259701
+idx=17 dop=128.0000 true=256.4818 pred=154.0128 a=1.038459 b=23661.433594 c=0.072460 d=0.481776 e=-0.124830
+idx=18 dop=160.0000 true=148.3774 pred=139.7868 a=1.015796 b=24072.792969 c=0.094060 d=0.475330 e=-0.127234
+idx=19 dop=16.0000 true=463.1506 pred=601.3275 a=1.241889 b=18815.212891 c=0.061435 d=0.470739 e=-0.246956
+idx=20 dop=32.0000 true=350.7137 pred=302.7511 a=1.205228 b=19724.191406 c=0.060905 d=0.475739 e=-0.222138
+idx=21 dop=64.0000 true=78.2178 pred=135.0925 a=1.193077 b=19253.607422 c=0.074321 d=0.473558 e=-0.212105
+idx=22 dop=1.0000 true=0.8240 pred=16203.0967 a=1.311071 b=16203.298828 c=0.059054 d=0.457549 e=-0.260469
+idx=23 dop=96.0000 true=118.9201 pred=118.0713 a=1.133265 b=20728.707031 c=0.081299 d=0.476732 e=-0.170841
+idx=24 dop=1.0000 true=1.0430 pred=16489.3516 a=1.299335 b=16489.542969 c=0.056531 d=0.457735 e=-0.248319
+idx=25 dop=8.0000 true=129.5137 pred=1073.3928 a=1.315031 b=16534.828125 c=0.066680 d=0.457418 e=-0.294720
+idx=26 dop=1.0000 true=0.3880 pred=15816.8633 a=1.331320 b=15817.083984 c=0.063107 d=0.457058 e=-0.284109
+idx=27 dop=128.0000 true=131.8587 pred=108.9070 a=1.093173 b=21781.312500 c=0.077401 d=0.480206 e=-0.166387
+idx=28 dop=1.0000 true=0.9630 pred=16666.5879 a=1.292498 b=16666.775391 c=0.054396 d=0.457677 e=-0.241369
+idx=29 dop=160.0000 true=28.4661 pred=101.5034 a=1.065201 b=22454.996094 c=0.075105 d=0.482555 e=-0.171006
+[DEBUG][exec] ranges: a[1.015614, 1.331344] b[15816.666016, 24076.894531] c[0.052190, 0.094259] d[0.457055, 0.486106] e[-0.294720, -0.124634] true[0.220000, 784.438721] pred[101.503387, 16752.644531]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/Aggregation/exec_Aggregation.onnx
+Native model prediction time: 0.000457 seconds
+ONNX model prediction time: 0.000170 seconds
+
+Training operator: PartialAggregation
+[Exec Hyperparams] operator=PartialAggregation, lr=3e-05, batch_size=32, epochs=300
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(679, 31) y_train shape=(679,) dop_train shape=(679,)
+y_train min=0.197063 max=10005.964844 mean=550.345459
+dop_train min=8.000000 max=160.000000 mean=71.997055
+Epoch [10/300], Average Loss: 13.7352, Best Loss: 11.5228, Learning Rate: 0.000030
+Epoch [20/300], Average Loss: 11.5101, Best Loss: 11.1619, Learning Rate: 0.000027
+Epoch [30/300], Average Loss: 13.3244, Best Loss: 11.1619, Learning Rate: 0.000027
+Epoch [40/300], Average Loss: 10.4403, Best Loss: 10.4403, Learning Rate: 0.000024
+Epoch [50/300], Average Loss: 10.5456, Best Loss: 10.4403, Learning Rate: 0.000024
+Epoch [60/300], Average Loss: 11.6060, Best Loss: 10.1404, Learning Rate: 0.000022
+Epoch [70/300], Average Loss: 29.0427, Best Loss: 9.6669, Learning Rate: 0.000022
+Epoch [80/300], Average Loss: 10.5996, Best Loss: 9.6669, Learning Rate: 0.000020
+Epoch [90/300], Average Loss: 15.6448, Best Loss: 8.9638, Learning Rate: 0.000020
+Epoch [100/300], Average Loss: 8.8033, Best Loss: 8.8033, Learning Rate: 0.000018
+Epoch [110/300], Average Loss: 10.5272, Best Loss: 8.8033, Learning Rate: 0.000018
+Epoch [120/300], Average Loss: 11.4608, Best Loss: 8.4196, Learning Rate: 0.000016
+Epoch [130/300], Average Loss: 8.9224, Best Loss: 8.4186, Learning Rate: 0.000016
+Epoch [140/300], Average Loss: 8.5734, Best Loss: 7.8265, Learning Rate: 0.000014
+Epoch [150/300], Average Loss: 8.2100, Best Loss: 7.6291, Learning Rate: 0.000014
+Epoch [160/300], Average Loss: 7.2955, Best Loss: 7.2955, Learning Rate: 0.000013
+Epoch [170/300], Average Loss: 8.2321, Best Loss: 7.0657, Learning Rate: 0.000013
+Epoch [180/300], Average Loss: 8.3290, Best Loss: 6.8576, Learning Rate: 0.000012
+Epoch [190/300], Average Loss: 8.8463, Best Loss: 6.7555, Learning Rate: 0.000012
+Epoch [200/300], Average Loss: 11.0614, Best Loss: 6.5504, Learning Rate: 0.000010
+Epoch [210/300], Average Loss: 8.1379, Best Loss: 6.2697, Learning Rate: 0.000010
+Epoch [220/300], Average Loss: 6.5415, Best Loss: 6.2195, Learning Rate: 0.000009
+Epoch [230/300], Average Loss: 6.2451, Best Loss: 5.7576, Learning Rate: 0.000009
+Epoch [240/300], Average Loss: 6.1349, Best Loss: 5.7576, Learning Rate: 0.000008
+Epoch [250/300], Average Loss: 6.0343, Best Loss: 5.7576, Learning Rate: 0.000008
+Epoch [260/300], Average Loss: 5.5425, Best Loss: 5.5425, Learning Rate: 0.000008
+Epoch [270/300], Average Loss: 5.5785, Best Loss: 5.1103, Learning Rate: 0.000008
+Epoch [280/300], Average Loss: 6.7820, Best Loss: 5.1103, Learning Rate: 0.000007
+Epoch [290/300], Average Loss: 5.0516, Best Loss: 5.0516, Learning Rate: 0.000007
+Epoch [300/300], Average Loss: 5.6791, Best Loss: 5.0516, Learning Rate: 0.000006
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(43, 31) y_test shape=(43,) dop_test shape=(43,)
+y_test min=0.644125 max=1030.834961 mean=204.249115
+dop_test min=8.000000 max=160.000000 mean=72.372093
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=233.0216 pred=138.3703 a=1.193874 b=19841.226562 c=0.021615 d=0.469265 e=-0.207890
+idx=1 dop=96.0000 true=148.0811 pred=114.8206 a=1.137930 b=20647.488281 c=0.049468 d=0.468316 e=-0.197960
+idx=2 dop=8.0000 true=1006.8975 pred=1233.8262 a=1.296613 b=18295.441406 c=-0.046962 d=0.461670 e=-0.249436
+idx=3 dop=128.0000 true=113.4884 pred=106.3076 a=1.092277 b=21200.830078 c=0.069293 d=0.467142 e=-0.212098
+idx=4 dop=160.0000 true=69.4289 pred=102.3877 a=1.056428 b=21638.986328 c=0.098929 d=0.463862 e=-0.218887
+idx=5 dop=16.0000 true=640.5294 pred=533.0112 a=1.281525 b=18626.802734 c=-0.035617 d=0.464315 e=-0.230248
+idx=6 dop=32.0000 true=442.2260 pred=247.3438 a=1.253188 b=19057.544922 c=-0.016821 d=0.466333 e=-0.217204
+idx=7 dop=64.0000 true=200.6958 pred=135.4982 a=1.197045 b=19690.150391 c=0.020863 d=0.467983 e=-0.220123
+idx=8 dop=96.0000 true=159.6391 pred=113.9113 a=1.139081 b=20592.488281 c=0.049379 d=0.467935 e=-0.201813
+idx=9 dop=8.0000 true=1000.2200 pred=1238.7389 a=1.296124 b=18349.490234 c=-0.046428 d=0.462350 e=-0.243470
+idx=10 dop=128.0000 true=105.8282 pred=106.1717 a=1.092467 b=21193.003906 c=0.069454 d=0.467037 e=-0.212742
+idx=11 dop=160.0000 true=70.3724 pred=102.4551 a=1.056345 b=21644.210938 c=0.098927 d=0.463890 e=-0.218661
+idx=12 dop=16.0000 true=590.4838 pred=533.5484 a=1.281377 b=18637.904297 c=-0.035426 d=0.464467 e=-0.229311
+idx=13 dop=32.0000 true=441.6059 pred=247.5069 a=1.253006 b=19058.173828 c=-0.016655 d=0.466207 e=-0.219176
+idx=14 dop=64.0000 true=173.7897 pred=135.8228 a=1.196588 b=19699.236328 c=0.021096 d=0.468108 e=-0.217818
+idx=15 dop=96.0000 true=115.5683 pred=112.7600 a=1.140543 b=20522.023438 c=0.049001 d=0.467482 e=-0.206360
+idx=16 dop=8.0000 true=1030.8350 pred=1239.1370 a=1.296072 b=18353.386719 c=-0.046353 d=0.462404 e=-0.243123
+idx=17 dop=128.0000 true=119.6561 pred=107.7500 a=1.090361 b=21289.519531 c=0.069363 d=0.467829 e=-0.207981
+idx=18 dop=160.0000 true=75.8619 pred=105.5404 a=1.052623 b=21881.160156 c=0.098157 d=0.465730 e=-0.206687
+idx=19 dop=16.0000 true=581.7806 pred=526.7930 a=1.282978 b=18484.671875 c=-0.037196 d=0.462522 e=-0.245487
+idx=20 dop=32.0000 true=389.4109 pred=245.8679 a=1.253811 b=18985.763672 c=-0.017488 d=0.465402 e=-0.225254
+idx=21 dop=64.0000 true=93.8603 pred=135.6824 a=1.203692 b=20279.507812 c=0.003700 d=0.471989 e=-0.167049
+idx=22 dop=64.0000 true=1.4703 pred=101.2686 a=1.263258 b=19428.355469 c=-0.023018 d=0.473811 e=-0.136070
+idx=23 dop=96.0000 true=119.8308 pred=112.6948 a=1.146885 b=21129.591797 c=0.031445 d=0.471633 e=-0.154124
+idx=24 dop=96.0000 true=1.0669 pred=86.5892 a=1.198490 b=20569.134766 c=0.013873 d=0.476893 e=-0.126184
+idx=25 dop=8.0000 true=70.6963 pred=1237.9109 a=1.304905 b=18674.925781 c=-0.055163 d=0.467593 e=-0.204595
+idx=26 dop=8.0000 true=8.5850 pred=1031.9314 a=1.367022 b=17715.828125 c=-0.087257 d=0.462006 e=-0.168008
+idx=27 dop=128.0000 true=114.0161 pred=109.9763 a=1.093559 b=22078.103516 c=0.058979 d=0.470901 e=-0.150597
+idx=28 dop=128.0000 true=0.7677 pred=89.3895 a=1.132323 b=21649.394531 c=0.050255 d=0.478935 e=-0.126543
+idx=29 dop=160.0000 true=57.4879 pred=107.6989 a=1.055268 b=22662.949219 c=0.079894 d=0.468347 e=-0.160323
+[DEBUG][exec] ranges: a[1.052623, 1.367022] b[17715.828125, 22662.949219] c[-0.087257, 0.098929] d[0.461670, 0.479242] e[-0.249436, -0.126184] true[0.644125, 1030.834961] pred[86.589188, 1239.136963]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/PartialAggregation/exec_PartialAggregation.onnx
+Native model prediction time: 0.000561 seconds
+ONNX model prediction time: 0.000167 seconds
+
+Training operator: NestedLoopJoinBuild
+[Exec Hyperparams] operator=NestedLoopJoinBuild, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(42, 31) y_train shape=(42,) dop_train shape=(42,)
+y_train min=0.126500 max=2.254000 mean=0.777179
+dop_train min=4.000000 max=4.000000 mean=4.000000
+Epoch [10/100], Average Loss: 8.0652, Best Loss: 8.0652, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 8.0614, Best Loss: 8.0614, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 8.0579, Best Loss: 8.0579, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 8.0544, Best Loss: 8.0544, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 8.0512, Best Loss: 8.0512, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 8.0480, Best Loss: 8.0480, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 8.0451, Best Loss: 8.0451, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 8.0420, Best Loss: 8.0420, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 8.0393, Best Loss: 8.0393, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 8.0365, Best Loss: 8.0365, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(11, 31) y_test shape=(11,) dop_test shape=(11,)
+y_test min=0.190750 max=1.466000 mean=0.767591
+dop_test min=4.000000 max=4.000000 mean=4.000000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=4.0000 true=0.7067 pred=5288.0244 a=1.065057 b=23148.335938 c=0.060432 d=0.481546 e=-0.092687
+idx=1 dop=4.0000 true=0.9245 pred=5226.3413 a=1.068959 b=23002.466797 c=0.053582 d=0.480200 e=-0.097328
+idx=2 dop=4.0000 true=0.2115 pred=5301.8706 a=1.062941 b=23140.896484 c=0.072806 d=0.484994 e=-0.103413
+idx=3 dop=4.0000 true=0.9550 pred=5156.6567 a=1.073602 b=22842.406250 c=0.047544 d=0.479080 e=-0.105188
+idx=4 dop=4.0000 true=1.1437 pred=5089.7354 a=1.078188 b=22689.876953 c=0.040196 d=0.478464 e=-0.113662
+idx=5 dop=4.0000 true=0.1968 pred=5302.0547 a=1.063059 b=23145.486328 c=0.071319 d=0.484444 e=-0.101007
+idx=6 dop=4.0000 true=0.4288 pred=5301.5610 a=1.063513 b=23157.916016 c=0.067498 d=0.483378 e=-0.097647
+idx=7 dop=4.0000 true=1.4660 pred=5288.0244 a=1.065057 b=23148.335938 c=0.060432 d=0.481546 e=-0.092687
+idx=8 dop=4.0000 true=0.9028 pred=5226.3413 a=1.068959 b=23002.466797 c=0.053582 d=0.480200 e=-0.097328
+idx=9 dop=4.0000 true=0.1908 pred=5301.8706 a=1.062941 b=23140.896484 c=0.072806 d=0.484994 e=-0.103413
+idx=10 dop=4.0000 true=1.3170 pred=5156.6567 a=1.073602 b=22842.406250 c=0.047544 d=0.479080 e=-0.105188
+[DEBUG][exec] ranges: a[1.062941, 1.078188] b[22689.876953, 23157.916016] c[0.040196, 0.072806] d[0.478464, 0.484994] e[-0.113662, -0.092687] true[0.190750, 1.466000] pred[5089.735352, 5302.054688]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/NestedLoopJoinBuild/exec_NestedLoopJoinBuild.onnx
+Native model prediction time: 0.000476 seconds
+ONNX model prediction time: 0.000221 seconds
+
+Training operator: NestedLoopJoinProbe
+[Exec Hyperparams] operator=NestedLoopJoinProbe, lr=3e-05, batch_size=32, epochs=100
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(42, 31) y_train shape=(42,) dop_train shape=(42,)
+y_train min=0.074938 max=6.576250 mean=1.152151
+dop_train min=8.000000 max=160.000000 mean=72.000000
+Epoch [10/100], Average Loss: 97.3349, Best Loss: 97.3349, Learning Rate: 0.000030
+Epoch [20/100], Average Loss: 96.1165, Best Loss: 96.1165, Learning Rate: 0.000027
+Epoch [30/100], Average Loss: 95.0393, Best Loss: 95.0393, Learning Rate: 0.000027
+Epoch [40/100], Average Loss: 93.9949, Best Loss: 93.9949, Learning Rate: 0.000024
+Epoch [50/100], Average Loss: 93.0434, Best Loss: 93.0434, Learning Rate: 0.000024
+Epoch [60/100], Average Loss: 92.1441, Best Loss: 92.1441, Learning Rate: 0.000022
+Epoch [70/100], Average Loss: 91.3425, Best Loss: 91.3425, Learning Rate: 0.000022
+Epoch [80/100], Average Loss: 90.5883, Best Loss: 90.5883, Learning Rate: 0.000020
+Epoch [90/100], Average Loss: 89.9131, Best Loss: 89.9131, Learning Rate: 0.000020
+Epoch [100/100], Average Loss: 89.2400, Best Loss: 89.2400, Learning Rate: 0.000018
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(11, 31) y_test shape=(11,) dop_test shape=(11,)
+y_test min=0.090875 max=0.660000 mean=0.290132
+dop_test min=8.000000 max=160.000000 mean=72.727272
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=0.2587 pred=274.1664 a=1.066488 b=23114.871094 c=0.052213 d=0.474370 e=-0.128020
+idx=1 dop=96.0000 true=0.1624 pred=191.6649 a=1.049702 b=23043.152344 c=0.060594 d=0.471352 e=-0.170475
+idx=2 dop=8.0000 true=0.5425 pred=2410.7012 a=1.080813 b=22814.632812 c=0.049008 d=0.472112 e=-0.124017
+idx=3 dop=128.0000 true=0.1737 pred=129.9052 a=1.064619 b=22690.613281 c=0.061352 d=0.468211 e=-0.249505
+idx=4 dop=160.0000 true=0.0909 pred=108.1012 a=1.058813 b=23190.500000 c=0.070404 d=0.464643 e=-0.180483
+idx=5 dop=16.0000 true=0.3680 pred=1146.4711 a=1.079500 b=22866.001953 c=0.047276 d=0.472801 e=-0.120657
+idx=6 dop=32.0000 true=0.3619 pred=568.9203 a=1.067953 b=23034.632812 c=0.047470 d=0.474942 e=-0.116676
+idx=7 dop=64.0000 true=0.1535 pred=275.1971 a=1.066314 b=23188.515625 c=0.046913 d=0.472284 e=-0.127700
+idx=8 dop=96.0000 true=0.2739 pred=182.4730 a=1.059641 b=22956.974609 c=0.061038 d=0.472631 e=-0.200019
+idx=9 dop=8.0000 true=0.6600 pred=2410.7300 a=1.080803 b=22814.435547 c=0.049078 d=0.472092 e=-0.124165
+idx=10 dop=128.0000 true=0.1460 pred=134.0041 a=1.058768 b=22740.111328 c=0.065049 d=0.468688 e=-0.209534
+[DEBUG][exec] ranges: a[1.049702, 1.080813] b[22690.613281, 23190.500000] c[0.046913, 0.070404] d[0.464643, 0.474942] e[-0.249505, -0.116676] true[0.090875, 0.660000] pred[108.101242, 2410.729980]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/NestedLoopJoinProbe/exec_NestedLoopJoinProbe.onnx
+Native model prediction time: 0.000452 seconds
+ONNX model prediction time: 0.000181 seconds
+All operator exec results have been saved to /home/candle/Project/serverless_tools/output/evaluations/dop_aware/all_operators_performance_exec.csv
+DOP-aware model training 完成，耗时: 868.5039 秒
+✅ Training completed
+
+============================================================
+🎉 All tasks completed!
+============================================================

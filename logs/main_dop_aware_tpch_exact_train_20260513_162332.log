@@ -1,0 +1,126 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260513_162332.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (176 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilterProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: AssignUniqueId
+信息: 算子 'CrossJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: EnforceSingleRow
+
+Training operator: FilterProject
+信息: 算子 'InnerJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LeftJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'LocalExchange' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: LocalMerge
+信息: 算子 'PartialSort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Project' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'RemoteSource' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanFilter' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'ScanProject' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'SemiJoin' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+[Exec Hyperparams] operator=TableScan, lr=1e-05, batch_size=16, epochs=300
+[DEBUG][train_exec] ===== data ranges =====
+X_train shape=(1918, 14) y_train shape=(1918,) dop_train shape=(1918,)
+y_train min=0.017525 max=2972.502197 mean=228.230499
+dop_train min=2.000000 max=160.000000 mean=60.741398
+Epoch [10/300], Average Loss: 2148.9345, Best Loss: 2148.9345, Learning Rate: 0.000010
+Epoch [20/300], Average Loss: 2015.5832, Best Loss: 2015.5832, Learning Rate: 0.000009
+Epoch [30/300], Average Loss: 2058.4915, Best Loss: 1907.4794, Learning Rate: 0.000009
+Epoch [40/300], Average Loss: 1879.7120, Best Loss: 1711.4333, Learning Rate: 0.000008
+Epoch [50/300], Average Loss: 1517.7470, Best Loss: 1517.7470, Learning Rate: 0.000008
+Epoch [60/300], Average Loss: 1695.2985, Best Loss: 1326.8254, Learning Rate: 0.000007
+Epoch [70/300], Average Loss: 1289.4970, Best Loss: 1174.0015, Learning Rate: 0.000007
+Epoch [80/300], Average Loss: 965.2713, Best Loss: 965.2713, Learning Rate: 0.000007
+Epoch [90/300], Average Loss: 903.5554, Best Loss: 866.8680, Learning Rate: 0.000007
+Epoch [100/300], Average Loss: 710.1284, Best Loss: 710.1284, Learning Rate: 0.000006
+Epoch [110/300], Average Loss: 613.2385, Best Loss: 612.4993, Learning Rate: 0.000006
+Epoch [120/300], Average Loss: 532.3378, Best Loss: 488.1860, Learning Rate: 0.000005
+Epoch [130/300], Average Loss: 377.1289, Best Loss: 377.1289, Learning Rate: 0.000005
+Epoch [140/300], Average Loss: 304.3410, Best Loss: 304.3410, Learning Rate: 0.000005
+Epoch [150/300], Average Loss: 253.8348, Best Loss: 253.8348, Learning Rate: 0.000005
+Epoch [160/300], Average Loss: 214.6270, Best Loss: 207.0065, Learning Rate: 0.000004
+Epoch [170/300], Average Loss: 162.8877, Best Loss: 162.8877, Learning Rate: 0.000004
+Epoch [180/300], Average Loss: 143.7159, Best Loss: 143.7159, Learning Rate: 0.000004
+Epoch [190/300], Average Loss: 113.6795, Best Loss: 113.6795, Learning Rate: 0.000004
+Epoch [200/300], Average Loss: 99.3741, Best Loss: 98.7615, Learning Rate: 0.000003
+Epoch [210/300], Average Loss: 77.8961, Best Loss: 77.8961, Learning Rate: 0.000003
+Epoch [220/300], Average Loss: 62.7232, Best Loss: 62.7232, Learning Rate: 0.000003
+Epoch [230/300], Average Loss: 59.1207, Best Loss: 53.6066, Learning Rate: 0.000003
+Epoch [240/300], Average Loss: 46.6171, Best Loss: 46.5492, Learning Rate: 0.000003
+Epoch [250/300], Average Loss: 87.3667, Best Loss: 33.6906, Learning Rate: 0.000003
+Epoch [260/300], Average Loss: 660.1906, Best Loss: 33.6906, Learning Rate: 0.000003
+Epoch [270/300], Average Loss: 32.4582, Best Loss: 24.2297, Learning Rate: 0.000003
+Epoch [280/300], Average Loss: 27.3280, Best Loss: 24.2297, Learning Rate: 0.000002
+Epoch [290/300], Average Loss: 27.8195, Best Loss: 21.6966, Learning Rate: 0.000002
+Epoch [300/300], Average Loss: 19.9798, Best Loss: 18.4449, Learning Rate: 0.000002
+[DEBUG][eval_exec] ===== data ranges =====
+X_test shape=(16, 14) y_test shape=(16,) dop_test shape=(16,)
+y_test min=0.220188 max=1042.502197 mean=211.981155
+dop_test min=2.000000 max=128.000000 mean=60.125000
+[DEBUG][exec] ===== sample params/predictions =====
+idx=0 dop=64.0000 true=73.7553 pred=10.4667 a=1.492326 b=6791.743652 c=-0.348397 d=0.521935 e=-0.175220
+idx=1 dop=64.0000 true=375.0023 pred=320.5188 a=1.091625 b=30181.111328 c=-0.183566 d=0.511138 e=-0.096808
+idx=2 dop=64.0000 true=134.5338 pred=14.9337 a=1.466822 b=8015.286621 c=-0.331745 d=0.519762 e=-0.156141
+idx=3 dop=16.0000 true=0.2247 pred=1.1240 a=1.790596 b=559.420532 c=-0.576647 d=0.538627 e=-0.213887
+idx=4 dop=96.0000 true=68.5470 pred=14.7815 a=1.395330 b=10534.230469 c=-0.291282 d=0.517399 e=-0.187104
+idx=5 dop=96.0000 true=398.4398 pred=233.3847 a=1.070585 b=31196.794922 c=-0.187133 d=0.516388 e=-0.101273
+idx=6 dop=96.0000 true=127.6066 pred=25.0938 a=1.346779 b=13100.108398 c=-0.266632 d=0.512836 e=-0.164214
+idx=7 dop=24.0000 true=0.2298 pred=-0.4026 a=1.763681 b=757.780884 c=-0.544876 d=0.533846 e=-0.218109
+idx=8 dop=8.0000 true=386.2527 pred=75.8295 a=1.655276 b=2418.360107 c=-0.454755 d=0.535003 e=-0.172324
+idx=9 dop=8.0000 true=1042.5022 pred=2725.4067 a=1.122832 b=28154.714844 c=-0.186576 d=0.505149 e=-0.101750
+idx=10 dop=8.0000 true=268.7523 pred=97.8411 a=1.637475 b=2991.690674 c=-0.447927 d=0.532725 e=-0.143992
+idx=11 dop=2.0000 true=0.3105 pred=91.9992 a=1.831215 b=331.366730 c=-0.630015 d=0.546873 e=-0.203710
+idx=12 dop=128.0000 true=56.0197 pred=21.4492 a=1.313738 b=14484.167969 c=-0.250667 d=0.515145 e=-0.191431
+idx=13 dop=128.0000 true=347.4244 pred=198.3335 a=1.047378 b=32365.935547 c=-0.195271 d=0.523824 e=-0.115828
+idx=14 dop=128.0000 true=111.8774 pred=36.9947 a=1.257881 b=17846.402344 c=-0.229605 d=0.510379 e=-0.169685
+idx=15 dop=32.0000 true=0.2202 pred=-1.0555 a=1.737996 b=988.227844 c=-0.514224 d=0.530171 e=-0.218826
+[DEBUG][exec] ranges: a[1.047378, 1.831215] b[331.366730, 32365.935547] c[-0.630015, -0.183566] d[0.505149, 0.546873] e[-0.218826, -0.096808] true[0.220188, 1042.502197] pred[-1.055523, 2725.406738]
+ONNX model saved to: /home/candle/Project/serverless_tools/output/tpch/models/exact_train/operator_dop_aware/TableScan/exec_TableScan.onnx
+Native model prediction time: 0.000432 seconds
+ONNX model prediction time: 0.000378 seconds
+All operator exec results have been saved to /home/candle/Project/serverless_tools/output/evaluations/dop_aware/all_operators_performance_exec.csv
+DOP-aware model training 完成，耗时: 74.1539 秒
+✅ Training completed
+
+============================================================
+🎉 All tasks completed!
+============================================================

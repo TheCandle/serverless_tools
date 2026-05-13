@@ -1,0 +1,70 @@
+[日志] 已启用文件日志: logs/main_dop_aware_tpch_exact_train_20260512_154800.log
+============================================================
+Serverless Predictor Main Control Script
+============================================================
+Test dataset: tpch
+Model dataset: tpch
+Training mode: exact_train
+Use estimates: False
+============================================================
+
+🚀 Starting training: dop_aware
+Starting DOP-aware operator model training...
+成功加载TPCH训练集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_500/plan_info.csv (23093 行)
+成功加载TPCH测试集计划数据: /home/candle/Project/serverless_tools/data_kunpeng/tpch_output_22/plan_info.csv (30 行)
+开始 DOP-aware model training...
+信息: 算子 'CStore Index Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Nest Loop' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Merge Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector WindowAgg' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Append' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Index Only Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'CStore Scan' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Materialize' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sort' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Aggregate' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Sonic Hash Join' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL GATHER' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming LOCAL REDISTRIBUTE' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Streaming BROADCAST' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector SetOp' 在提供的训练数据中不存在，将完全跳过此算子。
+信息: 算子 'Vector Append' 在提供的训练数据中不存在，将完全跳过此算子。
+
+Training operator: TableScan
+Backend TkAgg is interactive backend. Turning interactive mode on.
+[Exec Hyperparams] operator=TableScan, lr=0.0002, batch_size=16, epochs=300
+Epoch [10/300], Average Loss: 173.8101, Best Loss: 166.9662, Learning Rate: 0.000200
+Epoch [20/300], Average Loss: 173.4888, Best Loss: 158.5113, Learning Rate: 0.000180
+Epoch [30/300], Average Loss: 176.2658, Best Loss: 153.0878, Learning Rate: 0.000180
+Epoch [40/300], Average Loss: 196.3234, Best Loss: 153.0878, Learning Rate: 0.000162
+Epoch [50/300], Average Loss: 155.0557, Best Loss: 153.0878, Learning Rate: 0.000162
+Epoch [60/300], Average Loss: 168.3272, Best Loss: 140.8190, Learning Rate: 0.000146
+Epoch [70/300], Average Loss: 170.9081, Best Loss: 137.2483, Learning Rate: 0.000146
+Epoch [80/300], Average Loss: 161.5444, Best Loss: 137.2483, Learning Rate: 0.000131
+Epoch [90/300], Average Loss: 141.3098, Best Loss: 137.2483, Learning Rate: 0.000131
+Epoch [100/300], Average Loss: 152.6067, Best Loss: 137.2483, Learning Rate: 0.000118
+Epoch [110/300], Average Loss: 151.5540, Best Loss: 136.5662, Learning Rate: 0.000118
+Epoch [120/300], Average Loss: 150.8550, Best Loss: 136.5662, Learning Rate: 0.000106
+Epoch [130/300], Average Loss: 159.9133, Best Loss: 135.2295, Learning Rate: 0.000106
+Epoch [140/300], Average Loss: 189.6554, Best Loss: 135.2295, Learning Rate: 0.000096
+Epoch [150/300], Average Loss: 151.5280, Best Loss: 135.2295, Learning Rate: 0.000096
+Epoch [160/300], Average Loss: 155.4046, Best Loss: 135.2295, Learning Rate: 0.000086
+Epoch [170/300], Average Loss: 173.4973, Best Loss: 135.2295, Learning Rate: 0.000086
+Epoch [180/300], Average Loss: 146.2847, Best Loss: 135.2295, Learning Rate: 0.000077
+Epoch [190/300], Average Loss: 162.4312, Best Loss: 134.2910, Learning Rate: 0.000077
+Epoch [200/300], Average Loss: 147.8972, Best Loss: 134.2910, Learning Rate: 0.000070
+Epoch [210/300], Average Loss: 144.1874, Best Loss: 134.2910, Learning Rate: 0.000070
+Epoch [220/300], Average Loss: 158.0459, Best Loss: 134.2910, Learning Rate: 0.000063
+Epoch [230/300], Average Loss: 148.3930, Best Loss: 134.2910, Learning Rate: 0.000063
+Epoch [240/300], Average Loss: 142.9145, Best Loss: 134.2910, Learning Rate: 0.000056
+Epoch [250/300], Average Loss: 152.3791, Best Loss: 134.2910, Learning Rate: 0.000056
+Epoch [260/300], Average Loss: 161.5646, Best Loss: 134.2910, Learning Rate: 0.000051
+Epoch [270/300], Average Loss: 160.9837, Best Loss: 134.2910, Learning Rate: 0.000051
+Epoch [280/300], Average Loss: 144.4859, Best Loss: 134.2910, Learning Rate: 0.000046
+Epoch [290/300], Average Loss: 150.2103, Best Loss: 134.2910, Learning Rate: 0.000046
