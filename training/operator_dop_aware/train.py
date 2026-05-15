@@ -204,15 +204,31 @@ def train_one_operator_exec(
     # ==========================================================
     # Train exec model with operator-specific hyperparameters
     hard_exec_ops = {
-        'TableScan',
-        'LookupJoinOperator',
+        # 'TableScan',
+        # 'LookupJoinOperator',
+        # 'OrderBy',
+        # 'LocalExchangeSourceOperator',
+        'AssignUniqueId',
+        'EnforceSingleRow',
+        'LocalMerge',
+        'Merge',
+        'MergeOperator',
+        'ExplainAnalyzeOperator',
+        'TaskOutputOperator',
         'OrderBy',
-        'LocalExchangeSourceOperator',
-    }
-    very_hard_exec_ops = {
+        'CallbackSink',
         'Aggregation',
         'PartialAggregation',
+        'NestedLoopJoinBuild',
+        'NestedLoopJoinProbe',
         'HashBuilderOperator',
+        'LookupJoinOperator',
+        'LocalExchangeSinkOperator',
+    }
+    very_hard_exec_ops = {
+        # 'Aggregation',
+        # 'PartialAggregation',
+        # 'HashBuilderOperator',
     }
 
     if operator in very_hard_exec_ops:
@@ -221,10 +237,11 @@ def train_one_operator_exec(
         # exec_lr = 1e-4
         # exec_batch_size = 16
     elif operator in hard_exec_ops:
-        exec_lr = 3e-5
+        exec_lr = 1e-3
         exec_batch_size = 32
     else:
-        exec_lr = 3e-5
+        # exec_lr = 3e-5
+        exec_lr = 1e-3
         exec_batch_size = 32
         # exec_lr = 5e-4
         # exec_batch_size = 32

@@ -542,8 +542,10 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
             operator_level_rows.append({
                 'query_id': query_id,
                 'query_dop': query_dop,
+                'plan_id': getattr(n, 'plan_id', None),
                 'operator_type': getattr(n, 'operator_type', None),
                 'dop': getattr(n, 'dop', query_dop),
+                'true_execution_time': getattr(n, 'execution_time', None),
                 'pred_execution_time': pred_t,
             })
 

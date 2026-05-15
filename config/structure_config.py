@@ -721,22 +721,22 @@ dop_operator_features = {
 # Presto native operators that may not exist in openGauss datasets.
 # Keep them as independent operators instead of forcing semantic remapping.
 PRESTO_NATIVE_OPERATORS = [
-    'MergeOperator',
-    'ExplainAnalyzeOperator',
-    'TaskOutputOperator',
-    'ExchangeOperator',
-    'OrderBy',
-    'LocalMerge',
-    'CallbackSink',
-    'PartitionedOutput',
-    'LocalExchangeSourceOperator',
-    'HashBuilderOperator',
-    'LookupJoinOperator',
-    'LocalExchangeSinkOperator',
-    'Aggregation',
-    'PartialAggregation',
-    'NestedLoopJoinBuild',
-    'NestedLoopJoinProbe',
+    # 'MergeOperator',
+    # 'ExplainAnalyzeOperator',
+    # 'TaskOutputOperator',
+    # 'ExchangeOperator',
+    # 'OrderBy',
+    # 'LocalMerge',
+    # 'CallbackSink',
+    # 'PartitionedOutput',
+    # 'LocalExchangeSourceOperator',
+    # 'HashBuilderOperator',
+    # 'LookupJoinOperator',
+    # 'LocalExchangeSinkOperator',
+    # 'Aggregation',
+    # 'PartialAggregation',
+    # 'NestedLoopJoinBuild',
+    # 'NestedLoopJoinProbe',
 ]
 
 def _extend_unique(target_list, values):
@@ -907,7 +907,7 @@ dop_train_epochs = {
         'mem': 50
      },
     'AssignUniqueId': {
-        'exec': 220,
+        'exec': 400,
         'mem': 50
     },
     'CrossJoin': {
@@ -915,7 +915,7 @@ dop_train_epochs = {
         'mem': 50
     },
     'EnforceSingleRow': {
-        'exec': 100,
+        'exec': 300,
         'mem': 50
     },
     'FilterProject': {
@@ -965,6 +965,46 @@ dop_train_epochs = {
     'TableScan': {
         'exec': 400,
         'mem': 50
+    },
+    'MergeOperator': {
+        'exec': 200,
+        'mem': 50
+    },
+    'ExplainAnalyzeOperator': {
+        'exec': 200,
+        'mem': 50
+    },
+    'TaskOutputOperator': {
+        'exec': 200,
+        'mem': 50
+    },
+    'ExchangeOperator': {
+        'exec': 300,
+        'mem': 50
+    },
+    'OrderBy': {
+        'exec': 220,
+        'mem': 50
+    },
+    'PartitionedOutput': {
+        'exec': 260,
+        'mem': 50
+    },
+    'HashBuilderOperator': {
+        'exec': 320,
+        'mem': 50
+    },
+    'LocalExchangeSinkOperator': {
+        'exec': 200,
+        'mem': 50
+    },
+    'NestedLoopJoinBuild': {
+        'exec': 200,
+        'mem': 50
+    },
+    'NestedLoopJoinProbe': {
+        'exec': 200,
+        'mem': 50
     }
 }
 
@@ -980,12 +1020,12 @@ for _op in PRESTO_NATIVE_OPERATORS:
 _difficult_exec_epochs = {
     'OrderBy': 220,
     'PartitionedOutput': 260,
-    'LocalExchangeSourceOperator': 260,
+    'LocalExchangeSourceOperator': 300,
     'ExchangeOperator': 300,
     'Aggregation': 300,
     'PartialAggregation': 300,
-    'HashBuilderOperator': 320,
-    'LookupJoinOperator': 260,
+    'HashBuilderOperator': 400,
+    'LookupJoinOperator': 350,
 }
 for _op, _exec_epochs in _difficult_exec_epochs.items():
     if _op not in dop_train_epochs:

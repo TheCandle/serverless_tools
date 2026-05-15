@@ -171,8 +171,8 @@ def main():
     
     # Runtime control - set which functions to run (True/False)
     # TO ASK
-    RUN_TRAIN =  True  # Whether to run training
-    RUN_INFERENCE = False  # Whether to run inference
+    RUN_TRAIN =  False  # Whether to run training
+    RUN_INFERENCE = True  # Whether to run inference
     RUN_OPTIMIZE = False  # Whether to run optimization
     RUN_EVALUATE = False  # Whether to run evaluation
     RUN_COMPARE = False  # Whether to run comparison analysis

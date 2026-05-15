@@ -134,7 +134,12 @@ class PlanNode:
         # 只有在onnx_manager不为None时才进行推理
         if self.onnx_manager is not None:
             self.infer_exec_with_onnx()
-            self.infer_mem_with_onnx()
+            # 仅在有内存模型时才执行内存推理，避免 exec-only 场景报错
+            if hasattr(self.onnx_manager, 'has_mem_model') and self.onnx_manager.has_mem_model(self.operator_type):
+                self.infer_mem_with_onnx()
+            else:
+                current_dop = self.dop if self.dop is not None and self.dop > 0 else 1
+                self.pred_mem = 1024.0 * current_dop
 
     def add_child(self, child_node):
         self.child_plans.append(child_node)
