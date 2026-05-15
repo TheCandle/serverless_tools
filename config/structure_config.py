@@ -721,22 +721,22 @@ dop_operator_features = {
 # Presto native operators that may not exist in openGauss datasets.
 # Keep them as independent operators instead of forcing semantic remapping.
 PRESTO_NATIVE_OPERATORS = [
-    # 'MergeOperator',
-    # 'ExplainAnalyzeOperator',
-    # 'TaskOutputOperator',
-    # 'ExchangeOperator',
-    # 'OrderBy',
-    # 'LocalMerge',
-    # 'CallbackSink',
-    # 'PartitionedOutput',
-    # 'LocalExchangeSourceOperator',
-    # 'HashBuilderOperator',
-    # 'LookupJoinOperator',
-    # 'LocalExchangeSinkOperator',
-    # 'Aggregation',
-    # 'PartialAggregation',
-    # 'NestedLoopJoinBuild',
-    # 'NestedLoopJoinProbe',
+    'MergeOperator',
+    'ExplainAnalyzeOperator',
+    'TaskOutputOperator',
+    'ExchangeOperator',
+    'OrderBy',
+    'LocalMerge',
+    'CallbackSink',
+    'PartitionedOutput',
+    'LocalExchangeSourceOperator',
+    'HashBuilderOperator',
+    'LookupJoinOperator',
+    'LocalExchangeSinkOperator',
+    'Aggregation',
+    'PartialAggregation',
+    'NestedLoopJoinBuild',
+    'NestedLoopJoinProbe',
 ]
 
 def _extend_unique(target_list, values):

@@ -7,15 +7,7 @@ import torch
 # import utils
 # from structure import no_dop_operator_features, no_dop_operators_exec, no_dop_operators_mem, dop_operators_exec, dop_operators_mem, parallel_op
 
-from config.structure_config import (
-    no_dop_operators_exec,
-    no_dop_operators_mem,
-    dop_operators_exec,
-    dop_operators_mem,
-    parallel_op,
-    dop_operator_features,
-    no_dop_operator_features,
-)
+from config.structure_config import no_dop_operators_exec, no_dop_operators_mem, dop_operators_exec, dop_operators_mem, parallel_op
 
 class ONNXModelManager:
     # --- 修改 __init__ 方法 ---
@@ -39,51 +31,6 @@ class ONNXModelManager:
         self.mem_sessions = {}
         self.load_models() # load_models 方法保持不变
     # --- 结束修改 ---
-
-    def has_exec_model(self, operator_type):
-        return operator_type in self.exec_sessions
-
-    def has_mem_model(self, operator_type):
-        return operator_type in self.mem_sessions
-
-    def _get_feature_schema(self, operator_type, target='exec'):
-        schema = dop_operator_features.get(operator_type)
-        if schema is None:
-            schema = no_dop_operator_features.get(operator_type)
-        if not schema:
-            return None
-        return schema.get(target)
-
-    def _align_feature_array(self, operator_type, feature_data, expected_dim, target='exec'):
-        arr = np.array(feature_data).reshape(1, -1).astype(np.float32)
-        got_dim = arr.shape[1]
-
-        if expected_dim is None or got_dim == expected_dim:
-            return arr
-
-        feature_schema = self._get_feature_schema(operator_type, target=target)
-        if feature_schema and len(feature_schema) == expected_dim and got_dim < expected_dim:
-            padded = np.zeros((1, expected_dim), dtype=np.float32)
-            padded[:, :got_dim] = arr
-            missing_features = feature_schema[got_dim:]
-            print(
-                f"⚠️ ONNX {target} feature dim auto-aligned for '{operator_type}': "
-                f"got={got_dim}, expected={expected_dim}, padded_zeros={expected_dim - got_dim}, "
-                f"missing_tail_features={missing_features}"
-            )
-            return padded
-
-        mismatch_msg = (
-            f"ONNX {target} input dim mismatch for operator '{operator_type}': "
-            f"got {got_dim}, expected {expected_dim}."
-        )
-        if feature_schema:
-            mismatch_msg += (
-                f" Configured feature count={len(feature_schema)}."
-                f" First configured features={feature_schema[:min(10, len(feature_schema))]}"
-            )
-        mismatch_msg += " This usually means the exported model and inference feature config are from different versions."
-        raise ValueError(mismatch_msg)
 
     def load_models(self):
         dop_operators = set()
@@ -122,26 +69,13 @@ class ONNXModelManager:
 
     def infer_exec(self, operator_type, feature_data):
         # 将 operator_type 中的空格替换为下划线以匹配模型文件名
+        
         if operator_type not in self.exec_sessions:
             raise UserWarning(f"No execution model found for operator type: {operator_type}")
-
+        
         session = self.exec_sessions[operator_type]
-        # 在运行前做显式维度检查；当配置可判定且仅缺少尾部特征时自动补零对齐
-        input_meta = session.get_inputs()[0]
-        input_name = input_meta.name
-        input_shape = input_meta.shape  # 例如 [None, 31]
-        expected_dim = None
-        if isinstance(input_shape, (list, tuple)) and len(input_shape) > 1 and isinstance(input_shape[1], int):
-            expected_dim = input_shape[1]
-
-        feature_array = self._align_feature_array(
-            operator_type=operator_type,
-            feature_data=feature_data,
-            expected_dim=expected_dim,
-            target='exec'
-        )
-
-        inputs = {input_name: feature_array}
+        feature_array = np.array(feature_data).reshape(1, -1).astype(np.float32)
+        inputs = {session.get_inputs()[0].name: feature_array}
         exec_pred = session.run(None, inputs)
         exec_pred[0][0]
         return exec_pred[0][0]
@@ -150,22 +84,9 @@ class ONNXModelManager:
         # 将 operator_type 中的空格替换为下划线以匹配模型文件名
         if operator_type not in self.mem_sessions:
             raise ValueError(f"No memory model found for operator type: {operator_type}")
-
+        
         session = self.mem_sessions[operator_type]
-        input_meta = session.get_inputs()[0]
-        input_name = input_meta.name
-        input_shape = input_meta.shape
-        expected_dim = None
-        if isinstance(input_shape, (list, tuple)) and len(input_shape) > 1 and isinstance(input_shape[1], int):
-            expected_dim = input_shape[1]
-
-        feature_array = self._align_feature_array(
-            operator_type=operator_type,
-            feature_data=feature_data,
-            expected_dim=expected_dim,
-            target='mem'
-        )
-
-        inputs = {input_name: feature_array}
+        feature_array = np.array(feature_data).reshape(1, -1).astype(np.float32)
+        inputs = {session.get_inputs()[0].name: feature_array}
         mem_pred = session.run(None, inputs)
         return mem_pred[0][0]

@@ -19,24 +19,40 @@ from utils import (
 def train_dop_aware_models(dataset: str, train_mode: str, **kwargs):
     """Train DOP-aware operator models"""
     print(f"Starting DOP-aware operator model training...")
-    
+
     # Use unified data loader
     loader = create_dataset_loader(dataset)
     use_estimates = TRAIN_MODES[train_mode]['use_estimates']
     train_ratio = float(kwargs.get('train_ratio', DEFAULT_CONFIG['train_ratio']))
-    
+
     # Load data
     train_data = loader.load_train_data(use_estimates, train_ratio=train_ratio)
     test_data = loader.load_test_data(use_estimates, train_ratio=train_ratio)
-    
+
     if train_data is None or test_data is None:
         return False
-    
+
+    # Offline-eval-only mode: evaluate ONNX models without training
+    if bool(kwargs.get('offline_eval_only', False)):
+        eval_func = safe_import('training.operator_dop_aware.train', 'evaluate_all_operators_exec_offline')
+        if eval_func is None:
+            return False
+        with Timer("DOP-aware offline ONNX evaluation"):
+            eval_func(
+                test_data=test_data,
+                dataset=dataset,
+                train_mode=train_mode,
+                use_estimates=use_estimates,
+                epsilon=float(kwargs.get('epsilon', 1e-2)),
+                save_per_operator_comparisons=bool(kwargs.get('save_per_operator_comparisons', True)),
+            )
+        return True
+
     # Import training function
     train_func = safe_import('training.operator_dop_aware.train', 'train_all_operators')
     if train_func is None:
         return False
-    
+
     # Execute training
     with Timer("DOP-aware model training"):
         train_func(
@@ -48,7 +64,7 @@ def train_dop_aware_models(dataset: str, train_mode: str, **kwargs):
             dataset=dataset,
             train_mode=train_mode,
         )
-    
+
     return True
 
 def train_non_dop_aware_models(dataset: str, train_mode: str, **kwargs):
@@ -198,6 +214,12 @@ def main():
                        help='Training ratio')
     parser.add_argument('--n_trials', type=int, default=30,
                        help='XGBoost optimization trial count (only effective when method=query_level)')
+    parser.add_argument('--offline_eval_only', action='store_true',
+                       help='Only run offline ONNX evaluation for dop_aware method (no training)')
+    parser.add_argument('--epsilon', type=float, default=1e-2,
+                       help='Numerical stability epsilon for offline eval')
+    parser.add_argument('--save_per_operator_comparisons', action='store_true', default=True,
+                       help='Save per-operator comparison CSVs during offline eval')
     
     args = parser.parse_args()
     
@@ -220,7 +242,10 @@ def main():
     if args.method == 'dop_aware':
         success = train_dop_aware_models(args.dataset, args.train_mode, 
                                        total_queries=args.total_queries,
-                                       train_ratio=args.train_ratio)
+                                       train_ratio=args.train_ratio,
+                                       offline_eval_only=args.offline_eval_only,
+                                       epsilon=args.epsilon,
+                                       save_per_operator_comparisons=args.save_per_operator_comparisons)
     elif args.method == 'non_dop_aware':
         success = train_non_dop_aware_models(args.dataset, args.train_mode,
                                           total_queries=args.total_queries,

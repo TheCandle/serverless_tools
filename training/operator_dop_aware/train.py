@@ -180,6 +180,30 @@ def process_and_train_curve(
     
 
 
+def evaluate_one_operator_exec(
+    models_exec,
+    X_test_exec,
+    y_test_exec,
+    dop_test,
+    operator,
+    epsilon=1e-2,
+    onnx_model_dir: str = None,
+):
+    """单独执行 exec 评估（不触发训练）。"""
+    return dop_model.predict_and_evaluate_exec_curve(
+        model=models_exec,
+        X_test=X_test_exec,
+        y_test=y_test_exec,
+        dop_test=dop_test,
+        epsilon=epsilon,
+        operator=operator,
+        suffix="exec",
+        onnx_model_dir=onnx_model_dir,
+        enable_debug=True,
+        debug_sample_count=30,
+    )
+
+
 def train_one_operator_exec(
     X_train_exec,
     X_test_exec,
@@ -259,17 +283,14 @@ def train_one_operator_exec(
         lr=exec_lr,
     )
     # Predict and evaluate execution time models
-    results_exec = dop_model.predict_and_evaluate_exec_curve(
-        model=models_exec,
-        X_test=X_test_exec,
-        y_test=y_test_exec,
-        dop_test = dop_test,
-        epsilon=epsilon,
+    results_exec = evaluate_one_operator_exec(
+        models_exec=models_exec,
+        X_test_exec=X_test_exec,
+        y_test_exec=y_test_exec,
+        dop_test=dop_test,
         operator=operator,
-        suffix="exec",
+        epsilon=epsilon,
         onnx_model_dir=onnx_model_dir,
-        enable_debug=True,
-        debug_sample_count=30
     )
 
 
@@ -282,6 +303,231 @@ def train_one_operator_exec(
         "native_time_exec": results_exec["native_time"],
         "onnx_time_exec": results_exec["onnx_time"],
 }
+
+
+def evaluate_one_operator_exec(
+    models_exec,
+    X_test_exec,
+    y_test_exec,
+    dop_test,
+    operator,
+    epsilon=1e-2,
+    onnx_model_dir: str = None,
+):
+    """离线执行 exec 模型评估（不触发训练）。"""
+    return dop_model.predict_and_evaluate_exec_curve(
+        model=models_exec,
+        X_test=X_test_exec,
+        y_test=y_test_exec,
+        dop_test=dop_test,
+        epsilon=epsilon,
+        operator=operator,
+        suffix="exec",
+        onnx_model_dir=onnx_model_dir,
+        enable_debug=True,
+        debug_sample_count=30,
+    )
+
+
+def evaluate_one_operator_exec_onnx(
+    onnx_path,
+    X_test_exec,
+    y_test_exec,
+    dop_test,
+    epsilon=1e-2,
+):
+    """离线评估 ONNX exec 模型（完全不依赖训练阶段对象）。"""
+    import numpy as np
+    import onnxruntime as ort
+
+    if X_test_exec.shape[0] == 0 or y_test_exec.numel() == 0 or dop_test.numel() == 0:
+        print("[WARN][eval_exec_onnx] empty test set, skip evaluation.")
+        return {
+            "metrics": {
+                "MAE_error": None,
+                "Q_error": None,
+                "average_actual_value": None,
+            },
+            "comparisons": pd.DataFrame(columns=["Actual", "Predicted_ONNX", "Difference_ONNX"]),
+            "onnx_time": None,
+            "skipped": True,
+            "skip_reason": "empty_test_set",
+        }
+
+    session = ort.InferenceSession(onnx_path)
+    input_name = session.get_inputs()[0].name
+
+    start_time = time.time()
+    pred_params = session.run(None, {input_name: X_test_exec.numpy().astype(np.float32)})[0]
+    onnx_time = time.time() - start_time
+
+    pred_params_t = torch.from_numpy(pred_params)
+    a = pred_params_t[:, 0]
+    b = pred_params_t[:, 1]
+    c = pred_params_t[:, 2]
+    d = pred_params_t[:, 3]
+    e = pred_params_t[:, 4]
+
+    dop_safe = torch.clamp(dop_test, min=epsilon)
+    predictions_onnx = torch.relu(b / (dop_safe ** a) + c * (dop_safe ** d) + e)
+    predictions_onnx = torch.clamp(predictions_onnx, 1e-2)
+
+    mae_onnx = torch.mean(torch.abs(y_test_exec - predictions_onnx))
+    q_error = torch.mean(torch.maximum(y_test_exec / predictions_onnx, predictions_onnx / y_test_exec) - 1)
+    avg_actual_value = torch.mean(y_test_exec)
+
+    comparisons = pd.DataFrame({
+        "Actual": y_test_exec,
+        "Predicted_ONNX": predictions_onnx,
+        "Difference_ONNX": y_test_exec - predictions_onnx,
+    })
+
+    print(f"ONNX model prediction time: {onnx_time:.6f} seconds")
+
+    return {
+        "metrics": {
+            "MAE_error": mae_onnx,
+            "Q_error": q_error,
+            "average_actual_value": avg_actual_value,
+        },
+        "comparisons": comparisons,
+        "onnx_time": onnx_time,
+        "skipped": False,
+    }
+
+def evaluate_one_operator_exec_offline(
+    test_data,
+    operator,
+    dataset,
+    train_mode,
+    use_estimates=False,
+    epsilon=1e-2,
+):
+    """完全离线评估：自动准备特征并加载 ONNX 模型进行 exec 评估。"""
+    if operator not in dop_operator_features:
+        raise ValueError(f"未知算子: {operator}")
+
+    test_data_local = test_data.copy()
+    if use_estimates:
+        print("!!! 离线评估模拟模式：正在对测试数据进行基数传播预处理... !!!")
+        test_data_local = propagate_estimates_in_dataframe(test_data_local)
+
+    features_exec = dop_operator_features[operator]["exec"]
+    features_mem = dop_operator_features[operator]["mem"]
+    feature_columns = sorted(set(features_exec + features_mem))
+
+    # 仅用 test_data 进行 prepare，train_data 传空同结构 DataFrame
+    X_dummy, X_test, y_dummy, y_test, group_dummy, group_test = utils_feat.prepare_data(
+        train_data=test_data_local.iloc[0:0].copy(),
+        test_data=test_data_local,
+        operator=operator,
+        feature_columns=feature_columns,
+        target_columns=["execution_time", "peak_mem", "dop"],
+        use_estimates=use_estimates,
+        return_group_cols=True,
+    )
+
+    _ = X_dummy, y_dummy, group_dummy  # 占位，避免未使用警告
+
+    if X_test.empty or y_test.empty:
+        print(f"警告: 算子 '{operator}' 在测试数据中没有有效样本。")
+        return {
+            "metrics": {
+                "MAE_error": None,
+                "Q_error": None,
+                "average_actual_value": None,
+            },
+            "comparisons": pd.DataFrame(columns=["Actual", "Predicted_ONNX", "Difference_ONNX"]),
+            "onnx_time": None,
+            "skipped": True,
+            "skip_reason": "empty_test_set",
+        }
+
+    X_test_exec_tensor = torch.tensor(X_test[features_exec].values, dtype=torch.float32)
+    y_test_exec_tensor = torch.tensor(y_test["execution_time"].values, dtype=torch.float32)
+    dop_test_tensor = torch.tensor(y_test["dop"].values, dtype=torch.float32)
+
+    model_dir = get_model_paths(dataset, train_mode, "dop_aware")["model_dir"]
+    operator_name = operator.replace(" ", "_")
+    onnx_path = os.path.join(model_dir, operator, f"exec_{operator_name}.onnx")
+
+    if not os.path.exists(onnx_path):
+        raise FileNotFoundError(f"未找到 ONNX 模型: {onnx_path}")
+
+    return evaluate_one_operator_exec_onnx(
+        onnx_path=onnx_path,
+        X_test_exec=X_test_exec_tensor,
+        y_test_exec=y_test_exec_tensor,
+        dop_test=dop_test_tensor,
+        epsilon=epsilon,
+    )
+
+
+def evaluate_all_operators_exec_offline(
+    test_data,
+    dataset,
+    train_mode,
+    use_estimates=False,
+    epsilon=1e-2,
+    save_per_operator_comparisons=True,
+):
+    """批量离线评估所有 exec 算子，并输出汇总 CSV。"""
+    results_rows = []
+
+    eval_base_dir = os.path.join(PROJECT_ROOT, "output", "evaluations", "dop_aware")
+    compare_dir = os.path.join(eval_base_dir, "operator_comparisons")
+    os.makedirs(eval_base_dir, exist_ok=True)
+    if save_per_operator_comparisons:
+        os.makedirs(compare_dir, exist_ok=True)
+
+    operators_in_test = set(test_data["operator_type"].unique()) if "operator_type" in test_data.columns else set()
+
+    for operator in operator_lists:
+        if operator not in dop_operators_exec:
+            continue
+        if operator not in operators_in_test:
+            print(f"信息: 算子 '{operator}' 在测试数据中不存在，跳过离线评估。")
+            continue
+
+        print(f"\n[Offline Eval] operator: {operator}")
+        try:
+            op_result = evaluate_one_operator_exec_offline(
+                test_data=test_data,
+                operator=operator,
+                dataset=dataset,
+                train_mode=train_mode,
+                use_estimates=use_estimates,
+                epsilon=epsilon,
+            )
+        except FileNotFoundError as e:
+            print(f"警告: {e}，跳过。")
+            continue
+        except Exception as e:
+            print(f"警告: 算子 '{operator}' 离线评估失败: {e}")
+            continue
+
+        metrics = op_result.get("metrics", {})
+        comparisons = op_result.get("comparisons", pd.DataFrame())
+
+        if save_per_operator_comparisons and isinstance(comparisons, pd.DataFrame) and not comparisons.empty:
+            comparisons.to_csv(os.path.join(compare_dir, f"{operator}_combined_comparison_exec.csv"), index=False)
+
+        results_rows.append({
+            "Operator": operator,
+            "Execution Time MAE": metrics.get("MAE_error"),
+            "Execution Time Q-error": metrics.get("Q_error"),
+            "Average Execution Time": metrics.get("average_actual_value"),
+            "ONNX Execution Time (s)": op_result.get("onnx_time"),
+        })
+
+    final_results_df_exec = pd.DataFrame(results_rows)
+    final_csv_file_path_exec = os.path.join(eval_base_dir, "all_operators_performance_exec.csv")
+    final_results_df_exec.to_csv(final_csv_file_path_exec, index=False)
+    print(f"离线评估汇总已保存: {final_csv_file_path_exec}")
+
+    return final_results_df_exec
+
+
 def train_one_operator_mem(
     X_train_mem,
     X_test_mem,

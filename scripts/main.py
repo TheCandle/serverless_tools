@@ -172,6 +172,7 @@ def main():
     # Runtime control - set which functions to run (True/False)
     # TO ASK
     RUN_TRAIN =  False  # Whether to run training
+    RUN_OFFLINE_EVAL_ONLY = True  # Whether to run dop_aware ONNX offline evaluation only (no training)
     RUN_INFERENCE = True  # Whether to run inference
     RUN_OPTIMIZE = False  # Whether to run optimization
     RUN_EVALUATE = False  # Whether to run evaluation
@@ -229,6 +230,34 @@ def main():
             print("❌ Training failed")
             return
     
+    # Run offline evaluation only (dop_aware)
+    if RUN_OFFLINE_EVAL_ONLY:
+        print(f"\n🧪 Starting offline ONNX evaluation only: {TRAIN_METHOD}")
+        if TRAIN_METHOD != 'dop_aware':
+            print("❌ RUN_OFFLINE_EVAL_ONLY currently supports only TRAIN_METHOD='dop_aware'")
+            return
+
+        # Validate dop_aware model config for current model dataset/train mode
+        if not validate_experiment_config(MODEL_DATASET, 'dop_aware', TRAIN_MODE):
+            print(f"❌ Offline evaluation configuration validation failed - need {MODEL_DATASET} dataset's dop_aware model first")
+            return
+
+        from train import train_dop_aware_models
+        success = train_dop_aware_models(
+            DATASET,
+            TRAIN_MODE,
+            train_ratio=TRAIN_RATIO,
+            offline_eval_only=True,
+            epsilon=1e-2,
+            save_per_operator_comparisons=True,
+        )
+
+        if success:
+            print("✅ Offline ONNX evaluation completed")
+        else:
+            print("❌ Offline ONNX evaluation failed")
+            return
+
     # Run inference
     if RUN_INFERENCE:
         print(f"\n🔍 Starting inference: {TRAIN_METHOD}")
