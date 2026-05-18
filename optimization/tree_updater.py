@@ -60,7 +60,11 @@ def build_query_trees(df_plans_base_dop, onnx_manager, use_estimates=False): # <
             if pd.isna(child_plan_str) or not str(child_plan_str).strip(): continue
 
             try:
-                child_plan_ids = [int(pid) for pid in str(child_plan_str).split(',')]
+                child_plan_ids = [
+                    int(float(pid.strip()))
+                    for pid in str(child_plan_str).split(',')
+                    if pid.strip()
+                ]
                 for child_id in child_plan_ids:
                     if child_id in nodes_in_query:
                         child_node = nodes_in_query[child_id]

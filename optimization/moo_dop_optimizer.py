@@ -626,6 +626,7 @@ class ThreadBlockDOPProblem(Problem):
                         ratios[stage_id] = 1.0 if stage_nodes_in_seg else 0.0
                     else:
                         ratios[stage_id] = len(stage_nodes_in_seg) / total_stage_nodes
+                # 记录了每个segment里每个stage_id里在segment里结点数与该stage总结点数的比例
                 self.segment_stage_ratios[sid] = ratios
 
                 for up in upstream:

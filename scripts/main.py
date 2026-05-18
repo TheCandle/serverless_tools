@@ -172,9 +172,9 @@ def main():
     # Runtime control - set which functions to run (True/False)
     # TO ASK
     RUN_TRAIN =  False  # Whether to run training
-    RUN_OFFLINE_EVAL_ONLY = True  # Whether to run dop_aware ONNX offline evaluation only (no training)
-    RUN_INFERENCE = True  # Whether to run inference
-    RUN_OPTIMIZE = False  # Whether to run optimization
+    RUN_OFFLINE_EVAL_ONLY = False  # Whether to run dop_aware ONNX offline evaluation only (no training)
+    RUN_INFERENCE = False  # Whether to run inference
+    RUN_OPTIMIZE = True  # Whether to run optimization
     RUN_EVALUATE = False  # Whether to run evaluation
     RUN_COMPARE = False  # Whether to run comparison analysis
     RUN_COMPARE_INFERENCE_METHODS = False  # Whether to run inference method comparison
