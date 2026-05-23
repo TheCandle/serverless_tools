@@ -5,15 +5,63 @@ import json
 from pathlib import Path
 
 
-def extract_rows(data: dict):
+def load_plan_info(plan_info_path: Path):
+    """
+    Build lookup:
+      (query_id, plan_id) -> (query_num, stage_id, pipeline_id)
+    plan_info.csv is semicolon-separated.
+    """
+    lookup = {}
+    with plan_info_path.open("r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f, delimiter=";")
+        for row in reader:
+            query_num = row.get("query_num")
+            query_id = row.get("query_id")
+            plan_id = row.get("plan_id")
+            stage_id = row.get("stage_id")
+            pipeline_id = row.get("pipeline_id")
+            if query_id is None or plan_id is None:
+                continue
+            lookup[(str(query_id), str(plan_id))] = (query_num, stage_id, pipeline_id)
+    return lookup
+
+
+def extract_rows(data: dict, plan_lookup: dict):
     rows = []
     for query in data.get("queries", []):
-        stage_id = query.get("query_id")
+        query_id = query.get("query_id")
+        if query_id is None:
+            continue
+        query_id_str = str(query_id)
+
         for tb in query.get("thread_blocks", []):
+            thread_block_id = tb.get("thread_block_id")
+
+            # thread_block does not equal plan_id.
+            # We pick one operator inside this thread_block and use its plan_id to locate
+            # stage_id / pipeline_id in plan_info.csv.
+            operators = tb.get("operators", []) or []
+            picked_plan_id = None
+            for op in operators:
+                plan_id = op.get("plan_id")
+                if plan_id is not None:
+                    picked_plan_id = str(plan_id)
+                    break
+
+            output_query_id = query_id
+            stage_id, pipeline_id = (None, None)
+            if picked_plan_id is not None:
+                output_query_id, stage_id, pipeline_id = plan_lookup.get(
+                    (query_id_str, picked_plan_id),
+                    (query_id, None, None),
+                )
+
             rows.append(
                 {
+                    "query_id": output_query_id,
+                    "thread_block_id": thread_block_id,
                     "stage_id": stage_id,
-                    "thread_block_id": tb.get("thread_block_id"),
+                    "pipeline_id": pipeline_id,
                     "optimal_dop": tb.get("optimal_dop"),
                 }
             )
@@ -22,13 +70,23 @@ def extract_rows(data: dict):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Extract stage_id/query_id, thread_block_id and optimal_dop from pipeline_optimization.json"
+        description=(
+            "Extract query_id, thread_block_id, optimal_dop from "
+            "pipeline_optimization.json, and enrich with query_num, stage_id/pipeline_id "
+            "from plan_info.csv by (query_id, operator.plan_id in each thread_block)."
+        )
     )
     parser.add_argument(
         "-i",
         "--input",
         default="output/tpch/optimization_results/pipeline_optimization.json",
         help="Path to input JSON file",
+    )
+    parser.add_argument(
+        "-p",
+        "--plan-info",
+        default="data_kunpeng/tpch_output_22/plan_info.csv",
+        help="Path to plan_info.csv (semicolon-separated)",
     )
     parser.add_argument(
         "-o",
@@ -39,22 +97,34 @@ def main():
     args = parser.parse_args()
 
     input_path = Path(args.input)
+    plan_info_path = Path(args.plan_info)
     output_path = Path(args.output)
 
     with input_path.open("r", encoding="utf-8") as f:
         data = json.load(f)
 
-    rows = extract_rows(data)
+    plan_lookup = load_plan_info(plan_info_path)
+    rows = extract_rows(data, plan_lookup)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(
-            f, fieldnames=["stage_id", "thread_block_id", "optimal_dop"]
+            f,
+            fieldnames=[
+                "query_id",
+                "thread_block_id",
+                "stage_id",
+                "pipeline_id",
+                "optimal_dop",
+            ],
         )
         writer.writeheader()
         writer.writerows(rows)
 
+    missing = sum(1 for r in rows if r["stage_id"] is None or r["pipeline_id"] is None)
     print(f"Extracted {len(rows)} rows -> {output_path}")
+    if missing:
+        print(f"Warning: {missing} rows could not be matched in {plan_info_path}")
 
 
 if __name__ == "__main__":

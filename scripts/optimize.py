@@ -332,7 +332,7 @@ def run_pipeline_optimization(dataset: str, train_mode: str,
                 debug_dop=debug_dop,
                 debug_query_ids=debug_query_ids,
                 debug_max_tb_per_query=debug_max_tb_per_query,
-                min_candidate_dop=1,
+                min_candidate_dop=8,
                 force_root_dop_one=True,
                 debug_inf_trace=debug_inf_trace,
             )

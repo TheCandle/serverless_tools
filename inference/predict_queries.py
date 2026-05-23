@@ -672,6 +672,10 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
     # 转换为 DataFrame (原始逻辑)
     df = pd.DataFrame(data) # 原始变量名 df
 
+    # 始终输出查询级汇总结果，便于查看整查询时间/内存
+    query_output_csv_path = output_csv_path.replace('.csv', '_query_level_summary.csv')
+    df.to_csv(query_output_csv_path, index=False, sep=';')
+
     # 优先输出算子级推理结果（用于后续按 operator_type + dop 聚合画图）
     if operator_level_rows:
         df_operator = pd.DataFrame(operator_level_rows)
@@ -682,9 +686,9 @@ def run_inference(plan_csv_path, query_csv_path, output_csv_path, no_dop_model_d
         # 回退到查询级结果
         df.to_csv(output_csv_path, index=False, sep=';')
 
-    # 输出保存的文件路径 (原始逻辑)
-    print(f"Data has been saved to {output_csv_path}") # 使用传入的路径
-
+    # 输出保存的文件路径
+    print(f"Operator-level data has been saved to {output_csv_path}")
+    print(f"Query-level summary has been saved to {query_output_csv_path}")
     # === 结束: 严格复制粘贴原始顶层逻辑 ===
 
 # ==============================================================================

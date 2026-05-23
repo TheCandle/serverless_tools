@@ -383,6 +383,9 @@ class ThreadBlock:
                 # which represents upstream parent's production rate we need to match
                 parent_upload_times[child_id] = parent_production_rate
             
+            if(len(self.child_thread_ids) == 0):
+                parent_upload_times = {self.thread_id: parent_production_rate}
+
             self.choose_optimal_dop(
                 child_upload_times=parent_upload_times,
                 min_improvement_ratio=min_improvement_ratio,

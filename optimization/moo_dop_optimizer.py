@@ -37,31 +37,66 @@ class ThreadBlockInfo:
     blocking_interval: Dict[int, float]  # DOP -> blocking time
     child_thread_ids: List[int]  # IDs of child thread blocks
     parent_thread_id: Optional[int]  # ID of parent thread block (None if root)
-    pred_params: Optional[Any] = None  # Curve parameters for computing execution time at any DOP
+    pred_params: Optional[Any] = None  # Legacy single-node representative params (fallback only)
     is_parallel: bool = True  # Whether the thread block supports parallel execution
     base_exec_time: float = 0.0  # Base execution time for non-parallel blocks
+    node_pred_params: Optional[List[Any]] = None  # Per-node curve params in this thread block
+    node_is_parallel: Optional[List[bool]] = None  # Per-node parallel flags
+    node_base_exec_times: Optional[List[float]] = None  # Per-node base execution time
 
 
 def compute_exec_time_from_params(pred_params: Any, dop: int, is_parallel: bool, base_time: float) -> float:
     """
     Compute execution time at given DOP using curve parameters
-    
+
     Formula: exec_time = (b / dop^a) + (d * dop^c) + e
     where pred_params = [a, b, c, d, e]
     """
     if not is_parallel or pred_params is None:
         # Non-parallel nodes have constant execution time
         return base_time
-    
+
     try:
         # Curve formula: exec_time = (b / dop^a) + (d * dop^c) + e
         a, b, c, d, e = pred_params[0], pred_params[1], pred_params[2], pred_params[3], pred_params[4]
-        exec_time = (b / (dop ** a)) + (d * (dop ** c)) + e
+        exec_time = (b / (dop ** a)) + (c * (dop ** d)) + e
         return max(exec_time, 0.1)  # Ensure positive value
     except Exception:
         # Fallback
         return base_time if base_time > 0 else 100.0
 
+
+def compute_thread_block_exec_time(tb: ThreadBlockInfo, dop: int) -> float:
+    """
+    Compute thread-block execution time.
+
+    Priority:
+    1) Use thread-block-level prediction map `pred_dop_exec_time` when available.
+    2) Fallback to per-node aggregation when node-level metadata is available.
+    3) Final fallback to legacy single-node representative `pred_params`.
+    """
+    if tb.pred_dop_exec_time and dop in tb.pred_dop_exec_time:
+        return max(float(tb.pred_dop_exec_time[dop]), 0.1)
+
+    if tb.node_pred_params and tb.node_is_parallel and tb.node_base_exec_times:
+        n = min(len(tb.node_pred_params), len(tb.node_is_parallel), len(tb.node_base_exec_times))
+        if n > 0:
+            total = 0.0
+            for i in range(n):
+                total += compute_exec_time_from_params(
+                    pred_params=tb.node_pred_params[i],
+                    dop=dop,
+                    is_parallel=tb.node_is_parallel[i],
+                    base_time=tb.node_base_exec_times[i]
+                )
+            return max(total, 0.1)
+
+    return compute_exec_time_from_params(
+        pred_params=tb.pred_params,
+        dop=dop,
+        is_parallel=tb.is_parallel,
+        base_time=tb.base_exec_time
+    )
 
 def calculate_flow_rate_mismatch(thread_blocks: List[ThreadBlockInfo], 
                                   dop_config: Dict[int, int]) -> float:
@@ -87,12 +122,7 @@ def calculate_flow_rate_mismatch(thread_blocks: List[ThreadBlockInfo],
         parent_dop = dop_config[parent_id]
         
         # Use curve parameters to compute parent execution time
-        parent_exec_time = compute_exec_time_from_params(
-            pred_params=parent_tb.pred_params,
-            dop=parent_dop,
-            is_parallel=parent_tb.is_parallel,
-            base_time=parent_tb.base_exec_time
-        )
+        parent_exec_time = compute_thread_block_exec_time(parent_tb, parent_dop)
         
         if parent_id not in parent_children_map:
             continue
@@ -106,12 +136,7 @@ def calculate_flow_rate_mismatch(thread_blocks: List[ThreadBlockInfo],
             child_dop = dop_config[child_id]
             
             # Use curve parameters to compute child execution time
-            child_exec_time = compute_exec_time_from_params(
-                pred_params=child_tb.pred_params,
-                dop=child_dop,
-                is_parallel=child_tb.is_parallel,
-                base_time=child_tb.base_exec_time
-            )
+            child_exec_time = compute_thread_block_exec_time(child_tb, child_dop)
             child_blocking = child_tb.blocking_interval.get(child_dop, 0)
             child_upload_time = child_exec_time - child_blocking
             
@@ -155,12 +180,7 @@ def calculate_query_execution_time_simple(thread_blocks: List[ThreadBlockInfo],
         dop = dop_config[thread_id]
         
         # Compute execution time using curve parameters (supports any DOP)
-        exec_time = compute_exec_time_from_params(
-            pred_params=tb.pred_params,
-            dop=dop,
-            is_parallel=tb.is_parallel,
-            base_time=tb.base_exec_time
-        )
+        exec_time = compute_thread_block_exec_time(tb, dop)
         
         # If has children, consider their max completion time
         if thread_id in children_map:
@@ -212,7 +232,7 @@ def compute_marginal_gain_dop(tb: ThreadBlockInfo,
         if exec_time_cache and tb.thread_id in exec_time_cache and d in exec_time_cache[tb.thread_id]:
             t = exec_time_cache[tb.thread_id][d]
         else:
-            t = compute_exec_time_from_params(tb.pred_params, d, tb.is_parallel, tb.base_exec_time)
+            t = compute_thread_block_exec_time(tb, d)
         times.append(max(t, 1e-6))
     # Relative improvement compared to previous point
     best_dop = grid[-1]
@@ -247,14 +267,14 @@ def compute_throughput_match_dop(parent_tb: ThreadBlockInfo,
         cds = sorted(ct.candidate_dops) if ct.candidate_dops else [8, 16, 32, 64]
         cmin, cmax = min(cds), max(cds)
         cref = _ensure_even_dop(int((cmin + cmax) / 2), cmin, cmax)
-        c_exec = compute_exec_time_from_params(ct.pred_params, cref, ct.is_parallel, ct.base_exec_time)
+        c_exec = compute_thread_block_exec_time(ct, cref)
         c_block = ct.blocking_interval.get(cref, 0.0)
         child_refs.append(max(c_exec - c_block, 0.0))
     
     best_parent_dop = pgrid[0]
     best_mismatch = float("inf")
     for pd in pgrid:
-        p_exec = compute_exec_time_from_params(parent_tb.pred_params, pd, parent_tb.is_parallel, parent_tb.base_exec_time)
+        p_exec = compute_thread_block_exec_time(parent_tb, pd)
         total_mismatch = 0.0
         for upload_time in child_refs:
             total_mismatch += abs(p_exec - upload_time)
@@ -336,7 +356,7 @@ def compute_child_match_dop(child_tb: ThreadBlockInfo, target_parent_time: float
         if exec_time_cache and child_tb.thread_id in exec_time_cache and d in exec_time_cache[child_tb.thread_id]:
             c_exec = exec_time_cache[child_tb.thread_id][d]
         else:
-            c_exec = compute_exec_time_from_params(child_tb.pred_params, d, child_tb.is_parallel, child_tb.base_exec_time)
+            c_exec = compute_thread_block_exec_time(child_tb, d)
         c_block = child_tb.blocking_interval.get(d, 0.0)
         upload_time = max(c_exec - c_block, 0.0)
         err = abs(upload_time - target_parent_time)
@@ -404,7 +424,7 @@ class DependentSampling(Sampling):
                         if exec_time_cache and parent_tb.thread_id in exec_time_cache and parent_dop in exec_time_cache[parent_tb.thread_id]:
                             parent_exec = exec_time_cache[parent_tb.thread_id][parent_dop]
                         else:
-                            parent_exec = compute_exec_time_from_params(parent_tb.pred_params, parent_dop, parent_tb.is_parallel, parent_tb.base_exec_time)
+                            parent_exec = compute_thread_block_exec_time(parent_tb, parent_dop)
                         d_marg = compute_marginal_gain_dop(tb, rel_improve_threshold=self.rel_improve_threshold, exec_time_cache=exec_time_cache)
                         d_match_child = compute_child_match_dop(tb, parent_exec, exec_time_cache=exec_time_cache)
                         cds = sorted(tb.candidate_dops) if tb.candidate_dops else [8, 16, 32, 64]
@@ -482,7 +502,7 @@ class DependentRepair(Repair):
                         if exec_time_cache and parent_tb.thread_id in exec_time_cache and parent_dop in exec_time_cache[parent_tb.thread_id]:
                             parent_exec = exec_time_cache[parent_tb.thread_id][parent_dop]
                         else:
-                            parent_exec = compute_exec_time_from_params(parent_tb.pred_params, parent_dop, parent_tb.is_parallel, parent_tb.base_exec_time)
+                            parent_exec = compute_thread_block_exec_time(parent_tb, parent_dop)
                         d_marg = compute_marginal_gain_dop(tb, rel_improve_threshold=self.rel_improve_threshold, exec_time_cache=exec_time_cache)
                         d_match_child = compute_child_match_dop(tb, parent_exec, exec_time_cache=exec_time_cache)
                         cds = sorted(tb.candidate_dops) if tb.candidate_dops else [8, 16, 32, 64]
@@ -664,12 +684,7 @@ class ThreadBlockDOPProblem(Problem):
             
             # Pre-compute for all candidate DOPs
             for dop in candidate_dops:
-                exec_time = compute_exec_time_from_params(
-                    pred_params=tb.pred_params,
-                    dop=dop,
-                    is_parallel=tb.is_parallel,
-                    base_time=tb.base_exec_time
-                )
+                exec_time = compute_thread_block_exec_time(tb, dop)
                 self.exec_time_cache[tb.thread_id][dop] = exec_time
             
             # Also pre-compute for common DOP values that might be generated in continuous mode
@@ -680,12 +695,7 @@ class ThreadBlockDOPProblem(Problem):
                 # Pre-compute for even DOPs in range (most common case)
                 for dop in range(min_dop, max_dop + 1, 2):  # Step by 2 for even numbers
                     if dop not in self.exec_time_cache[tb.thread_id]:
-                        exec_time = compute_exec_time_from_params(
-                            pred_params=tb.pred_params,
-                            dop=dop,
-                            is_parallel=tb.is_parallel,
-                            base_time=tb.base_exec_time
-                        )
+                        exec_time = compute_thread_block_exec_time(tb, dop)
                         self.exec_time_cache[tb.thread_id][dop] = exec_time
     
     def _evaluate(self, x, out, *args, **kwargs):
@@ -785,12 +795,7 @@ class ThreadBlockDOPProblem(Problem):
                 exec_time = self.exec_time_cache[thread_id][dop]
             else:
                 # Fallback: compute on-the-fly
-                exec_time = compute_exec_time_from_params(
-                    pred_params=tb.pred_params,
-                    dop=dop,
-                    is_parallel=tb.is_parallel,
-                    base_time=tb.base_exec_time
-                )
+                exec_time = compute_thread_block_exec_time(tb, dop)
             
             # If has children, consider their max completion time
             if thread_id in self.children_map:
@@ -818,12 +823,7 @@ class ThreadBlockDOPProblem(Problem):
             if stage_id in self.exec_time_cache and dop in self.exec_time_cache[stage_id]:
                 exec_time = self.exec_time_cache[stage_id][dop]
             else:
-                exec_time = compute_exec_time_from_params(
-                    pred_params=tb.pred_params,
-                    dop=dop,
-                    is_parallel=tb.is_parallel,
-                    base_time=tb.base_exec_time
-                )
+                exec_time = compute_thread_block_exec_time(tb, dop)
             stage_exec_times[stage_id] = exec_time
 
         # 2) project stage times to segments -> t_seg
@@ -874,12 +874,7 @@ class ThreadBlockDOPProblem(Problem):
                 exec_time = self.exec_time_cache[tb.thread_id][dop]
             else:
                 # Fallback: compute on-the-fly
-                exec_time = compute_exec_time_from_params(
-                    pred_params=tb.pred_params,
-                    dop=dop,
-                    is_parallel=tb.is_parallel,
-                    base_time=tb.base_exec_time
-                )
+                exec_time = compute_thread_block_exec_time(tb, dop)
             total_cost += dop * exec_time
         
         return total_cost
@@ -938,20 +933,31 @@ def optimize_thread_block_dops_with_moo(
                 break
         
         # Extract prediction parameters from thread block nodes
-        # Use the first parallel node's pred_params as representative
+        # Keep legacy representative params for backward compatibility,
+        # but also store per-node metadata for block-level fallback aggregation.
         pred_params = None
         is_parallel = True
         base_exec_time = tb.thread_execution_time if hasattr(tb, 'thread_execution_time') else 0.0
-        
+        node_pred_params = []
+        node_is_parallel = []
+        node_base_exec_times = []
+
         if hasattr(tb, 'nodes') and tb.nodes:
             for node in tb.nodes:
-                if hasattr(node, 'is_parallel') and node.is_parallel and hasattr(node, 'pred_params'):
-                    if node.pred_params is not None:
-                        pred_params = node.pred_params
-                        break
-            
+                node_parallel = bool(getattr(node, 'is_parallel', True))
+                node_params = getattr(node, 'pred_params', None)
+                node_base_time = float(getattr(node, 'execution_time', 0.0) or 0.0)
+
+                node_pred_params.append(node_params)
+                node_is_parallel.append(node_parallel)
+                node_base_exec_times.append(node_base_time)
+
+                # Legacy representative params (first parallel node)
+                if pred_params is None and node_parallel and node_params is not None:
+                    pred_params = node_params
+
             # Check if all nodes are non-parallel
-            if all(not getattr(node, 'is_parallel', True) for node in tb.nodes):
+            if all(not p for p in node_is_parallel):
                 is_parallel = False
         
         info = ThreadBlockInfo(
@@ -963,7 +969,10 @@ def optimize_thread_block_dops_with_moo(
             parent_thread_id=parent_id,
             pred_params=pred_params,
             is_parallel=is_parallel,
-            base_exec_time=base_exec_time
+            base_exec_time=base_exec_time,
+            node_pred_params=node_pred_params,
+            node_is_parallel=node_is_parallel,
+            node_base_exec_times=node_base_exec_times
         )
         thread_block_infos.append(info)
     
@@ -978,7 +987,8 @@ def optimize_thread_block_dops_with_moo(
         try:
             for tid in sorted(ranges.keys()):
                 low, high = ranges[tid]
-                print(f"    Stage {tid} endpoint range: [{low}, {high}] -> candidates={thread_block_infos[tid - 1].candidate_dops if 0 <= tid - 1 < len(thread_block_infos) else 'N/A'}")
+                # print(f"    Stage {tid} endpoint range: [{low}, {high}] -> candidates={thread_block_infos[tid - 1].candidate_dops if 0 <= tid - 1 < len(thread_block_infos) else 'N/A'}")
+                print(f"    Stage {tid} endpoint range: [{low}, {high}] -> candidates={thread_block_infos[tid].candidate_dops if 0 <= tid < len(thread_block_infos) else 'N/A'}")
         except Exception:
             pass
     
