@@ -42,11 +42,28 @@ def extract_rows(data: dict, plan_lookup: dict):
             # stage_id / pipeline_id in plan_info.csv.
             operators = tb.get("operators", []) or []
             picked_plan_id = None
+            has_local_merge = False
+            has_nested_loop_join_build = False
+            has_enforce_single_row = False
             for op in operators:
                 plan_id = op.get("plan_id")
-                if plan_id is not None:
+                if plan_id is not None and picked_plan_id is None:
                     picked_plan_id = str(plan_id)
-                    break
+
+                # If any operator in this pipeline/thread_block is one of the
+                # special operators below, force the pipeline DOP to 1.
+                op_name = str(
+                    op.get("operator_name")
+                    or op.get("name")
+                    or op.get("operator_type")
+                    or ""
+                )
+                if "LocalMerge" in op_name:
+                    has_local_merge = True
+                if "NestedLoopJoinBuild" in op_name:
+                    has_nested_loop_join_build = True
+                if "EnforceSingleRow" in op_name:
+                    has_enforce_single_row = True
 
             output_query_id = query_id
             stage_id, pipeline_id = (None, None)
@@ -56,13 +73,20 @@ def extract_rows(data: dict, plan_lookup: dict):
                     (query_id, None, None),
                 )
 
+            force_single_dop = (
+                has_local_merge
+                or has_nested_loop_join_build
+                or has_enforce_single_row
+            )
+            effective_dop = 1 if force_single_dop else tb.get("optimal_dop")
+
             rows.append(
                 {
                     "query_id": output_query_id,
                     "thread_block_id": thread_block_id,
                     "stage_id": stage_id,
                     "pipeline_id": pipeline_id,
-                    "optimal_dop": tb.get("optimal_dop"),
+                    "optimal_dop": effective_dop,
                 }
             )
     return rows

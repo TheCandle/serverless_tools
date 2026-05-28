@@ -220,8 +220,8 @@ def compute_marginal_gain_dop(tb: ThreadBlockInfo,
     Optimized: can use exec_time_cache to avoid repeated computation.
     """
     candidate_dops = sorted(tb.candidate_dops) if tb.candidate_dops else [8, 16, 32, 64]
-    min_dop = min(candidate_dops)
-    max_dop = max(candidate_dops)
+    min_dop = int(min(candidate_dops))
+    max_dop = int(max(candidate_dops))
     # Use sparse grid for speed: sample every 4 DOPs instead of every 2
     grid = [d for d in range(min_dop, max_dop + 1, 4) if d % 2 == 0]
     if not grid:
@@ -258,7 +258,7 @@ def compute_throughput_match_dop(parent_tb: ThreadBlockInfo,
         return _ensure_even_dop(int(np.median(cds)), min(cds), max(cds))
     
     parent_candidates = sorted(parent_tb.candidate_dops) if parent_tb.candidate_dops else [8, 16, 32, 64]
-    pmin, pmax = min(parent_candidates), max(parent_candidates)
+    pmin, pmax = int(min(parent_candidates)), int(max(parent_candidates))
     pgrid = [d for d in range(pmin, pmax + 1) if d % 2 == 0] or parent_candidates
     
     # Precompute child's reference upload time at child's mid-range DOP
@@ -300,7 +300,7 @@ def compute_stage_dop_range(tb: ThreadBlockInfo,
     high = max(d_marg, d_match)
     # Ensure within candidate min/max
     cds = sorted(tb.candidate_dops) if tb.candidate_dops else [8, 16, 32, 64]
-    cmin, cmax = min(cds), max(cds)
+    cmin, cmax = int(min(cds)), int(max(cds))
     low = max(low, cmin)
     high = min(high, cmax)
     # Make endpoints even
@@ -960,9 +960,15 @@ def optimize_thread_block_dops_with_moo(
             if all(not p for p in node_is_parallel):
                 is_parallel = False
         
+        # Normalize candidate DOPs to integers to avoid float->range() TypeError
+        raw_candidate_dops = tb.candidate_optimal_dops if getattr(tb, 'candidate_optimal_dops', None) else [8, 16, 32, 64]
+        normalized_candidate_dops = sorted({int(round(float(d))) for d in raw_candidate_dops if d is not None})
+        if not normalized_candidate_dops:
+            normalized_candidate_dops = [8, 16, 32, 64]
+
         info = ThreadBlockInfo(
             thread_id=tid,
-            candidate_dops=tb.candidate_optimal_dops,
+            candidate_dops=normalized_candidate_dops,
             pred_dop_exec_time=tb.pred_dop_exec_time,
             blocking_interval=tb.blocking_interval,
             child_thread_ids=list(tb.child_thread_ids),
